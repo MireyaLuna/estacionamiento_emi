@@ -69,7 +69,7 @@ class Usuarios extends Controller
         $cargo = $_POST['cargo'];
         $id = $_POST['id'];
         $fecha = new DateTime();
-        $fecha_hoy = $fecha->format('Y-m-d h:i:s a');
+        $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         $hash = hash("SHA256", $clave);
 
         if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo)) {

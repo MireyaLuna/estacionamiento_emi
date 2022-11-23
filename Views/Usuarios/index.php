@@ -1,8 +1,8 @@
 <?php include "Views/Templates/header.php"; ?>
-<ol class="breadcrumb">
+<!-- <ol class="breadcrumb">
     <li class="breadcrumb-item active mt-2" aria-current="page">Usuarios</li>
-</ol>
-<button type="button" class="btn btn-primary mb-2" onclick="frmUsuario();">Nuevo</button>
+</ol> -->
+<div class = "mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmUsuario();">Nuevo</button></div>
 <table class="table table-light" id="tblUsuarios">
     <thead class="thead-dark">
         <tr>

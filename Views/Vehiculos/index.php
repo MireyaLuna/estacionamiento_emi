@@ -1,8 +1,5 @@
 <?php include "Views/Templates/header.php"; ?>
-<ol class="breadcrumb">
-    <li class="breadcrumb-item active mt-2" aria-current="page">Vehiculos</li>
-</ol>
-<button type="button" class="btn btn-primary mb-2" onclick="frmVehiculo()">Nuevo</button>
+<div class="mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmVehiculo();">Nuevo</button></div>
 <table class="table table-light" id="tblVehiculos">
     <thead class="thead-dark">
         <tr>
@@ -10,28 +7,15 @@
             <th>PLACA</th>
             <th>COLOR</th>
             <th>MARCA</th>
-            <th>CARGO</th>
-            <th>CLIENTE</th>
+            <!-- <th>CLIENTE</th> -->
             <th>ESPACIO</th>
-            <th>USUARIO CREACION</th>
-            <!-- <th>FECHA MODIFICACION</th> -->
-            <th>USUARIO MODIFICACION</th>
+            <th>FECHA CREACION</th>
+            <th>FECHA MODIFICACION</th>
             <th>ESTADO</th>
             <th>ACCION</th>
         </tr>
     </thead>
     <tbody>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
-        <th>hola</th>
     </tbody>
 </table>
 <div class="modal fade" id="my_modal" tabindex="-1" aria-labelledby="my_modalLabel" aria-hidden="true">
@@ -43,7 +27,32 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="frmVehiculo">
-                    <h1>abre</h1>
+                    <div class="form-floating mb-3">
+                        <input id="id_cliente" class="form-control" type="text" name="id_cliente" placeholder="Ingrese cliente">
+                        <input type="hidden" id="id" name="id">
+                        <label for="id_cliente">Cliente</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input id="id_espacio" class="form-control" type="text" name="id_espacio" placeholder="Ingrese espacio a ocupar">
+                        <label for="id_espacio">Espacio</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input id="placa" class="form-control" type="text" name="placa" placeholder="Ingrese placa">
+                        <label for="placa">Placa</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input id="color" class="form-control" type="text" name="color" placeholder="Ingrese color">
+                                <label for="color">Color</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input id="marca" class="form-control" type="text" name="marca" placeholder="Ingrese marca">
+                                <label for="marca">Marca</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="d-grid gap-2 col-6 mx-auto">
