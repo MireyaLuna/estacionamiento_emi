@@ -22,14 +22,16 @@ class Usuarios extends Controller
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
-            } else {
-                $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
-            }
-            $data[$i]['acciones'] = '<div> 
+                $data[$i]['acciones'] = '<div> 
             <button type="button" class = "btn btn-primary" onclick="btnEditarUsuario(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
             <button type="button" class = "btn btn-danger" onclick="btnEliminarUsuario(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
-            <button type="button" class = "btn btn-success" onclick="btnReingresarUsuario(' . $data[$i]['id'] . ');"><i class="fas fa-arrow-circle-left"></i></button>
             </div>';
+            } else {
+                $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
+                $data[$i]['acciones'] = '<div>
+                <button type="button" class = "btn btn-success" onclick="btnReingresarUsuario(' . $data[$i]['id'] . ');"><i class="fas fa-arrow-circle-left"></i></button>
+                </div>';
+            }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
