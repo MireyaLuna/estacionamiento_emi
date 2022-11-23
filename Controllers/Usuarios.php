@@ -62,7 +62,7 @@ class Usuarios extends Controller
     }
     public function registrar()
     {
-        date_default_timezone_set("America/Guyana");
+        date_default_timezone_set("America/La_Paz");
         $usuario = $_POST['usuario'];
         $nombre = $_POST['nombre'];
         $clave = $_POST['clave'];

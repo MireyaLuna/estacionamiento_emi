@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -47,6 +47,33 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'marca',
         }, {
             'data': 'id_espacio',
+        }, {
+            'data': 'fecha_creacion',
+        }, {
+            // 'data': 'usuario_creacion',
+            // }, {
+            'data': 'fecha_modificacion',
+        }, {
+            // 'data': 'usuario_modificador',
+            // }, {
+            'data': 'estado',
+        }, {
+            'data': 'acciones',
+        }]
+    });
+    tblClientes = $('#tblClientes').DataTable({
+        ajax: {
+            url: base_url + "Clientes/listar",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'id',
+        }, {
+            'data': 'nombre',
+        }, {
+            'data': 'ci',
+        }, {
+            'data': 'telefono',
         }, {
             'data': 'fecha_creacion',
         }, {
@@ -342,6 +369,127 @@ function btnReingresarVehiculo(id) {
                         alertas("No tiene permiso de realizar esta accion", "warning");
                     } else {
                         tblVehiculos.ajax.reload();
+                        alertas(res.msg, res.icono);
+                    }
+                }
+            }
+
+        }
+    })
+}
+
+//--------------------------------------------------------
+function frmCliente() {
+    document.getElementById("tituloModal").textContent = "Registrar cliente";
+    document.getElementById("btnAccion").textContent = "Registrar";
+    document.getElementById("frmCliente").reset();
+    myModal.show();
+    document.getElementById("id").value = "";
+}
+
+function registrarCliente(e) {
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    const ci = document.getElementById("ci");
+    const telefono = document.getElementById("telefono");
+
+    if (nombre.value == "" || ci.value == "" || telefono.value == "" ) {
+        alertas('Todo los campos son obligatorios', 'warning');
+    } else {
+        const url = base_url + "Clientes/registrar";
+        const frm = document.getElementById("frmCliente");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                alertas(res.msg, res.icono);
+                frm.reset();
+                myModal.hide();
+                tblClientes.ajax.reload();
+            }
+        }
+    }
+}
+
+function btnEditarCliente(id) {
+    document.getElementById("tituloModal").textContent = "Actualizar cliente";
+    document.getElementById("btnAccion").textContent = "Modificar";
+    const url = base_url + "Clientes/editar/" + id;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            document.getElementById("id").value = res.id;
+            document.getElementById("nombre").value = res.nombre;
+            document.getElementById("ci").value = res.ci;
+            document.getElementById("telefono").value = res.telefono;
+            myModal.show();
+            console.log(res)
+            tblClientes.ajax.reload();
+        }
+    }
+
+}
+
+function btnEliminarCliente(id) {
+    Swal.fire({
+        title: '¿Esta seguro de la eliminacion?',
+        text: "El cliente no se eliminara de forma permanente, solo cambia a estado inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Clientes/eliminar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas('No tiene permiso de eliminar', 'warning');
+                    } else {
+                        alertas(res.msg, res.icono);
+                        tblClientes.ajax.reload();
+                    }
+                }
+            }
+
+        }
+    })
+}
+
+function btnReingresarCliente(id) {
+    Swal.fire({
+        title: '¿Estas seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Clientes/reingresar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas("No tiene permiso de realizar esta accion", "warning");
+                    } else {
+                        tblClientes.ajax.reload();
                         alertas(res.msg, res.icono);
                     }
                 }

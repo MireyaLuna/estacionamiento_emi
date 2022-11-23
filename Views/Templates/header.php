@@ -53,6 +53,10 @@
                                     <a class="nav-link" href="layout-sidenav-light.html">Roles</a>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="<?php echo base_url;?>Clientes">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Clientes
+                            </a>
                             <a class="nav-link" href="<?php echo base_url;?>Vehiculos">
                                 <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
                                 Vehiculos
