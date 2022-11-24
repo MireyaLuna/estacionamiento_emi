@@ -51,6 +51,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url;?>Usuarios">Usuarios</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Roles</a>
+                                    <a class="nav-link" href="<?php echo base_url;?>Puntos">Puntos de atencion</a>
                                 </nav>
                             </div>
                             <a class="nav-link" href="<?php echo base_url;?>Clientes">
@@ -61,10 +62,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
                                 Vehiculos
                             </a>
+                            <a class="nav-link" href="<?php echo base_url;?>Estacionamientos">
+                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                Estacionamientos
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
+                        <div class="small">Estas en:</div>
                         Start Bootstrap
                     </div>
                 </nav>

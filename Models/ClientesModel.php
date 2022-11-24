@@ -1,5 +1,5 @@
 <?php
-class clientesModel extends Query{
+class ClientesModel extends Query{
     private $usuario, $nombre, $clave, $genero, $cargo, $id, $estado, $fecha;
     public function __construct(){
         parent::__construct();
