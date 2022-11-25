@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -140,6 +140,37 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'acciones',
         }]
     });
+    tblEspacios = $('#tblEspacios').DataTable({
+        ajax: {
+            url: base_url + "Espacios/listar",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'id',
+        }, {
+            'data': 'id_estacionamiento',
+        }, {
+            'data': 'nro_espacio',
+        }, {
+            'data': 'id_vehiculo',
+        }, {
+            'data': 'hora_ingreso',
+        }, {
+            'data': 'hora_salida',
+        }, {
+            'data': 'fecha_creacion',
+        }, {
+            // 'data': 'usuario_creacion',
+            // }, {
+            'data': 'fecha_modificacion',
+        }, {
+            // 'data': 'usuario_modificador',
+            // }, {
+            'data': 'estado',
+        }, {
+            'data': 'acciones',
+        }]
+    });
 })
 
 function frmLogin(e) {
@@ -174,7 +205,6 @@ function frmLogin(e) {
         }
     }
 }
-
 function frmUsuario() {
     document.getElementById("tituloModal").textContent = "Registrar usuario";
     document.getElementById("btnAccion").textContent = "Registrar";
@@ -183,7 +213,6 @@ function frmUsuario() {
     myModal.show();
     document.getElementById("id").value = "";
 }
-
 function registrarUsuario(e) {
     e.preventDefault();
     const usuario = document.getElementById("usuario");
@@ -213,7 +242,6 @@ function registrarUsuario(e) {
         }
     }
 }
-
 function btnEditarUsuario(id) {
     document.getElementById("tituloModal").textContent = "Actualizar usuario";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -240,7 +268,6 @@ function btnEditarUsuario(id) {
     }
 
 }
-
 function btnEliminarUsuario(id) {
     // alert(id);
     Swal.fire({
@@ -274,7 +301,6 @@ function btnEliminarUsuario(id) {
         }
     })
 }
-
 function btnReingresarUsuario(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -313,7 +339,6 @@ function frmVehiculo() {
     myModal.show();
     document.getElementById("id").value = "";
 }
-
 function registrarVehiculo(e) {
     e.preventDefault();
     const placa = document.getElementById("placa");
@@ -341,7 +366,6 @@ function registrarVehiculo(e) {
         }
     }
 }
-
 function btnEditarVehiculo(id) {
     document.getElementById("tituloModal").textContent = "Actualizar vehiculo";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -365,7 +389,6 @@ function btnEditarVehiculo(id) {
     }
 
 }
-
 function btnEliminarVehiculo(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -398,7 +421,6 @@ function btnEliminarVehiculo(id) {
         }
     })
 }
-
 function btnReingresarVehiculo(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -429,7 +451,6 @@ function btnReingresarVehiculo(id) {
         }
     })
 }
-
 //--------------------------------------------------------
 function frmCliente() {
     document.getElementById("tituloModal").textContent = "Registrar cliente";
@@ -438,7 +459,6 @@ function frmCliente() {
     myModal.show();
     document.getElementById("id").value = "";
 }
-
 function registrarCliente(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
@@ -464,7 +484,6 @@ function registrarCliente(e) {
         }
     }
 }
-
 function btnEditarCliente(id) {
     document.getElementById("tituloModal").textContent = "Actualizar cliente";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -486,7 +505,6 @@ function btnEditarCliente(id) {
     }
 
 }
-
 function btnEliminarCliente(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -519,7 +537,6 @@ function btnEliminarCliente(id) {
         }
     })
 }
-
 function btnReingresarCliente(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -558,7 +575,6 @@ function frmEstacionamiento() {
     myModal.show();
     document.getElementById("id").value = "";
 }
-
 function registrarEstacionamiento(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
@@ -584,7 +600,6 @@ function registrarEstacionamiento(e) {
         }
     }
 }
-
 function btnEditarEstacionamiento(id) {
     document.getElementById("tituloModal").textContent = "Actualizar estacionamiento";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -604,7 +619,6 @@ function btnEditarEstacionamiento(id) {
         }
     }
 }
-
 function btnEliminarEstacionamiento(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -637,7 +651,6 @@ function btnEliminarEstacionamiento(id) {
         }
     })
 }
-
 function btnReingresarEstacionamiento(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -660,6 +673,128 @@ function btnReingresarEstacionamiento(id) {
                         alertas("No tiene permiso de realizar esta accion", "warning");
                     } else {
                         tblEstacionamientos.ajax.reload();
+                        alertas(res.msg, res.icono);
+                    }
+                }
+            }
+
+        }
+    })
+}
+//--------------------------------------------------------
+function frmEspacio() {
+    document.getElementById("tituloModal").textContent = "Registrar espacio";
+    document.getElementById("btnAccion").textContent = "Registrar";
+    document.getElementById("frmEspacio").reset();
+    myModal.show();
+    document.getElementById("id").value = "";
+}
+function registrarEspacio(e) {
+    e.preventDefault();
+    const estacionamiento = document.getElementById("estacionamiento");
+    const numero = document.getElementById("numero");
+    const vehiculo = document.getElementById("vehiculo");
+    const ingreso = document.getElementById("ingreso");
+    const salida = document.getElementById("salida");
+
+    if (numero.value == "" || vehiculo.value == "" || estacionamiento.value == "" || ingreso.value == "" ) {
+        alertas('Todo los campos son obligatorios', 'warning');
+    } else {
+        const url = base_url + "Espacios/registrar";
+        const frm = document.getElementById("frmEspacio");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                console.log(res);
+                alertas(res.msg, res.icono);
+                frm.reset();
+                myModal.hide();
+                tblEspacios.ajax.reload();
+            }
+        }
+    }
+}
+function btnEditarEspacio(id) {
+    document.getElementById("tituloModal").textContent = "Actualizar espacio";
+    document.getElementById("btnAccion").textContent = "Modificar";
+    const url = base_url + "Espacios/editar/" + id;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            document.getElementById("id").value = res.id;
+            document.getElementById("estacionamiento").value = res.id_estacionamiento;
+            document.getElementById("numero").value = res.nro_espacio;
+            document.getElementById("vehiculo").value = res.id_vehiculo;
+            document.getElementById("ingreso").value = res.hora_ingreso;
+            document.getElementById("salida").removeAttribute('disabled');
+            document.getElementById("salida").value = res.hora_salida;
+            myModal.show();
+            console.log(res);
+            tblEspacios.ajax.reload();
+        }
+    }
+}
+function btnEliminarEspacio(id) {
+    Swal.fire({
+        title: '¿Esta seguro de la eliminacion?',
+        text: "El espacio no se eliminara de forma permanente, solo cambia a estado inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Espacios/eliminar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas('No tiene permiso de eliminar', 'warning');
+                    } else {
+                        alertas(res.msg, res.icono);
+                        tblEspacios.ajax.reload();
+                    }
+                }
+            }
+
+        }
+    })
+}
+function btnReingresarEspacio(id) {
+    Swal.fire({
+        title: '¿Estas seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Espacios/reingresar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas("No tiene permiso de realizar esta accion", "warning");
+                    } else {
+                        tblEspacios.ajax.reload();
                         alertas(res.msg, res.icono);
                     }
                 }

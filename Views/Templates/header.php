@@ -67,6 +67,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
                                 Estacionamientos
                             </a>
+                            <a class="nav-link" href="<?php echo base_url;?>Espacios">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Espacios
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
