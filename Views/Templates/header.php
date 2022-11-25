@@ -64,7 +64,7 @@
                                 Vehiculos
                             </a>
                             <a class="nav-link" href="<?php echo base_url;?>Estacionamientos">
-                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
                                 Estacionamientos
                             </a>
                         </div>

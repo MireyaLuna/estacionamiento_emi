@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -101,6 +101,31 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'descripcion',
         }, {
             'data': 'id_estacionamiento',
+        }, {
+            'data': 'fecha_creacion',
+        }, {
+            // 'data': 'usuario_creacion',
+            // }, {
+            'data': 'fecha_modificacion',
+        }, {
+            // 'data': 'usuario_modificador',
+            // }, {
+            'data': 'estado',
+        }, {
+            'data': 'acciones',
+        }]
+    });
+    tblEstacionamientos = $('#tblEstacionamientos').DataTable({
+        ajax: {
+            url: base_url + "Estacionamientos/listar",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'id',
+        }, {
+            'data': 'nombre',
+        }, {
+            'data': 'ubicacion',
         }, {
             'data': 'fecha_creacion',
         }, {
@@ -526,44 +551,44 @@ function btnReingresarCliente(id) {
     })
 }
 //--------------------------------------------------------
-function frmPuntos() {
-    document.getElementById("tituloModal").textContent = "Registrar punto de atencion";
+function frmEstacionamiento() {
+    document.getElementById("tituloModal").textContent = "Registrar estacionamiento";
     document.getElementById("btnAccion").textContent = "Registrar";
-    document.getElementById("frmPuntos").reset();
+    document.getElementById("frmEstacionamiento").reset();
     myModal.show();
     document.getElementById("id").value = "";
 }
 
-function registrarPunto(e) {
+function registrarEstacionamiento(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
-    const descripcion = document.getElementById("descripcion");
-    const estacionamiento = document.getElementById("estacionamiento");
+    const ubicacion = document.getElementById("ubicacion");
 
-    if (nombre.value == "" || descripcion.value == "" || estacionamiento.value == "" ) {
+    if (nombre.value == "" || ubicacion.value == "" ) {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
-        const url = base_url + "Puntos/registrar";
-        const frm = document.getElementById("frmPuntos");
+        const url = base_url + "Estacionamientos/registrar";
+        const frm = document.getElementById("frmEstacionamiento");
         const http = new XMLHttpRequest();
         http.open("POST", url, true);
         http.send(new FormData(frm));
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
+                console.log(res);
                 alertas(res.msg, res.icono);
                 frm.reset();
                 myModal.hide();
-                tblPuntos.ajax.reload();
+                tblEstacionamientos.ajax.reload();
             }
         }
     }
 }
 
-function btnEditarPunto(id) {
-    document.getElementById("tituloModal").textContent = "Actualizar punto de atencion";
+function btnEditarEstacionamiento(id) {
+    document.getElementById("tituloModal").textContent = "Actualizar estacionamiento";
     document.getElementById("btnAccion").textContent = "Modificar";
-    const url = base_url + "Puntos/editar/" + id;
+    const url = base_url + "Estacionamientos/editar/" + id;
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
     http.send();
@@ -572,19 +597,18 @@ function btnEditarPunto(id) {
             const res = JSON.parse(this.responseText);
             document.getElementById("id").value = res.id;
             document.getElementById("nombre").value = res.nombre;
-            document.getElementById("descripcion").value = res.descripcion;
-            document.getElementById("estacionamiento").value = res.id_estacionamiento;
+            document.getElementById("ubicacion").value = res.ubicacion;
             myModal.show();
             console.log(res)
-            tblPuntos.ajax.reload();
+            tblEstacionamientos.ajax.reload();
         }
     }
 }
 
-function btnEliminarPunto(id) {
+function btnEliminarEstacionamiento(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
-        text: "El punto de atencion no se eliminara de forma permanente, solo cambia a estado inactivo",
+        text: "El estacionamiento no se eliminara de forma permanente, solo cambia a estado inactivo",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -593,7 +617,7 @@ function btnEliminarPunto(id) {
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url + "Puntos/eliminar/" + id;
+            const url = base_url + "Estacionamientos/eliminar/" + id;
             const http = new XMLHttpRequest();
             http.open("GET", url, true);
             http.send();
@@ -605,7 +629,7 @@ function btnEliminarPunto(id) {
                         alertas('No tiene permiso de eliminar', 'warning');
                     } else {
                         alertas(res.msg, res.icono);
-                        tblPuntos.ajax.reload();
+                        tblEstacionamientos.ajax.reload();
                     }
                 }
             }
@@ -614,7 +638,7 @@ function btnEliminarPunto(id) {
     })
 }
 
-function btnReingresarPunto(id) {
+function btnReingresarEstacionamiento(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
         icon: 'warning',
@@ -625,7 +649,7 @@ function btnReingresarPunto(id) {
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
-            const url = base_url + "Puntos/reingresar/" + id;
+            const url = base_url + "Estacionamientos/reingresar/" + id;
             const http = new XMLHttpRequest();
             http.open("GET", url, true);
             http.send();
@@ -635,7 +659,7 @@ function btnReingresarPunto(id) {
                     if (res == '') {
                         alertas("No tiene permiso de realizar esta accion", "warning");
                     } else {
-                        tblPuntos.ajax.reload();
+                        tblEstacionamientos.ajax.reload();
                         alertas(res.msg, res.icono);
                     }
                 }
