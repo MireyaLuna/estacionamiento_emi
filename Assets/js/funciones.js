@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -223,6 +223,40 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'acciones',
         }]
     });
+    tblFacturas = $('#tblFacturas').DataTable({
+        ajax: {
+            url: base_url + "Facturas/listar",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'id',
+        }, {
+            'data': 'id_registro',
+        }, {
+            'data': 'nit',
+        }, {
+            'data': 'nombre',
+        }, {
+            'data': 'cantidad',
+        }, {
+            'data': 'fecha_emision',
+        }, {
+            'data': 'fecha_limite_emision',
+        }, {
+            'data': 'fecha_creacion',
+        }, {
+            // 'data': 'usuario_creacion',
+            // }, {
+            'data': 'fecha_modificacion',
+        }, {
+            // 'data': 'usuario_modificador',
+            // }, {
+            'data': 'estado',
+        }, {
+            'data': 'acciones',
+        }]
+    });
+
 })
 
 function frmLogin(e) {
@@ -1077,6 +1111,127 @@ function btnReingresarPago(id) {
                         alertas("No tiene permiso de realizar esta accion", "warning");
                     } else {
                         tblPagos.ajax.reload();
+                        alertas(res.msg, res.icono);
+                    }
+                }
+            }
+
+        }
+    })
+}
+//--------------------------------------------------------
+function frmFactura() {
+    document.getElementById("tituloModal").textContent = "Registrar factura";
+    document.getElementById("btnAccion").textContent = "Registrar";
+    document.getElementById("frmFactura").reset();
+    myModal.show();
+    document.getElementById("id").value = "";
+}
+function registrarFactura(e) {
+    e.preventDefault();
+    const registro = document.getElementById("registro");
+    const nit = document.getElementById("nit");
+    const nombre = document.getElementById("nombre");
+    const cantidad = document.getElementById("cantidad");
+    const fecha_emision = document.getElementById("fecha_emision");
+    const fecha_limite = document.getElementById("fecha_limite");
+
+    if (registro.value == "" || nit.value == "" || nombre.value == "" || cantidad.value == "" || fecha_emision.value == ""|| fecha_limite.value == "") {
+        alertas('Todo los campos son obligatorios', 'warning');
+    } else {
+        const url = base_url + "Facturas/registrar";
+        const frm = document.getElementById("frmFactura");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                alertas(res.msg, res.icono);
+                frm.reset();
+                myModal.hide();
+                tblFacturas.ajax.reload();
+            }
+        }
+    }
+}
+function btnEditarFactura(id) {
+    document.getElementById("tituloModal").textContent = "Actualizar factura";
+    document.getElementById("btnAccion").textContent = "Modificar";
+    const url = base_url + "Facturas/editar/" + id;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            document.getElementById("registro").value = res.id_registro;
+            document.getElementById("nit").value = res.nit;
+            document.getElementById("nombre").value = res.nombre;
+            document.getElementById("cantidad").value = res.cantidad;
+            document.getElementById("fecha_emision").value = res.fecha_emision;
+            document.getElementById("fecha_limite").value = res.fecha_limite_emision;
+            myModal.show();
+            console.log(res)
+            tblFacturas.ajax.reload();
+        }
+    }
+
+}
+function btnEliminarFactura(id) {
+    Swal.fire({
+        title: '¿Esta seguro de la anulacion?',
+        text: "Se anulara la factura",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Facturas/eliminar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas('No tiene permiso de eliminar', 'warning');
+                    } else {
+                        alertas(res.msg, res.icono);
+                        tblFacturas.ajax.reload();
+                    }
+                }
+            }
+
+        }
+    })
+}
+function btnReingresarFactura(id) {
+    Swal.fire({
+        title: '¿Estas seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Facturas/reingresar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas("No tiene permiso de realizar esta accion", "warning");
+                    } else {
+                        tblFacturas.ajax.reload();
                         alertas(res.msg, res.icono);
                     }
                 }

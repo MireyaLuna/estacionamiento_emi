@@ -75,6 +75,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Espacios
                             </a>
+                            <a class="nav-link" href="<?php echo base_url;?>Facturas">
+                                <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                Facturas
+                            </a>
                             <a class="nav-link" href="<?php echo base_url;?>Pagos">
                                 <div class="sb-nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
                                 Pagos
