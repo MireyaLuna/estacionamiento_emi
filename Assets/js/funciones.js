@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -157,6 +157,35 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'hora_ingreso',
         }, {
             'data': 'hora_salida',
+        }, {
+            'data': 'fecha_creacion',
+        }, {
+            // 'data': 'usuario_creacion',
+            // }, {
+            'data': 'fecha_modificacion',
+        }, {
+            // 'data': 'usuario_modificador',
+            // }, {
+            'data': 'estado',
+        }, {
+            'data': 'acciones',
+        }]
+    });
+    tblAdministrador = $('#tblAdministrador').DataTable({
+        ajax: {
+            url: base_url + "Administrador/listar",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'id',
+        }, {
+            'data': 'nombre',
+        }, {
+            'data': 'ci',
+        }, {
+            'data': 'codigo_saga',
+        }, {
+            'data': 'id_usuario',
         }, {
             'data': 'fecha_creacion',
         }, {
@@ -803,6 +832,126 @@ function btnReingresarEspacio(id) {
         }
     })
 }
+//--------------------------------------------------------
+function frmAdministrador() {
+    document.getElementById("tituloModal").textContent = "Registrar cliente";
+    document.getElementById("btnAccion").textContent = "Registrar";
+    document.getElementById("frmAdministrador").reset();
+    myModal.show();
+    document.getElementById("id").value = "";
+}
+function registrarAdministrador(e) {
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    const ci = document.getElementById("ci");
+    const codigo_saga = document.getElementById("codigo_saga");
+    const id_usuario = document.getElementById("id_usuario");
+
+    if (nombre.value == "" || ci.value == "" || codigo_saga.value == "" || id_usuario.value == "") {
+        alertas('Todo los campos son obligatorios', 'warning');
+    } else {
+        const url = base_url + "Administrador/registrar";
+        const frm = document.getElementById("frmAdministrador");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                alertas(res.msg, res.icono);
+                frm.reset();
+                myModal.hide();
+                tblAdministrador.ajax.reload();
+            }
+        }
+    }
+}
+function btnEditarAdministrador(id) {
+    document.getElementById("tituloModal").textContent = "Actualizar administrador";
+    document.getElementById("btnAccion").textContent = "Modificar";
+    const url = base_url + "Administrador/editar/" + id;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            document.getElementById("id").value = res.id;
+            document.getElementById("nombre").value = res.nombre;
+            document.getElementById("ci").value = res.ci;
+            document.getElementById("codigo_saga").value = res.codigo_saga;
+            document.getElementById("id_usuario").value = res.id_usuario;
+            myModal.show();
+            console.log(res)
+            tblAdministrador.ajax.reload();
+        }
+    }
+
+}
+function btnEliminarAdministrador(id) {
+    Swal.fire({
+        title: '¿Esta seguro de la eliminacion?',
+        text: "No se eliminara de forma permanente, solo cambia a estado inactivo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Administrador/eliminar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas('No tiene permiso de eliminar', 'warning');
+                    } else {
+                        alertas(res.msg, res.icono);
+                        tblAdministrador.ajax.reload();
+                    }
+                }
+            }
+
+        }
+    })
+}
+function btnReingresarAdministrador(id) {
+    Swal.fire({
+        title: '¿Estas seguro de reingresar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Administrador/reingresar/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == '') {
+                        alertas("No tiene permiso de realizar esta accion", "warning");
+                    } else {
+                        tblAdministrador.ajax.reload();
+                        alertas(res.msg, res.icono);
+                    }
+                }
+            }
+
+        }
+    })
+}
+
+
 function alertas(mensaje, icono) {
     Swal.fire({
         position: 'top-end',

@@ -55,6 +55,10 @@
                                     <a class="nav-link" href="<?php echo base_url;?>Puntos">Puntos de atencion</a>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="<?php echo base_url;?>Administrador">
+                                <div class="sb-nav-link-icon"><i class="far fa-star"></i></div>
+                                Administrador
+                            </a>
                             <a class="nav-link" href="<?php echo base_url;?>Clientes">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Clientes
