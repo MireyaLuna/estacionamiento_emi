@@ -5,7 +5,7 @@ class Usuarios extends Controller
     {
         session_start();
         if (empty($_SESSION['activo'])) {
-            header("location: ".base_url);
+            header("location: " . base_url);
         }
         parent::__construct();
     }
@@ -19,7 +19,7 @@ class Usuarios extends Controller
     }
     public function listar()
     {
-        $data = $this->model->getUsuarios(); 
+        $data = $this->model->getUsuarios();
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';

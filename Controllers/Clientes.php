@@ -11,7 +11,8 @@ class Clientes extends Controller
     }
     public function index()
     {
-        $this->views->getViews($this, "index");
+        $data['usuarios'] = $this->model->getUsuarios();
+        $this->views->getViews($this, "index", $data);
     }
     public function listar()
     {

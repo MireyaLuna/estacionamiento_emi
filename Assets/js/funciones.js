@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'telefono',
         }, {
+            'data': 'usuario',
+        }, {
             'data': 'fecha_creacion',
         }, {
             // 'data': 'usuario_creacion',
@@ -104,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'descripcion',
         }, {
-            'data': 'id_estacionamiento',
+            'data': 'estacionamiento',
         }, {
             'data': 'fecha_creacion',
         }, {
@@ -156,12 +158,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'nro_espacio',
         }, {
-        //     'data': 'id_vehiculo',
-        // }, {
-        //     'data': 'hora_ingreso',
-        // }, {
-        //     'data': 'hora_salida',
-        // }, {
+            //     'data': 'id_vehiculo',
+            // }, {
+            //     'data': 'hora_ingreso',
+            // }, {
+            //     'data': 'hora_salida',
+            // }, {
             'data': 'fecha_creacion',
         }, {
             // 'data': 'usuario_creacion',
@@ -241,8 +243,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'monto_pagado',
         }, {
-        //     'data': 'monto_recibido',
-        // }, {
+            //     'data': 'monto_recibido',
+            // }, {
             'data': 'fecha_emision',
         }, {
             'data': 'fecha_limite_emision',

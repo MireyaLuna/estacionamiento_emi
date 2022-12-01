@@ -40,10 +40,13 @@
                             <label for="descripcion">Descripcion</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input id="estacionamiento" class="form-control" type="text" name="estacionamiento">
-                            <label for="estacionamiento">Estacionamiento</label>
-                        </div>
-                        
+                            <select id="estacionamiento" class="form-control" name="estacionamiento">
+                                <?php foreach ($data['estacionamientos'] as $row) { ?>
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="estacionamiento">Estacionamientos</label>
+                        </div>                        
                         <div class="row">
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="button" class="btn btn-success" onclick="registrarPunto(event);" id="btnAccion">Registrar</button>

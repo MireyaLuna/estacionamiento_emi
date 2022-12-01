@@ -51,14 +51,14 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="<?php echo base_url;?>Usuarios">Usuarios</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Roles</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Parametros</a>
                                     <a class="nav-link" href="<?php echo base_url;?>Puntos">Puntos de atencion</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="<?php echo base_url;?>Administrador">
+                            <!-- <a class="nav-link" href="<?php echo base_url;?>Administrador">
                                 <div class="sb-nav-link-icon"><i class="far fa-star"></i></div>
                                 Administrador
-                            </a>
+                            </a> -->
                             <a class="nav-link" href="<?php echo base_url;?>Clientes">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Clientes
@@ -99,10 +99,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
                                 Facturas
                             </a>
-                            <a class="nav-link" href="<?php echo base_url;?>Pagos">
+                            <!-- <a class="nav-link" href="<?php echo base_url;?>Pagos">
                                 <div class="sb-nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
                                 Pagos
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

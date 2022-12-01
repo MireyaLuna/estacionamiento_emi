@@ -5,10 +5,15 @@ class PuntosModel extends Query{
         parent::__construct();
     }
     public function getPuntos(){
-        $sql = "SELECT * FROM punto_atencion";
+        $sql = "SELECT p.*, e.nombre as estacionamiento FROM punto_atencion p, estacionamiento e WHERE id_estacionamiento = e.id AND e.estado = 1";
         $data = $this->selectAll($sql);
         return $data;
-    }                                        
+    }            
+    public function getEstacionamientos(){
+        $sql = "SELECT * FROM estacionamiento WHERE estado = 1";
+        $data = $this->selectAll($sql);
+        return $data;
+    }                            
     public function registrarPunto(string $nombre, string $descripcion, string $estacionamiento, string $fecha){
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
