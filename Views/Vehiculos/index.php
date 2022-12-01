@@ -7,8 +7,8 @@
             <th>PLACA</th>
             <th>COLOR</th>
             <th>MARCA</th>
-            <!-- <th>CLIENTE</th> -->
-            <th>ESPACIO</th>
+            <th>CLIENTE</th>
+            <th>TIPO</th>
             <th>FECHA CREACION</th>
             <th>FECHA MODIFICACION</th>
             <th>ESTADO</th>
@@ -33,8 +33,8 @@
                         <label for="id_cliente">Cliente</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="id_espacio" class="form-control" type="text" name="id_espacio" placeholder="Ingrese espacio a ocupar">
-                        <label for="id_espacio">Espacio</label>
+                        <input id="tipo" class="form-control" type="text" name="tipo" placeholder="Ingrese tipo">
+                        <label for="tipo">Tipo</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="placa" class="form-control" type="text" name="placa" placeholder="Ingrese placa">

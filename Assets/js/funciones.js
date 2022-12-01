@@ -48,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'marca',
         }, {
-            'data': 'id_espacio',
+            'data': 'id_cliente',
+        }, {
+            'data': 'tipo',
         }, {
             'data': 'fecha_creacion',
         }, {
@@ -440,9 +442,9 @@ function registrarVehiculo(e) {
     const color = document.getElementById("color");
     const marca = document.getElementById("marca");
     const cliente = document.getElementById("id_cliente");
-    const espacio = document.getElementById("id_espacio");
+    const tipo = document.getElementById("tipo");
 
-    if (placa.value == "" || color.value == "" || marca.value == "" || cliente.value == "" || espacio.value == "") {
+    if (placa.value == "" || color.value == "" || marca.value == "" || cliente.value == "" || tipo.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Vehiculos/registrar";
@@ -477,7 +479,7 @@ function btnEditarVehiculo(id) {
             document.getElementById("color").value = res.color;
             document.getElementById("marca").value = res.marca;
             document.getElementById("id_cliente").value = res.id_cliente;
-            document.getElementById("id_espacio").value = res.id_espacio;
+            document.getElementById("tipo").value = res.tipo;
             myModal.show();
             console.log(res)
             tblVehiculos.ajax.reload();

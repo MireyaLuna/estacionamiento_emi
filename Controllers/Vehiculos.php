@@ -41,16 +41,16 @@ class Vehiculos extends Controller
         $color = $_POST['color'];
         $marca = $_POST['marca'];
         $cliente = $_POST['id_cliente'];
-        $espacio = $_POST['id_espacio'];
+        $tipo = $_POST['tipo'];
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
 
-        if (empty($placa) || empty($color) || empty($marca) || empty($cliente) || empty($espacio)) {
-            $msg = array('msg' => 'Todo los campos son obligatoriossss', 'icono' => 'warning');
+        if (empty($placa) || empty($color) || empty($marca) || empty($cliente) || empty($tipo)) {
+            $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
-                    $data = $this->model->registrarVehiculo($placa, $color, $marca, $cliente, $espacio, $fecha_hoy);
+                    $data = $this->model->registrarVehiculo($placa, $color, $marca, $cliente, $tipo, $fecha_hoy);
                     if ($data == "ok") {
                         $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                     } else if ($data == "existe") {
@@ -60,7 +60,7 @@ class Vehiculos extends Controller
                     }
                 
             } else {
-                $data = $this->model->modificarVehiculo($placa, $color, $marca, $cliente, $espacio, $fecha_hoy, $id);
+                $data = $this->model->modificarVehiculo($placa, $color, $marca, $cliente, $tipo, $fecha_hoy, $id);
                 if ($data == "modificado") {
                     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                 } else {
