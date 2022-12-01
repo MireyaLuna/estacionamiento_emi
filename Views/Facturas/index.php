@@ -9,8 +9,8 @@
             <th>ID</th>
             <th>REGISTRO</th>
             <th>NIT</th>
-            <th>NOMBRE</th>
-            <th>CANTIDAD</th>
+            <th>MONTO PAGADO</th>
+            <!-- <th>CANTIDAD</th> -->
             <th>FECHA EMISION</th>
             <th>FECHA LIMITE EMISION</th>
             <th>FECHA CREACION</th>
@@ -42,23 +42,30 @@
                         <input id="nit" class="form-control" type="number" name="nit">
                         <label for="nit">Numero de identificacion tributaria</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input id="nombre" class="form-control" type="text" name="nombre">
-                        <label for="nombre">Nombre</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input id="cantidad" class="form-control" type="number" name="cantidad">
-                        <label for="cantidad">Cantidad</label>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input id="monto_pagado" class="form-control" type="number" name="monto_pagado">
+                                <label for="monto_pagado">Monto pagado</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input id="monto_recibido" class="form-control" type="number" name="monto_recibido">
+                                <label for="monto_recibido">Monto recibido</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="fecha_emision" class="form-control" type="date" name="fecha_emision" value="<?php date_default_timezone_set("America/La_Paz");
-                                                                                                                echo date('Y-m-d') ?>" >
+                                                                                                                echo date('Y-m-d') ?>">
                         <label for="fecha_emision">Fecha Emision</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="fecha_limite" class="form-control" type="date" name="fecha_limite" value="<?php date_default_timezone_set("America/La_Paz");
-                                                                                                            $fecha_actual = date("Y-m-d");
-                                                                                                            echo date("Y-m-d",strtotime($fecha_actual."+ 6 month"));  ?>" >
+                                                                                                                $fecha_actual = date("Y-m-d");
+                                                                                                                echo date("Y-m-d", strtotime($fecha_actual . "+ 6 month"));  ?>">
                         <label for=" fecha_limite">Fecha limite de emision</label>
                     </div>
                     <div class="row">

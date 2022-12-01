@@ -239,10 +239,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'nit',
         }, {
-            'data': 'nombre',
+            'data': 'monto_pagado',
         }, {
-            'data': 'cantidad',
-        }, {
+        //     'data': 'monto_recibido',
+        // }, {
             'data': 'fecha_emision',
         }, {
             'data': 'fecha_limite_emision',
@@ -1285,12 +1285,12 @@ function registrarFactura(e) {
     e.preventDefault();
     const registro = document.getElementById("registro");
     const nit = document.getElementById("nit");
-    const nombre = document.getElementById("nombre");
-    const cantidad = document.getElementById("cantidad");
+    const monto_pagado = document.getElementById("monto_pagado");
+    const monto_recibido = document.getElementById("monto_recibido");
     const fecha_emision = document.getElementById("fecha_emision");
     const fecha_limite = document.getElementById("fecha_limite");
 
-    if (registro.value == "" || nit.value == "" || nombre.value == "" || cantidad.value == "" || fecha_emision.value == "" || fecha_limite.value == "") {
+    if (registro.value == "" || nit.value == "" || monto_pagado.value == "" || monto_recibido.value == "" || fecha_emision.value == "" || fecha_limite.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Facturas/registrar";

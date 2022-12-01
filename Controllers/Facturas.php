@@ -38,8 +38,8 @@ class Facturas extends Controller
         date_default_timezone_set("America/La_Paz");
         $registro = $_POST['registro'];
         $nit = $_POST['nit'];
-        $nombre = $_POST['nombre'];
-        $cantidad = $_POST['cantidad'];
+        $monto_pagado = $_POST['monto_pagado'];
+        $monto_recibido = $_POST['monto_recibido'];
         $fecha_emision = $_POST['fecha_emision'];
         // print_r($fecha_emision);
         $fecha_limite = $_POST['fecha_limite'];
@@ -47,11 +47,11 @@ class Facturas extends Controller
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         
-        if (empty($registro) || empty($nit) || empty($nombre) || empty($cantidad) || empty($fecha_emision)|| empty($fecha_limite)) {
+        if (empty($registro) || empty($nit) || empty($monto_pagado) || empty($monto_recibido) || empty($fecha_emision)|| empty($fecha_limite)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
-                $data = $this->model->registrarFactura($registro, $nit, $nombre, $cantidad, $fecha_emision, $fecha_limite, $fecha_hoy);
+                $data = $this->model->registrarFactura($registro, $nit, $monto_pagado, $monto_recibido, $fecha_emision, $fecha_limite, $fecha_hoy);
                 if ($data == "ok") {
                     $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                 } else if ($data == "existe") {
@@ -60,7 +60,7 @@ class Facturas extends Controller
                     $msg = array('msg' => 'Error al registrar', 'icono' => 'error');
                 }
             } else {
-                $data = $this->model->modificarFactura($registro, $nit, $nombre, $cantidad, $fecha_emision, $fecha_limite, $fecha_hoy, $id);
+                $data = $this->model->modificarFactura($registro, $nit, $monto_pagado, $monto_recibido, $fecha_emision, $fecha_limite, $fecha_hoy, $id);
                 if ($data == "modificado") {
                     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                 } else if ($data == "existe") {
