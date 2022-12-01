@@ -38,17 +38,17 @@ class Espacios extends Controller
         date_default_timezone_set("America/La_Paz");
         $numero = $_POST['numero'];
         $estacionamiento = $_POST['estacionamiento'];
-        $vehiculo = $_POST['vehiculo'];
-        $ingreso = $_POST['ingreso'];
+        // $vehiculo = $_POST['vehiculo'];
+        // $ingreso = $_POST['ingreso'];
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         
-        if (empty($numero) || empty($estacionamiento) || empty($vehiculo) || empty($ingreso)) {
+        if (empty($numero) || empty($estacionamiento)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
-                $data = $this->model->registrarEspacio($numero, $estacionamiento, $vehiculo, $ingreso, $fecha_hoy);
+                $data = $this->model->registrarEspacio($numero, $estacionamiento, $fecha_hoy);
                 if ($data == "ok") {
                     $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                 } else if ($data == "existe") {
@@ -57,8 +57,7 @@ class Espacios extends Controller
                     $msg = array('msg' => 'Error al registrar', 'icono' => 'error');
                 }
             } else {
-                $salida = $_POST['salida'];
-                $data = $this->model->modificarEspacio($numero, $estacionamiento, $vehiculo, $ingreso, $salida, $fecha_hoy, $id);
+                $data = $this->model->modificarEspacio($numero, $estacionamiento, $fecha_hoy, $id);
                 if ($data == "modificado") {
                     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                 } else if ($data == "existe") {

@@ -9,9 +9,9 @@
             <th>ID</th>
             <th>ESTACIONAMIENTO</th>
             <th>NUMERO ESPACIO</th>
-            <th>VEHICULO</th>
+            <!-- <th>VEHICULO</th>
             <th>HORA INGRESO</th>
-            <th>HORA SALIDA</th>
+            <th>HORA SALIDA</th> -->
             <th>FECHA CREACION</th>
             <!-- <th>USUARIO CREACION</th> -->
             <th>FECHA MODIFICACION</th>
@@ -40,18 +40,6 @@
                     <div class="form-floating mb-3">
                         <input id="numero" class="form-control" type="text" name="numero">
                         <label for="numero">Numero</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input id="vehiculo" class="form-control" type="text" name="vehiculo">
-                        <label for="vehiculo">Vehiculo</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input id="ingreso" class="form-control" type="time" name="ingreso" value = "<?php date_default_timezone_set("America/La_Paz"); echo date('H:i:s')?>">
-                        <label for="ingreso">Hora de ingreso</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input id="salida" class="form-control" type="time" name="salida" disabled>
-                        <label for="salida">Hora de salida</label>
                     </div>
                     <div class="row">
                         <div class="d-grid gap-2 col-6 mx-auto">

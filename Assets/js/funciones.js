@@ -154,12 +154,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'nro_espacio',
         }, {
-            'data': 'id_vehiculo',
-        }, {
-            'data': 'hora_ingreso',
-        }, {
-            'data': 'hora_salida',
-        }, {
+        //     'data': 'id_vehiculo',
+        // }, {
+        //     'data': 'hora_ingreso',
+        // }, {
+        //     'data': 'hora_salida',
+        // }, {
             'data': 'fecha_creacion',
         }, {
             // 'data': 'usuario_creacion',
@@ -919,11 +919,11 @@ function registrarEspacio(e) {
     e.preventDefault();
     const estacionamiento = document.getElementById("estacionamiento");
     const numero = document.getElementById("numero");
-    const vehiculo = document.getElementById("vehiculo");
-    const ingreso = document.getElementById("ingreso");
-    const salida = document.getElementById("salida");
+    // const vehiculo = document.getElementById("vehiculo");
+    // const ingreso = document.getElementById("ingreso");
+    // const salida = document.getElementById("salida");
 
-    if (numero.value == "" || vehiculo.value == "" || estacionamiento.value == "" || ingreso.value == "") {
+    if (numero.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Espacios/registrar";
@@ -958,10 +958,10 @@ function btnEditarEspacio(id) {
             document.getElementById("id").value = res.id;
             document.getElementById("estacionamiento").value = res.id_estacionamiento;
             document.getElementById("numero").value = res.nro_espacio;
-            document.getElementById("vehiculo").value = res.id_vehiculo;
-            document.getElementById("ingreso").value = res.hora_ingreso;
-            document.getElementById("salida").removeAttribute('disabled');
-            document.getElementById("salida").value = res.hora_salida;
+            // document.getElementById("vehiculo").value = res.id_vehiculo;
+            // document.getElementById("ingreso").value = res.hora_ingreso;
+            // document.getElementById("salida").removeAttribute('disabled');
+            // document.getElementById("salida").value = res.hora_salida;
             myModal.show();
             console.log(res);
             tblEspacios.ajax.reload();

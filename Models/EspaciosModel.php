@@ -9,15 +9,13 @@ class EspaciosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }                                            
-    public function registrarEspacio(string $numero, string $estacionamiento, string $vehiculo, string $ingreso, string $fecha){
+    public function registrarEspacio(string $numero, string $estacionamiento, string $fecha){
         $this->numero = $numero;
         $this->estacionamiento = $estacionamiento;
-        $this->vehiculo = $vehiculo;
-        $this->ingreso = $ingreso;
         $this->fecha = $fecha;
         
-        $sql = "INSERT INTO espacio(nro_espacio, id_estacionamiento, id_vehiculo, hora_ingreso, fecha_creacion) VALUES (?,?,?,?,?)";
-        $datos = array($this->numero, $this->estacionamiento, $this->vehiculo, $this->ingreso, $this->fecha);
+        $sql = "INSERT INTO espacio(nro_espacio, id_estacionamiento, fecha_creacion) VALUES (?,?,?)";
+        $datos = array($this->numero, $this->estacionamiento, $this->fecha);
         $data = $this->save($sql, $datos);
         if($data == 1){
             $res = "ok";
@@ -32,16 +30,13 @@ class EspaciosModel extends Query{
         $data = $this->select($sql);
         return $data;
     }                               
-    public function modificarEspacio(string $numero, string $estacionamiento, string $vehiculo, string $ingreso, string $salida, string $fecha, int $id){
+    public function modificarEspacio(string $numero, string $estacionamiento, string $fecha, int $id){
         $this->numero = $numero;
         $this->estacionamiento = $estacionamiento;
-        $this->vehiculo = $vehiculo;
-        $this->ingreso = $ingreso;
-        $this->salida = $salida;
         $this->fecha = $fecha;
         $this->id = $id;
-        $sql = "UPDATE espacio SET nro_espacio = ?, id_estacionamiento = ?, id_vehiculo = ?, hora_ingreso = ?, hora_salida = ?, fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->numero, $this->estacionamiento, $this->vehiculo, $this->ingreso, $this->salida, $this->fecha, $this->id);
+        $sql = "UPDATE espacio SET nro_espacio = ?, id_estacionamiento = ?, fecha_modificacion = ? WHERE id = ?";
+        $datos = array($this->numero, $this->estacionamiento, $this->fecha, $this->id);
         $data = $this->save($sql, $datos);
         if($data == 1){
             $res = "modificado";
