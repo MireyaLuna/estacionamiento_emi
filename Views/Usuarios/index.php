@@ -11,6 +11,7 @@
             <th>NOMBRE</th>
             <th>GENERO</th>
             <th>CARGO</th>
+            <th>ESTACIONAMIENTO</th>
             <th>FECHA CREACION</th>
             <!-- <th>USUARIO CREACION</th> -->
             <th>FECHA MODIFICACION</th>
@@ -55,6 +56,14 @@
                                 <?php } ?>
                             </select>
                             <label for="cargo">Rol</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select id="estacionamiento" class="form-control" name="estacionamiento">
+                                <?php foreach ($data['estacionamientos'] as $row) { ?>
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="estacionamiento">Estacionamientos</label>
                         </div>
                         <div class="row" id="claves">
                             <div class="col-md-6">

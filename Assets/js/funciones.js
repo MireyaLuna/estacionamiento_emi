@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'cargo',
         }, {
+            'data': 'estacionamiento',
+        }, {
             'data': 'fecha_creacion',
         }, {
             // 'data': 'usuario_creacion',
@@ -291,6 +293,7 @@ function frmLogin(e) {
         }
     }
 }
+
 function frmUsuario() {
     document.getElementById("tituloModal").textContent = "Registrar usuario";
     document.getElementById("btnAccion").textContent = "Registrar";
@@ -299,6 +302,7 @@ function frmUsuario() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarUsuario(e) {
     e.preventDefault();
     const usuario = document.getElementById("usuario");
@@ -307,7 +311,8 @@ function registrarUsuario(e) {
     const confirmar = document.getElementById("confirmar");
     const genero = document.getElementById("genero");
     const cargo = document.getElementById("cargo");
-    if (usuario.value == "" || nombre.value == "" || genero.value == "" || cargo.value == "") {
+    const id_estacionamiento = document.getElementById("estacionamiento");
+    if (usuario.value == "" || nombre.value == "" || genero.value == "" || cargo.value == "" || id_estacionamiento.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else if (clave.value != confirmar.value) {
         alertas('Las contraseñas no coinciden', 'warning');
@@ -328,6 +333,7 @@ function registrarUsuario(e) {
         }
     }
 }
+
 function btnEditarUsuario(id) {
     document.getElementById("tituloModal").textContent = "Actualizar usuario";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -354,6 +360,7 @@ function btnEditarUsuario(id) {
     }
 
 }
+
 function btnEliminarUsuario(id) {
     // alert(id);
     Swal.fire({
@@ -387,6 +394,7 @@ function btnEliminarUsuario(id) {
         }
     })
 }
+
 function btnReingresarUsuario(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -425,6 +433,7 @@ function frmVehiculo() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarVehiculo(e) {
     e.preventDefault();
     const placa = document.getElementById("placa");
@@ -452,6 +461,7 @@ function registrarVehiculo(e) {
         }
     }
 }
+
 function btnEditarVehiculo(id) {
     document.getElementById("tituloModal").textContent = "Actualizar vehiculo";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -475,6 +485,7 @@ function btnEditarVehiculo(id) {
     }
 
 }
+
 function btnEliminarVehiculo(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -507,6 +518,7 @@ function btnEliminarVehiculo(id) {
         }
     })
 }
+
 function btnReingresarVehiculo(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -545,13 +557,14 @@ function frmCliente() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarCliente(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
     const ci = document.getElementById("ci");
     const telefono = document.getElementById("telefono");
 
-    if (nombre.value == "" || ci.value == "" || telefono.value == "" ) {
+    if (nombre.value == "" || ci.value == "" || telefono.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Clientes/registrar";
@@ -570,6 +583,7 @@ function registrarCliente(e) {
         }
     }
 }
+
 function btnEditarCliente(id) {
     document.getElementById("tituloModal").textContent = "Actualizar cliente";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -591,6 +605,7 @@ function btnEditarCliente(id) {
     }
 
 }
+
 function btnEliminarCliente(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -623,6 +638,7 @@ function btnEliminarCliente(id) {
         }
     })
 }
+
 function btnReingresarCliente(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -661,13 +677,14 @@ function frmPuntos() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarPunto(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
     const descripcion = document.getElementById("descripcion");
     const estacionamiento = document.getElementById("estacionamiento");
 
-    if (nombre.value == "" || descripcion.value == "" || estacionamiento.value == "" ) {
+    if (nombre.value == "" || descripcion.value == "" || estacionamiento.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Puntos/registrar";
@@ -686,6 +703,7 @@ function registrarPunto(e) {
         }
     }
 }
+
 function btnEditarPunto(id) {
     document.getElementById("tituloModal").textContent = "Actualizar punto de atencion";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -706,6 +724,7 @@ function btnEditarPunto(id) {
         }
     }
 }
+
 function btnEliminarPunto(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -738,6 +757,7 @@ function btnEliminarPunto(id) {
         }
     })
 }
+
 function btnReingresarPunto(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -776,12 +796,13 @@ function frmEstacionamiento() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarEstacionamiento(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
     const ubicacion = document.getElementById("ubicacion");
 
-    if (nombre.value == "" || ubicacion.value == "" ) {
+    if (nombre.value == "" || ubicacion.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Estacionamientos/registrar";
@@ -801,6 +822,7 @@ function registrarEstacionamiento(e) {
         }
     }
 }
+
 function btnEditarEstacionamiento(id) {
     document.getElementById("tituloModal").textContent = "Actualizar estacionamiento";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -820,6 +842,7 @@ function btnEditarEstacionamiento(id) {
         }
     }
 }
+
 function btnEliminarEstacionamiento(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -852,6 +875,7 @@ function btnEliminarEstacionamiento(id) {
         }
     })
 }
+
 function btnReingresarEstacionamiento(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -890,6 +914,7 @@ function frmEspacio() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarEspacio(e) {
     e.preventDefault();
     const estacionamiento = document.getElementById("estacionamiento");
@@ -898,7 +923,7 @@ function registrarEspacio(e) {
     const ingreso = document.getElementById("ingreso");
     const salida = document.getElementById("salida");
 
-    if (numero.value == "" || vehiculo.value == "" || estacionamiento.value == "" || ingreso.value == "" ) {
+    if (numero.value == "" || vehiculo.value == "" || estacionamiento.value == "" || ingreso.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Espacios/registrar";
@@ -918,6 +943,7 @@ function registrarEspacio(e) {
         }
     }
 }
+
 function btnEditarEspacio(id) {
     document.getElementById("tituloModal").textContent = "Actualizar espacio";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -942,6 +968,7 @@ function btnEditarEspacio(id) {
         }
     }
 }
+
 function btnEliminarEspacio(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -974,6 +1001,7 @@ function btnEliminarEspacio(id) {
         }
     })
 }
+
 function btnReingresarEspacio(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -1012,6 +1040,7 @@ function frmAdministrador() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarAdministrador(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre");
@@ -1038,6 +1067,7 @@ function registrarAdministrador(e) {
         }
     }
 }
+
 function btnEditarAdministrador(id) {
     document.getElementById("tituloModal").textContent = "Actualizar administrador";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -1060,6 +1090,7 @@ function btnEditarAdministrador(id) {
     }
 
 }
+
 function btnEliminarAdministrador(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -1092,6 +1123,7 @@ function btnEliminarAdministrador(id) {
         }
     })
 }
+
 function btnReingresarAdministrador(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -1130,6 +1162,7 @@ function frmPago() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarPago(e) {
     e.preventDefault();
     const monto = document.getElementById("monto");
@@ -1153,6 +1186,7 @@ function registrarPago(e) {
         }
     }
 }
+
 function btnEditarPago(id) {
     document.getElementById("tituloModal").textContent = "Actualizar pago";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -1172,6 +1206,7 @@ function btnEditarPago(id) {
     }
 
 }
+
 function btnEliminarPago(id) {
     Swal.fire({
         title: '¿Esta seguro de la eliminacion?',
@@ -1204,6 +1239,7 @@ function btnEliminarPago(id) {
         }
     })
 }
+
 function btnReingresarPago(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',
@@ -1242,6 +1278,7 @@ function frmFactura() {
     myModal.show();
     document.getElementById("id").value = "";
 }
+
 function registrarFactura(e) {
     e.preventDefault();
     const registro = document.getElementById("registro");
@@ -1251,7 +1288,7 @@ function registrarFactura(e) {
     const fecha_emision = document.getElementById("fecha_emision");
     const fecha_limite = document.getElementById("fecha_limite");
 
-    if (registro.value == "" || nit.value == "" || nombre.value == "" || cantidad.value == "" || fecha_emision.value == ""|| fecha_limite.value == "") {
+    if (registro.value == "" || nit.value == "" || nombre.value == "" || cantidad.value == "" || fecha_emision.value == "" || fecha_limite.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Facturas/registrar";
@@ -1270,6 +1307,7 @@ function registrarFactura(e) {
         }
     }
 }
+
 function btnEditarFactura(id) {
     document.getElementById("tituloModal").textContent = "Actualizar factura";
     document.getElementById("btnAccion").textContent = "Modificar";
@@ -1293,6 +1331,7 @@ function btnEditarFactura(id) {
     }
 
 }
+
 function btnEliminarFactura(id) {
     Swal.fire({
         title: '¿Esta seguro de la anulacion?',
@@ -1325,6 +1364,7 @@ function btnEliminarFactura(id) {
         }
     })
 }
+
 function btnReingresarFactura(id) {
     Swal.fire({
         title: '¿Estas seguro de reingresar?',

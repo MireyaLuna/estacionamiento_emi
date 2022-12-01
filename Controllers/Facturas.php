@@ -18,9 +18,8 @@ class Facturas extends Controller
         $data = $this->model->getFacturas();
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
-                $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
+                $data[$i]['estado'] = '<span class="badge bg-success">Completado</span>';
                 $data[$i]['acciones'] = '<div> 
-            <button type="button" class = "btn btn-primary" onclick="btnEditarFactura(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
             <button type="button" class = "btn btn-danger" onclick="btnEliminarFactura(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
             </div>';
             } else {
@@ -32,6 +31,7 @@ class Facturas extends Controller
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
+        //<button type="button" class = "btn btn-primary" onclick="btnEditarFactura(' . $data[$i]['id'] . ');"><i class="ffas fa-clipboard-lista-regular fa-pen-to-square"></i></button>
     }
     public function registrar()
     {

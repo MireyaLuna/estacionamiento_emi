@@ -19,23 +19,29 @@ class UsuariosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function getUsuarios(){
-        $sql = "SELECT u.*, p.nombre as genero, p2.nombre as cargo FROM usuario u INNER JOIN parametro p INNER JOIN parametro p2 WHERE u.genero = p.codigo AND u.cargo = p2.codigo";
+    public function getEstacionamientos(){
+        $sql = "SELECT * FROM estacionamiento WHERE estado = 1";
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $fecha){
+    public function getUsuarios(){
+        $sql = "SELECT u.*, p.nombre AS genero, p2.nombre AS cargo, e.nombre AS estacionamiento FROM usuario u INNER JOIN parametro p INNER JOIN parametro p2 INNER JOIN estacionamiento e WHERE u.genero = p.codigo AND u.cargo = p2.codigo AND e.id = u.id_estacionamiento";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
+    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $id_estacionamiento, string $fecha){
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->clave = $clave;
         $this->genero = $genero;
         $this->cargo = $cargo;
+        $this->id_estacionamiento = $id_estacionamiento;
         $this->fecha = $fecha;
         $verificar = "SELECT * FROM usuario WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, fecha_creacion) VALUES (?,?,?,?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->fecha);
+            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, id_estacionamiento, fecha_creacion) VALUES (?,?,?,?,?,?,?)";
+            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha);
             $data = $this->save($sql, $datos);
             if($data == 1){
                 $res = "ok";
@@ -52,16 +58,17 @@ class UsuariosModel extends Query{
         $data = $this->select($sql);
         return $data;
     }
-    public function modificarUsuario(string $usuario, string $nombre, string $genero, string $cargo, string $fecha, int $id){
+    public function modificarUsuario(string $usuario, string $nombre, string $genero, string $cargo, string $id_estacionamiento, string $fecha, int $id){
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->genero = $genero;
         $this->cargo = $cargo;
+        $this->id_estacionamiento = $id_estacionamiento;
         $this->fecha = $fecha;
         $this->id = $id;
         
-        $sql = "UPDATE usuario SET usuario = ?, nombre = ?, genero = ?, cargo = ? , fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->usuario, $this->nombre, $this->genero, $this->cargo, $this->fecha, $this->id);
+        $sql = "UPDATE usuario SET usuario = ?, nombre = ?, genero = ?, cargo = ?, id_estacionamiento = ?, fecha_modificacion = ? WHERE id = ?";
+        $datos = array($this->usuario, $this->nombre, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha, $this->id);
         $data = $this->save($sql, $datos);
         if($data == 1){
             $res = "modificado";

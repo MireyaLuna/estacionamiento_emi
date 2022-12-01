@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Panel Administrativo</title>
+        <title>Estacionamiento EMI</title>
         <link href="<?php echo base_url;?>Assets/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url;?>Assets/DataTables/datatables.min.css"/>
         <script src="<?php echo base_url;?>Assets/js/all.js"></script>
@@ -75,6 +75,26 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Espacios
                             </a>
+                            <!-- Registros -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseRegistros" aria-expanded="false" aria-controls="collapseRegistros">
+                            <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
+                            Registros
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseRegistros" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="<?php echo base_url;?>Medidas">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket fa-2x"></i></div>
+                                    Nuevo Registro
+                                </a>
+                                <a class="nav-link" href="<?php echo base_url;?>Categorias">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-cubes-stacked fa-2x"></i></div>
+                                    Ver registros
+                                </a>
+                            </nav>
+                        </div>
                             <a class="nav-link" href="<?php echo base_url;?>Facturas">
                                 <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
                                 Facturas

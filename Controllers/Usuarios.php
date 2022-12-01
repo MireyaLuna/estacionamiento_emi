@@ -14,6 +14,7 @@ class Usuarios extends Controller
         // print_r($this->model->getUsuarios());
         $data['generos'] = $this->model->getGeneros();
         $data['cargos'] = $this->model->getCargos();
+        $data['estacionamientos'] = $this->model->getEstacionamientos();
         $this->views->getViews($this, "index", $data);
     }
     public function listar()
@@ -69,19 +70,20 @@ class Usuarios extends Controller
         $confirmar = $_POST['confirmar'];
         $genero = $_POST['genero'];
         $cargo = $_POST['cargo'];
+        $id_estacionamiento = $_POST['estacionamiento'];
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         $hash = hash("SHA256", $clave);
 
-        if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo)) {
+        if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo) || empty($id_estacionamiento)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
                 if ($clave != $confirmar) {
                     $msg = array('msg' => 'No coinciden las constraseñas', 'icono' => 'warning');
                 } else {
-                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $genero, $cargo, $fecha_hoy);
+                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $genero, $cargo, $id_estacionamiento, $fecha_hoy);
                     if ($data == "ok") {
                         $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                     } else if ($data == "existe") {
@@ -91,7 +93,7 @@ class Usuarios extends Controller
                     }
                 }
             } else {
-                $data = $this->model->modificarUsuario($usuario, $nombre, $genero, $cargo, $fecha_hoy, $id);
+                $data = $this->model->modificarUsuario($usuario, $nombre, $genero, $cargo, $id_estacionamiento, $fecha_hoy, $id);
                 if ($data == "modificado") {
                     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                 } else {
