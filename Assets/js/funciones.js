@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
         columns: [{
             'data': 'id',
         }, {
-            'data': 'id_registro',
+            'data': 'id_ticket',
         }, {
             'data': 'nit',
         }, {

@@ -7,7 +7,7 @@
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
-            <th>REGISTRO</th>
+            <th>NUMERO TICKET</th>
             <th>NIT</th>
             <th>MONTO PAGADO</th>
             <!-- <th>CANTIDAD</th> -->
@@ -36,7 +36,7 @@
                     <div class="form-floating mb-3">
                         <input type="hidden" id="id" name="id">
                         <input id="registro" class="form-control" type="text" name="registro">
-                        <label for="registro">Registro</label>
+                        <label for="registro">Ticket</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="nit" class="form-control" type="number" name="nit">
