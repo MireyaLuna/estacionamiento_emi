@@ -11,7 +11,8 @@ class Espacios extends Controller
     }
     public function index()
     {
-        $this->views->getViews($this, "index");
+        $data['estacionamientos'] = $this->model->getEstacionamientos();
+        $this->views->getViews($this, "index", $data);
     }
     public function listar()
     {

@@ -9,9 +9,6 @@
             <th>ID</th>
             <th>ESTACIONAMIENTO</th>
             <th>NUMERO ESPACIO</th>
-            <!-- <th>VEHICULO</th>
-            <th>HORA INGRESO</th>
-            <th>HORA SALIDA</th> -->
             <th>FECHA CREACION</th>
             <!-- <th>USUARIO CREACION</th> -->
             <th>FECHA MODIFICACION</th>
@@ -34,8 +31,12 @@
                 <form method="post" id="frmEspacio">
                     <div class="form-floating mb-3">
                         <input type="hidden" id="id" name="id">
-                        <input id="estacionamiento" class="form-control" type="text" name="estacionamiento">
-                        <label for="estacionamiento">Estacionamiento</label>
+                        <select id="estacionamiento" class="form-control" name="estacionamiento">
+                            <?php foreach ($data['estacionamientos'] as $row) { ?>
+                                <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <label for="estacionamiento">Estacionamientos</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="numero" class="form-control" type="text" name="numero">

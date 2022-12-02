@@ -5,10 +5,15 @@ class EspaciosModel extends Query{
         parent::__construct();
     }
     public function getEspacios(){
-        $sql = "SELECT * FROM espacio";
+        $sql = "SELECT e.*, s.nombre AS estacionamiento FROM espacio e INNER JOIN estacionamiento s WHERE e.id_estacionamiento = s.id";
         $data = $this->selectAll($sql);
         return $data;
-    }                                            
+    }                            
+    public function getEstacionamientos(){
+        $sql = "SELECT * FROM estacionamiento WHERE estado = 1";
+        $data = $this->selectAll($sql);
+        return $data;
+    }                
     public function registrarEspacio(string $numero, string $estacionamiento, string $fecha){
         $this->numero = $numero;
         $this->estacionamiento = $estacionamiento;

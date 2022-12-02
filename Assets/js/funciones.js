@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'marca',
         }, {
-            'data': 'id_cliente',
+            'data': 'nombre',
         }, {
             'data': 'tipo',
         }, {
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
         columns: [{
             'data': 'id',
         }, {
-            'data': 'id_estacionamiento',
+            'data': 'estacionamiento',
         }, {
             'data': 'nro_espacio',
         }, {

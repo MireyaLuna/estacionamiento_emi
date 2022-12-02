@@ -5,7 +5,17 @@ class VehiculosModel extends Query{
         parent::__construct();
     }
     public function getVehiculos(){
-        $sql = "SELECT * FROM vehiculo";
+        $sql = "SELECT v.*, p.nombre AS tipo, c.nombre AS nombre FROM vehiculo v INNER JOIN parametro p INNER JOIN cliente c WHERE v.id_cliente = c.id AND v.tipo = p.codigo";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
+    public function getTipos(){
+        $sql = "SELECT * FROM parametro WHERE grupo = 'Tipo_Vehiculo'";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
+    public function getClientes(){
+        $sql = "SELECT * FROM cliente";
         $data = $this->selectAll($sql);
         return $data;
     }

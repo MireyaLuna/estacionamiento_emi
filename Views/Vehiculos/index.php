@@ -28,13 +28,21 @@
             <div class="modal-body">
                 <form method="post" id="frmVehiculo">
                     <div class="form-floating mb-3">
-                        <input id="id_cliente" class="form-control" type="text" name="id_cliente" placeholder="Ingrese cliente">
                         <input type="hidden" id="id" name="id">
-                        <label for="id_cliente">Cliente</label>
+                        <select id="id_cliente" class="form-control" name="id_cliente">
+                            <?php foreach ($data['clientes'] as $row) { ?>
+                                <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <label for="id_cliente">Clientes</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="tipo" class="form-control" type="text" name="tipo" placeholder="Ingrese tipo">
-                        <label for="tipo">Tipo</label>
+                        <select id="tipo" class="form-control" name="tipo">
+                            <?php foreach ($data['tipos'] as $row) { ?>
+                                <option value="<?php echo $row['codigo'] ?>"><?php echo $row['nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <label for="tipo">Tipo de vehiculo</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="placa" class="form-control" type="text" name="placa" placeholder="Ingrese placa">

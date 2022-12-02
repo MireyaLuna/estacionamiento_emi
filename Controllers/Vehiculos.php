@@ -11,7 +11,9 @@ class Vehiculos extends Controller
     }
     public function index()
     {
-        $this->views->getViews($this, "index");
+        $data['tipos'] = $this->model->getTipos();
+        $data['clientes'] = $this->model->getClientes();
+        $this->views->getViews($this, "index", $data);
     }
     public function listar()
     {
