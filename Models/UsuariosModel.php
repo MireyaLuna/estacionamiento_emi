@@ -5,7 +5,7 @@ class UsuariosModel extends Query{
         parent::__construct();
     }
     public function getUsuario(string $usuario, string $clave){
-        $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND clave = '$clave'";
+        $sql = "SELECT u.*, e.nombre AS estacionamiento FROM usuario u INNER JOIN estacionamiento e WHERE u.usuario = '$usuario' AND clave = '$clave' AND u.id_estacionamiento = e.id";
         $data = $this->select($sql);
         return $data;
     }

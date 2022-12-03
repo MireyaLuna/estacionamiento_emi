@@ -14,7 +14,7 @@
             <th>FECHA MODIFICACION</th>
             <!-- <th>USUARIO MODIFICACION</th> -->
             <th>ESTADO</th>
-            <th>ACCION</th>
+            <!-- <th>ACCION</th> -->
         </tr>
     </thead>
     <tbody>

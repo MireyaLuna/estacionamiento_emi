@@ -85,9 +85,9 @@
                         <div class="collapse" id="collapseRegistros" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="<?php echo base_url;?>Medidas">
+                                <a class="nav-link" href="<?php echo base_url;?>Tickets">
                                     <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket fa-2x"></i></div>
-                                    Nuevo Registro
+                                    Nuevo ingreso
                                 </a>
                                 <a class="nav-link" href="<?php echo base_url;?>Categorias">
                                     <div class="sb-nav-link-icon"><i class="fa-solid fa-cubes-stacked fa-2x"></i></div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Estas en:</div>
-                        Start Bootstrap
+                        <p>Estacionamiento <?php echo $_SESSION['estacionamiento']?></p>
                     </div>
                 </nav>
             </div>

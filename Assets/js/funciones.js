@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, codigo, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -173,8 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // 'data': 'usuario_modificador',
             // }, {
             'data': 'estado',
-        }, {
-            'data': 'acciones',
+        // }, {
+        //     'data': 'acciones',
         }]
     });
     tblAdministrador = $('#tblAdministrador').DataTable({
@@ -1400,6 +1400,90 @@ function btnReingresarFactura(id) {
     })
 }
 
+function buscarPlaca(e) {
+    e.preventDefault();
+    // document.getElementById("ticket").removeAttribute('enabled');
+    // removeAttribute('disabled');
+    if (e.which == 13) {
+        const n_placa = document.getElementById("placa").value;
+        const url = base_url + "Tickets/buscarPlaca/" + n_placa;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // console.log(this.responseText);
+                const res = JSON.parse(this.responseText);
+                if (res) {
+                    // console.log(res);
+                    document.getElementById("placa_vehiculo").value = res.placa;
+                    document.getElementById("tipo_vehiculo").value = res.tipo_vehiculo;
+                    document.getElementById("tipo").value = res.tipo;
+                    document.getElementById("id_vehiculo").value = res.id;
+                } else {
+                    alertas("Vehiculo no encontrado", "warning");
+                }
+
+            }
+        }
+    }
+}
+
+function generarTicket() {
+    // var codigo;
+    // const url = base_url + "Tickets/obtenerCodigo";
+    // const http = new XMLHttpRequest();
+    // http.open("GET", url, true);
+    // http.send();
+    // http.onreadystatechange = function () {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         const rs = JSON.parse(this.responseText);
+    //         codigo = zeroFill(rs.cantidad+1, 8);
+    //         // console.log(codigo);
+    //     }
+    // }
+    // console.log(codigo);
+    const placa_vehiculo = document.getElementById("placa_vehiculo");
+    const tipo = document.getElementById("tipo");
+    const espacio = document.getElementById("espacio");
+    const hora_ingreso = document.getElementById("hora_ingreso");
+    const fecha_ingreso = document.getElementById("fecha_ingreso");
+
+    if (placa_vehiculo.value == "" || hora_ingreso.value == "" || fecha_ingreso.value == "" || espacio.value == "") {
+        alertas('Todo los campos son obligatorios', 'warning');
+    } else {
+        const url = base_url + "Tickets/registrar/" + fecha_ingreso.value + "/" + hora_ingreso.value + "/" + tipo.value;
+        const frm = document.getElementById("nuevoRegistro");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                console.log(res);
+                alertas(res.msg, res.icono);
+                const u = base_url + "Espacios/ocupar/" + espacio.value;
+                const h = new XMLHttpRequest();
+                h.open("GET", u, true);
+                h.send();
+                h.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // console.log(this.responseText);
+                        const res = JSON.parse(this.responseText);
+                        if (res == '') {
+                            alertas('No tiene permiso', 'warning');
+                        } else {
+                            // alertas(res.msg, res.icono);
+                            // tblFacturas.ajax.reload();
+                            frm.reset();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 function alertas(mensaje, icono) {
     Swal.fire({
         position: 'top-end',
@@ -1408,4 +1492,12 @@ function alertas(mensaje, icono) {
         showConfirmButton: false,
         timer: 2000
     })
+}
+
+function zeroFill(number, width) {
+    width -= number.toString().length;
+    if (width > 0) {
+        return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+    }
+    return number + "";
 }

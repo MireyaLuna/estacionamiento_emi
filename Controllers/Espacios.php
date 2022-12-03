@@ -19,13 +19,15 @@ class Espacios extends Controller
         $data = $this->model->getEspacios();
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
-                $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
-                $data[$i]['acciones'] = '<div> 
-            <button type="button" class = "btn btn-primary" onclick="btnEditarEspacio(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
-            <button type="button" class = "btn btn-danger" onclick="btnEliminarEspacio(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
-            </div>';
+                $data[$i]['estado'] = '<span class="badge bg-success">Libre</span>';
+                //     $data[$i]['acciones'] = '<div> 
+                // <button type="button" class = "btn btn-primary" onclick="btnEditarEspacio(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
+                // <button type="button" class = "btn btn-danger" onclick="btnEliminarEspacio(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
+                // </div>';
+            } else if ($data[$i]['estado'] == 2) {
+                $data[$i]['estado'] = '<span class="badge bg-danger">Ocupado</span>';
             } else {
-                $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
+                $data[$i]['estado'] = '<span class="badge bg-warning">Inactivo</span>';
                 $data[$i]['acciones'] = '<div>
                 <button type="button" class = "btn btn-success" onclick="btnReingresarEspacio(' . $data[$i]['id'] . ');"><i class="fas fa-arrow-circle-left"></i></button>
                 </div>';
@@ -44,7 +46,7 @@ class Espacios extends Controller
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
-        
+
         if (empty($numero) || empty($estacionamiento)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
@@ -90,7 +92,7 @@ class Espacios extends Controller
         // $id_usuario = $_SESSION['id_usuario'];
         // $verificar = $this->model->verificarPermiso($id_usuario, 'eliminar_usuario');
         // if (!empty($verificar) || $id_usuario == 1) {
-        $data = $this->model->accionEspacio(0, $id);
+        $data = $this->model->accionEspacio(3, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Espacio dado de baja', 'icono' => 'success');
         } else {
@@ -114,6 +116,25 @@ class Espacios extends Controller
             $msg = array('msg' => 'Espacio reingresado exitosamente', 'icono' => 'success');
         } else {
             $msg = array('msg' => 'Error al reingresar el espacio', 'icono' => 'error');
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+        // } else {
+        //     $msg = '';
+        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        //     die();
+        // }
+    }
+    public function ocupar(int $id)
+    {
+        // $id_usuario = $_SESSION['id_usuario'];
+        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
+        // if (!empty($verificar) || $id_usuario == 1) {
+        $data = $this->model->accionEspacio(2, $id);
+        if ($data == 1) {
+            $msg = "ok";
+        } else {
+            $msg = "";
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
