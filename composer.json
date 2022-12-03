@@ -1,5 +1,8 @@
 {
     "require": {
         "luecano/numero-a-letras": "3.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12"
     }
 }

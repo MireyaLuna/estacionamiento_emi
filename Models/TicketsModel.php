@@ -12,6 +12,12 @@ class TicketsModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
+    public function getTicket(int $id_ticket)
+    {
+        $sql = "SELECT t.*, v.placa, p.nombre AS tipo_vehiculo, e.nro_espacio, s.nombre AS estacionamiento FROM ticket t INNER JOIN vehiculo v INNER JOIN espacio e INNER JOIN estacionamiento s INNER JOIN parametro p WHERE t.id_vehiculo = v.id AND t.id_espacio = e.id AND e.id_estacionamiento = s.id AND p.codigo = v.tipo AND t.id = '$id_ticket'";
+        $data = $this->select($sql);
+        return $data;
+    }
     public function getPlacaVehiculo($placa)
     {
         $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM vehiculo v INNER JOIN parametro p WHERE v.placa = '$placa' AND p.codigo = v.tipo";

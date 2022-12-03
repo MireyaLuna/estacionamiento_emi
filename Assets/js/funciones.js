@@ -1438,7 +1438,7 @@ function generarTicket() {
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const rs = JSON.parse(this.responseText);
-            codigo = rs.cantidad;
+            codigo = rs.cantidad + 1;
         }
     }
     console.log(codigo);
@@ -1474,8 +1474,12 @@ function generarTicket() {
                             alertas('No tiene permiso', 'warning');
                         } else {
                             frm.reset();
+                            if(codigo==0){
+                                codigo = 1;
+                            }
                             const ruta = base_url + 'Tickets/generarPDF/' + codigo;
                             window.open(ruta);
+                            location.reload();
                             setTimeout(() => {
                                 window.location.reload();
                             }, 300);
