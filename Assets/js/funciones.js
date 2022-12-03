@@ -173,8 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // 'data': 'usuario_modificador',
             // }, {
             'data': 'estado',
-        // }, {
-        //     'data': 'acciones',
+            // }, {
+            //     'data': 'acciones',
         }]
     });
     tblAdministrador = $('#tblAdministrador').DataTable({
@@ -1430,19 +1430,18 @@ function buscarPlaca(e) {
 }
 
 function generarTicket() {
-    // var codigo;
-    // const url = base_url + "Tickets/obtenerCodigo";
-    // const http = new XMLHttpRequest();
-    // http.open("GET", url, true);
-    // http.send();
-    // http.onreadystatechange = function () {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         const rs = JSON.parse(this.responseText);
-    //         codigo = zeroFill(rs.cantidad+1, 8);
-    //         // console.log(codigo);
-    //     }
-    // }
-    // console.log(codigo);
+    var codigo;
+    const url = base_url + "Tickets/obtenerCodigo";
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const rs = JSON.parse(this.responseText);
+            codigo = rs.cantidad;
+        }
+    }
+    console.log(codigo);
     const placa_vehiculo = document.getElementById("placa_vehiculo");
     const tipo = document.getElementById("tipo");
     const espacio = document.getElementById("espacio");
@@ -1460,7 +1459,7 @@ function generarTicket() {
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
-                console.log(res);
+                // console.log(res);
                 alertas(res.msg, res.icono);
                 const u = base_url + "Espacios/ocupar/" + espacio.value;
                 const h = new XMLHttpRequest();
@@ -1469,13 +1468,17 @@ function generarTicket() {
                 h.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         // console.log(this.responseText);
-                        const res = JSON.parse(this.responseText);
-                        if (res == '') {
+                        const rspt = JSON.parse(this.responseText);
+                        console.log(codigo);
+                        if (rspt == '') {
                             alertas('No tiene permiso', 'warning');
                         } else {
-                            // alertas(res.msg, res.icono);
-                            // tblFacturas.ajax.reload();
                             frm.reset();
+                            const ruta = base_url + 'Tickets/generarPDF/' + codigo;
+                            window.open(ruta);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 300);
                         }
                     }
                 }

@@ -86,11 +86,11 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="<?php echo base_url;?>Tickets">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket fa-2x"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket"></i></div>
                                     Nuevo ingreso
                                 </a>
-                                <a class="nav-link" href="<?php echo base_url;?>Categorias">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-cubes-stacked fa-2x"></i></div>
+                                <a class="nav-link" href="<?php echo base_url;?>Tickets/historial">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-list"></i></div>
                                     Ver registros
                                 </a>
                             </nav>
