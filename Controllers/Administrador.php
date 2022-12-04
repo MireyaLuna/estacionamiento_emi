@@ -13,6 +13,15 @@ class Administrador extends Controller
     {
         $this->views->getViews($this, "index");
     }
+    public function home() {
+        $data['ticket'] = $this->model->getDatos('ticket');
+        $data['vehiculo'] = $this->model->getDatos('vehiculo');
+        $data['libres'] = $this->model->getEstadoEspacio(1);
+        $data['ocupados'] = $this->model->getEstadoEspacio(2);
+        $data['deshabilitados'] = $this->model->getEstadoEspacio(3);
+        $data['espacio'] = $this->model->getDatos('espacio');
+        $this->views->getViews($this, "home", $data);
+    }
     public function listar()
     {
         $data = $this->model->getAdministradores();

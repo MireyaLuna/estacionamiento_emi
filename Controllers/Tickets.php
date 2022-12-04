@@ -240,6 +240,12 @@ class Tickets extends Controller
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+    public function listar_detalle()
+    {
+        $data = $this->model->getTickets();
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
     public function anular($id_ticket)
     {
         // $id_usuario = $_SESSION['id_usuario'];

@@ -1,6 +1,12 @@
 <?php include "Views/Templates/header.php"; ?>
-<div class="mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmVehiculo();">Nuevo</button></div>
-<table class="table table-light" id="tblVehiculos">
+<div class="card">
+    <div class="card-header card-header-primary">
+        LISTA DE VEHICULOS
+    </div>
+    <div class="card-body">
+        <div><button type="button" class="btn btn-primary mb-2" onclick="frmVehiculo();"><i class="fas fa-plus"></i></button></div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="tblVehiculos">
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
@@ -18,6 +24,9 @@
     <tbody>
     </tbody>
 </table>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="my_modal" tabindex="-1" aria-labelledby="my_modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

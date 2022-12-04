@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, codigo, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, tbl_detalles, codigo, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -32,7 +32,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tblVehiculos = $('#tblVehiculos').DataTable({
         ajax: {
@@ -63,7 +122,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tblClientes = $('#tblClientes').DataTable({
         ajax: {
@@ -92,7 +210,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tblPuntos = $('#tblPuntos').DataTable({
         ajax: {
@@ -119,7 +296,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tblEstacionamientos = $('#tblEstacionamientos').DataTable({
         ajax: {
@@ -144,7 +380,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tblEspacios = $('#tblEspacios').DataTable({
         ajax: {
@@ -175,7 +470,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
             // }, {
             //     'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tblAdministrador = $('#tblAdministrador').DataTable({
         ajax: {
@@ -204,31 +558,90 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
-    });
-    tblPagos = $('#tblPagos').DataTable({
-        ajax: {
-            url: base_url + "Pagos/listar",
-            dataSrc: ''
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
         },
-        columns: [{
-            'data': 'id',
-        }, {
-            'data': 'monto',
-        }, {
-            'data': 'fecha_creacion',
-        }, {
-            // 'data': 'usuario_creacion',
-            // }, {
-            'data': 'fecha_modificacion',
-        }, {
-            // 'data': 'usuario_modificador',
-            // }, {
-            'data': 'estado',
-        }, {
-            'data': 'acciones',
-        }]
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
+    // tblPagos = $('#tblPagos').DataTable({
+    //     ajax: {
+    //         url: base_url + "Pagos/listar",
+    //         dataSrc: ''
+    //     },
+    //     columns: [{
+    //         'data': 'id',
+    //     }, {
+    //         'data': 'monto',
+    //     }, {
+    //         'data': 'fecha_creacion',
+    //     }, {
+    //         // 'data': 'usuario_creacion',
+    //         // }, {
+    //         'data': 'fecha_modificacion',
+    //     }, {
+    //         // 'data': 'usuario_modificador',
+    //         // }, {
+    //         'data': 'estado',
+    //     }, {
+    //         'data': 'acciones',
+    //     }]
+    // });
     tblFacturas = $('#tblFacturas').DataTable({
         ajax: {
             url: base_url + "Facturas/listar",
@@ -260,7 +673,66 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
     });
     tbl_tickets = $('#tbl_tickets').DataTable({
         ajax: {
@@ -283,7 +755,84 @@ document.addEventListener("DOMContentLoaded", function () {
             'data': 'estado',
         }, {
             'data': 'acciones',
-        }]
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [{
+                //Botón para Excel
+                extend: 'excelHtml5',
+                footer: true,
+                title: 'Archivo',
+                filename: 'Export_File',
+
+                //Aquí es donde generas el botón personalizado
+                text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+            },
+            //Botón para PDF
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para copiar
+            {
+                extend: 'copyHtml5',
+                footer: true,
+                title: 'Reporte de usuarios',
+                filename: 'Reporte de usuarios',
+                text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                exportOptions: {
+                    columns: [0, ':visible']
+                }
+            },
+            //Botón para print
+            {
+                extend: 'print',
+                footer: true,
+                filename: 'Export_File_print',
+                text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+            },
+            //Botón para cvs
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                filename: 'Export_File_csv',
+                text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+            },
+            {
+                extend: 'colvis',
+                text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                postfixButtons: ['colvisRestore']
+            }
+        ]
+    });
+    tbl_detalles = $('#tbl_detalles').DataTable({
+        ajax: {
+            url: base_url + "Tickets/listar_detalle",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'tipo_vehiculo',
+        }, {
+            'data': 'placa',
+        }, {
+            'data': 'hora_ingreso',
+        }, {
+            'data': 'hora_ingreso',
+        }],
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        }
     });
 
 })
@@ -311,7 +860,7 @@ function frmLogin(e) {
                 // console.log(this.responseText);
                 const res = JSON.parse(this.responseText);
                 if (res == "ok") {
-                    window.location = base_url + "Usuarios";
+                    window.location = base_url + "Administrador/home";
                 } else {
                     document.getElementById("alerta").classList.remove("d-none");
                     document.getElementById("alerta").textContent = res;

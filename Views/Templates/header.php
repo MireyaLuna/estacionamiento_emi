@@ -9,6 +9,9 @@
     <meta name="author" content="" />
     <title>Estacionamiento EMI</title>
     <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
+    <link href="<?php echo base_url;?>Assets/css/select2.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url; ?>Assets/css/estilos.css" rel="stylesheet" />
+    <link href="<?php echo base_url; ?>Assets/css/animate.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url; ?>Assets/DataTables/datatables.min.css" />
     <script src="<?php echo base_url; ?>Assets/js/all.js"></script>
 </head>
@@ -16,7 +19,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html"><img src="<?php echo base_url; ?>Assets/img/logo_emi.png" height="56" width="200"></a>
+        <a class="navbar-brand ps-3" href="<?php echo base_url; ?>Administrador/home"><img src="<?php echo base_url; ?>Assets/img/logo_emi.png" height="56" width="200"></a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->

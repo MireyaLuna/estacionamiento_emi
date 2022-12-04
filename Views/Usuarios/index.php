@@ -2,8 +2,14 @@
 <!-- <ol class="breadcrumb">
     <li class="breadcrumb-item active mt-2" aria-current="page">Usuarios</li>
 </ol> -->
-<div class="mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmUsuario();">Nuevo</button></div>
-<table class="table table-light" id="tblUsuarios">
+<div class="card">
+    <div class="card-header card-header-primary">
+        LISTA DE USUARIOS
+    </div>
+    <div class="card-body">
+        <div><button type="button" class="btn btn-primary mb-2" onclick="frmUsuario();"><i class="fas fa-plus"></i></button></div>
+        <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tblUsuarios">
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
@@ -23,6 +29,9 @@
     <tbody>
     </tbody>
 </table>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="my_modal" tabindex="-1" aria-labelledby="my_modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

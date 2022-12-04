@@ -12,6 +12,18 @@ class AdministradorModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
+    public function getDatos(string $table){
+        $sql = "SELECT COUNT(*) AS total FROM $table";
+        $data = $this->select($sql);
+        return $data;
+    }
+    
+    public function getEstadoEspacio(int $estado){
+        $sql = "SELECT COUNT(*) AS total FROM espacio WHERE estado = $estado";
+        $data = $this->select($sql);
+        return $data;
+    }
+
     public function registrarAdministrador(string $nombre, string $ci, string $codigo_saga, string $id_usuario, string $fecha)
     {
         $this->nombre = $nombre;

@@ -2,28 +2,37 @@
 <!-- <ol class="breadcrumb">
     <li class="breadcrumb-item active mt-2" aria-current="page">Usuarios</li>
 </ol> -->
-<div class="mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmFactura();">Nuevo</button></div>
-<table class="table table-light" id="tblFacturas">
-    <thead class="thead-dark">
-        <tr>
-            <th>ID</th>
-            <th>NUMERO TICKET</th>
-            <th>NIT</th>
-            <th>MONTO PAGADO</th>
-            <!-- <th>CANTIDAD</th> -->
-            <th>FECHA EMISION</th>
-            <th>FECHA LIMITE EMISION</th>
-            <th>FECHA CREACION</th>
-            <!-- <th>USUARIO CREACION</th> -->
-            <th>FECHA MODIFICACION</th>
-            <!-- <th>USUARIO MODIFICACION</th> -->
-            <th>ESTADO</th>
-            <th>ACCION</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="card">
+    <div class="card-header card-header-primary">
+        FACTURAS
+    </div>
+    <div class="card-body">
+        <div><button type="button" class="btn btn-primary mb-2" onclick="frmFactura();"><i class="fas fa-plus"></i></button></div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="tblFacturas">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>NUMERO TICKET</th>
+                        <th>NIT</th>
+                        <th>MONTO PAGADO</th>
+                        <!-- <th>CANTIDAD</th> -->
+                        <th>FECHA EMISION</th>
+                        <th>FECHA LIMITE EMISION</th>
+                        <th>FECHA CREACION</th>
+                        <!-- <th>USUARIO CREACION</th> -->
+                        <th>FECHA MODIFICACION</th>
+                        <!-- <th>USUARIO MODIFICACION</th> -->
+                        <th>ESTADO</th>
+                        <th>ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="my_modal" tabindex="-1" aria-labelledby="my_modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

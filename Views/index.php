@@ -9,6 +9,8 @@
     <meta name="author" content="" />
     <title>BIENVENIDO</title>
     <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
+    <link href="<?php echo base_url; ?>Assets/css/estilos.css" rel="stylesheet" />
+    <link href="<?php echo base_url; ?>Assets/css/animate.min.css" rel="stylesheet" />
 </head>
 
 <body class="bg-primary">
@@ -52,6 +54,7 @@
     <script>
         const base_url = '<?php echo base_url;?>';
     </script>
+    <!-- <script src="<?php echo base_url; ?>Assets/js/login.js"></script> -->
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 <!-- <ol class="breadcrumb">
     <li class="breadcrumb-item active mt-2" aria-current="page">Usuarios</li>
 </ol> -->
-<div class="mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmPago();">Nuevo</button></div>
+<div class="mt-4"><button type="button" class="btn btn-primary mb-2" onclick="frmPago();"><i class="fas fa-plus"></i></button></div>
 <table class="table table-light" id="tblPagos">
     <thead class="thead-dark">
         <tr>
