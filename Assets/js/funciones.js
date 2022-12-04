@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, codigo, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, codigo, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -257,6 +257,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             // 'data': 'usuario_modificador',
             // }, {
+            'data': 'estado',
+        }, {
+            'data': 'acciones',
+        }]
+    });
+    tbl_tickets = $('#tbl_tickets').DataTable({
+        ajax: {
+            url: base_url + "Tickets/listar_tickets",
+            dataSrc: ''
+        },
+        columns: [{
+            'data': 'id',
+        }, {
+            'data': 'codigo',
+        }, {
+            'data': 'placa',
+        }, {
+            'data': 'espacio',
+        }, {
+            'data': 'hora_ingreso',
+        }, {
+            'data': 'hora_salida',
+        }, {
             'data': 'estado',
         }, {
             'data': 'acciones',
@@ -1399,6 +1422,7 @@ function btnReingresarFactura(id) {
         }
     })
 }
+//---------------------------------------------------------
 
 function buscarPlaca(e) {
     e.preventDefault();
@@ -1490,6 +1514,37 @@ function generarTicket() {
         }
     }
 }
+function btnAnularTicket(id) {
+    Swal.fire({
+        title: '¿Estas seguro de anular el ticket?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Tickets/anular/" + id;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    if (res == "") {
+                        alertas("No tiene permiso de realizar esta accion", "warning");
+                    }else{
+                    alertas(res.msg, res.icono);
+                    tbl_tickets.ajax.reload();
+                    }
+                }
+            }
+        }
+    })
+}
+
 
 function alertas(mensaje, icono) {
     Swal.fire({

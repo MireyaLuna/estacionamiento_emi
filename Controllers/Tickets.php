@@ -23,7 +23,8 @@ class Tickets extends Controller
         // $id_usuario = $_SESSION['id_usuario'];
         // $verificar = $this->model->verificarPermiso($id_usuario, 'ver_historial_ventas');
         // if (!empty($verificar) || $id_usuario == 1) {
-        $this->views->getViews($this, "historial");
+        $data = $this->model->getVehiculos();
+        $this->views->getViews($this, "historial", $data);
         // } else {
         //     header('Location: ' . base_url . 'Errors/permisos');
         // }
@@ -213,5 +214,55 @@ class Tickets extends Controller
         // $pdf->WriteHTML($empresa['mensaje']);
 
         $pdf->Output();
+    }
+
+    public function listar_tickets()
+    {
+        $data = $this->model->getTickets();
+        // print_r($data);
+        for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]['estado'] == 1) {
+                $data[$i]['estado'] = '<span class="badge bg-success">En playa</span>';
+                $data[$i]['acciones'] = '<div>
+            <button class = "btn btn-warning" onclick="btnAnularTicket(' . $data[$i]['id'] . ')"><i class = "fas fa-ban"></i></button>
+            <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a></div>';
+            } else  if ($data[$i]['estado'] == 2) {
+                $data[$i]['estado'] = '<span class="badge bg-success">Finalizado</span>';
+                $data[$i]['acciones'] = '<div>
+            <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a></div>';
+            } else { 
+                $data[$i]['estado'] = '<span class="badge bg-danger">Anulado</span>';
+                $data[$i]['acciones'] = '<div>
+            <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a>
+            </div>';
+            }
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function anular($id_ticket)
+    {
+        // $id_usuario = $_SESSION['id_usuario'];
+        // $verificar = $this->model->verificarPermiso($id_usuario, 'anular_venta');
+        // if (!empty($verificar) || $id_usuario == 1) {
+            // $data = $this->model->getAnularVenta($id_venta);
+            $anular = $this->model->getAnular($id_ticket);
+            // foreach ($data as $row) {
+            //     $stock_actual = $this->model->getProductos($row['id_producto']);
+            //     $stock = $stock_actual['cantidad'] + $row['cantidad'];
+            //     $this->model->actualizarStock($stock, $row['id_producto']);
+            // }
+            if ($anular == 'ok') {
+                $msg = array('msg' => 'Ticket anulado', 'icono' => 'success');
+            } else {
+                $msg = array('msg' => 'Error al anular', 'icono' => 'error');
+            }
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            die();
+        // } else {
+        //     $msg = '';
+        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        //     die();
+        // }
     }
 }

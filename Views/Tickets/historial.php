@@ -3,7 +3,7 @@
     <div class="card-header card-header-primary">
         <strong>LISTA DE TICKETS</strong>
     </div>
-    <div class="card-body">
+    <!-- <div class="card-body">
         <form action="<?php echo base_url; ?>Tickets/pdf" method="POST" target="_blank">
             <div class="row mb-3">
                 <div class="col-md-1">
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div> -->
 </div>
 <div class="card-body">
     <div class="table-responsive">
@@ -44,6 +44,7 @@
                     <th>#</th>
                     <th>CODIGO</th>
                     <th>PLACA</th>
+                    <th>ESPACIO</th>
                     <th>INGRESO</th>
                     <th>SALIDA</th>
                     <th>ESTADO</th>
