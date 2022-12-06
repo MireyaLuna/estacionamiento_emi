@@ -38,7 +38,7 @@
 </div>
 <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="tbl_tickets">
+        <table class="table table-bordered table-hover" id="tbl_tickets"  >
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
@@ -48,7 +48,7 @@
                     <th>INGRESO</th>
                     <th>SALIDA</th>
                     <th>ESTADO</th>
-                    <th></th>
+                    <th>ACCIONES</th>
                 </tr>
             </thead>
             <tbody>

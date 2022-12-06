@@ -9,7 +9,7 @@
     <div class="card-body">
         <div><button type="button" class="btn btn-primary mb-2" onclick="frmUsuario();"><i class="fas fa-plus"></i></button></div>
         <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="tblUsuarios">
+        <table class="table table-bordered table-hover" id="tblUsuarios" style="width:auto">
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
@@ -23,7 +23,7 @@
             <th>FECHA MODIFICACION</th>
             <!-- <th>USUARIO MODIFICACION</th> -->
             <th>ESTADO</th>
-            <th>ACCION</th>
+            <th>ACCIONES</th>
         </tr>
     </thead>
     <tbody>

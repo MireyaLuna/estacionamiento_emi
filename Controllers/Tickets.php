@@ -218,14 +218,17 @@ class Tickets extends Controller
 
     public function listar_tickets()
     {
+        // <button class = "btn btn-success" onclick="btnGenerarFactura(' . $data[$i]['id'] . ')"><i class="fas fa-file-invoice"></i></button>
         $data = $this->model->getTickets();
         // print_r($data);
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">En playa</span>';
                 $data[$i]['acciones'] = '<div>
-            <button class = "btn btn-warning" onclick="btnAnularTicket(' . $data[$i]['id'] . ')"><i class = "fas fa-ban"></i></button>
-            <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a></div>';
+                <button class = "btn btn-warning" onclick="btnAnularTicket(' . $data[$i]['id'] . ')"><i class = "fas fa-ban"></i></button>
+           <a class="btn btn-success" href="' . base_url . "Facturas/generaFactura/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-invoice"></i></a></div>
+            <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a></div>
+            ';
             } else  if ($data[$i]['estado'] == 2) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Finalizado</span>';
                 $data[$i]['acciones'] = '<div>

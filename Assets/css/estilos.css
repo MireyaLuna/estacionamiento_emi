@@ -17,7 +17,7 @@ th{
              -6px -6px 12px #ffffff;
 }
 .card-header-primary{
-	background: linear-gradient(-90deg, #ffffff, #001a6f); 
+	background: linear-gradient(-90deg, #fff200, #001a6f); 
 	box-shadow:  6px 6px 12px #4d4c4c,
              -6px -6px 12px #ffffff;
     color: white;

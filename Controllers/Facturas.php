@@ -13,6 +13,12 @@ class Facturas extends Controller
     {
         $this->views->getViews($this, "index");
     }
+    public function generaFactura($id_ticket)
+    {
+        $data = $this->model->getTicket($id_ticket);
+        $this->views->getViews($this, "generaFactura", $data);
+        print_r($id_ticket);
+    }
     public function listar()
     {
         $data = $this->model->getFacturas();

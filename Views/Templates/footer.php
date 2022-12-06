@@ -5,7 +5,7 @@
 <div id="cambiarPass" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-morado text-white">
+            <div class="modal-header text-white">
                 <h5 class="modal-title" style="color: black;">Modificar contraseña</h5>
                 <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -14,15 +14,15 @@
             <div class="modal-body">
                 <form id="frmCambiarPass" onsubmit="frmCambiarPass(event);">
                     <div class="form-floating mb-3">
-                        <input id="clave_actual" class="form-control" type="password" name="clave_actual" placeholder="Contraseña actual">
+                        <input id="clave_actual" class="form-control" type="password" name="clave_actual" placeholder="Contraseña actual" autocomplete="on">
                         <label for="clave_actual">Contraseña actual</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="clave_nueva" class="form-control" type="password" name="clave_nueva" placeholder="Nueva contraseña">
+                        <input id="clave_nueva" class="form-control" type="password" name="clave_nueva" placeholder="Nueva contraseña" autocomplete="on">
                         <label for="clave_nueva">Contraseña nueva</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="confirmar_clave" class="form-control" type="password" name="confirmar_clave" placeholder="Confirmar contraseña">
+                        <input id="confirmar_clave" class="form-control" type="password" name="confirmar_clave" placeholder="Confirmar contraseña" autocomplete="on">
                         <label for="confirmar_clave">Confirmar contraseña</label>
                     </div>
                     <div class="row">

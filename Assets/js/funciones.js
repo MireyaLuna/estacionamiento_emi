@@ -788,8 +788,8 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 extend: 'copyHtml5',
                 footer: true,
-                title: 'Reporte de usuarios',
-                filename: 'Reporte de usuarios',
+                title: 'Reporte',
+                filename: 'Reporte',
                 text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
                 exportOptions: {
                     columns: [0, ':visible']
@@ -869,6 +869,7 @@ function frmLogin(e) {
         }
     }
 }
+
 function frmCambiarPass(e) {
     e.preventDefault();
     const actual = document.getElementById('clave_actual').value;
@@ -2079,7 +2080,7 @@ function generarTicket() {
                             alertas('No tiene permiso', 'warning');
                         } else {
                             frm.reset();
-                            if(codigo==0){
+                            if (codigo == 0) {
                                 codigo = 1;
                             }
                             const ruta = base_url + 'Tickets/generarPDF/' + codigo;
@@ -2095,6 +2096,7 @@ function generarTicket() {
         }
     }
 }
+
 function btnAnularTicket(id) {
     Swal.fire({
         title: '¿Estas seguro de anular el ticket?',
@@ -2116,14 +2118,32 @@ function btnAnularTicket(id) {
                     const res = JSON.parse(this.responseText);
                     if (res == "") {
                         alertas("No tiene permiso de realizar esta accion", "warning");
-                    }else{
-                    alertas(res.msg, res.icono);
-                    tbl_tickets.ajax.reload();
+                    } else {
+                        alertas(res.msg, res.icono);
+                        tbl_tickets.ajax.reload();
                     }
                 }
             }
         }
     })
+}
+
+function btnGenerarFactura(id) {
+    const url = base_url + "Facturas/generaFactura/" + id;
+    // const url = base_url + "Facturas/registrar";
+//         const frm = document.getElementById("frmFactura");
+//         const http = new XMLHttpRequest();
+//         http.open("POST", url, true);
+//         http.send(new FormData(frm));
+//         http.onreadystatechange = function () {
+//             if (this.readyState == 4 && this.status == 200) {
+//                 const res = JSON.parse(this.responseText);
+//                 alertas(res.msg, res.icono);
+//                 frm.reset();
+//                 myModal.hide();
+//                 tblFacturas.ajax.reload();
+//             }
+//         }
 }
 
 
@@ -2144,3 +2164,61 @@ function zeroFill(number, width) {
     }
     return number + "";
 }
+var udateTime = function() {
+    let currentDate = new Date(),
+        hours = currentDate.getHours(),
+        minutes = currentDate.getMinutes(), 
+        seconds = currentDate.getSeconds(),
+        weekDay = currentDate.getDay(), 
+        day = currentDate.getDay(), 
+        month = currentDate.getMonth(), 
+        year = currentDate.getFullYear();
+ 
+    const weekDays = [
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sabado'
+    ];
+ 
+    document.getElementById('weekDay').textContent = weekDays[weekDay];
+    document.getElementById('day').textContent = day;
+ 
+    const months = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre'
+    ];
+ 
+    document.getElementById('month').textContent = months[month];
+    document.getElementById('year').textContent = year;
+ 
+    document.getElementById('hours').textContent = hours;
+ 
+    if (minutes < 10) {
+        minutes = "0" + minutes
+    }
+ 
+    if (seconds < 10) {
+        seconds = "0" + seconds
+    }
+ 
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
+};
+ 
+udateTime();
+ 
+setInterval(udateTime, 1000);
