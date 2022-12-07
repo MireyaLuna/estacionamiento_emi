@@ -67,4 +67,25 @@ class FacturasModel extends Query{
         $data = $this->select($sql);
         return $data;
     }
+    public function getNIT(string $nit){
+        $sql = "SELECT * FROM datos_factura WHERE nit = '$nit'";
+        $data = $this->select($sql);
+        return $data;
+    }
+    public function registrarNIT(string $nit, string $razon_social)
+    {
+        $this->nit = $nit;
+        $this->razon_social = $razon_social;
+        
+        $sql = "INSERT INTO datos_factura(nit, razon_social) VALUES (?,?)";
+        $datos = array($this->nit, $this->razon_social);
+        $data = $this->save($sql, $datos);
+        if($data == 1){
+            $res = "ok";
+        }else{
+            $res = "error";
+        }
+        
+        return $res;
+    }
 }

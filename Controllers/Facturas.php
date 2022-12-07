@@ -52,8 +52,8 @@ class Facturas extends Controller
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
-        
-        if (empty($registro) || empty($nit) || empty($monto_pagado) || empty($monto_recibido) || empty($fecha_emision)|| empty($fecha_limite)) {
+
+        if (empty($registro) || empty($nit) || empty($monto_pagado) || empty($monto_recibido) || empty($fecha_emision) || empty($fecha_limite)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
@@ -130,5 +130,32 @@ class Facturas extends Controller
         //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         //     die();
         // }
+    }
+    public function buscarNIT(int $nit)
+    {
+        $data = $this->model->getNIT($nit);
+        // print_r($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function registrarNIT()
+    {
+        $nit = $_POST['nit'];
+        $razon_social = $_POST['razon_social'];
+
+        if (empty($nit) || empty($razon_social)) {
+            $msg = array('msg' => 'Datos de factura obligatorios', 'icono' => 'warning');
+        } else {
+            $data = $this->model->registrarNIT($nit, $razon_social);
+            if ($data == "ok") {
+                $msg = array('msg' => 'Datos de factura registrados exitosamente', 'icono' => 'success');
+            } else if ($data == "existe") {
+                $msg = array('msg' => 'Ya se encuentra registrado', 'icono' => 'warning');
+            } else {
+                $msg = array('msg' => 'Error al registrar', 'icono' => 'error');
+            }
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

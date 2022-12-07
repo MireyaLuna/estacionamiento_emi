@@ -1173,7 +1173,7 @@ function registrarCliente(e) {
     const genero = document.getElementById("genero");
     const cargo = document.getElementById("cargo");
 
-    if (nombre.value == "" || ci.value == "" || telefono.value == ""|| genero.value == ""|| cargo.value == "" ){
+    if (nombre.value == "" || ci.value == "" || telefono.value == "" || genero.value == "" || cargo.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Clientes/registrar";
@@ -2132,21 +2132,76 @@ function btnAnularTicket(id) {
 function btnGenerarFactura(id) {
     const url = base_url + "Facturas/generaFactura/" + id;
     // const url = base_url + "Facturas/registrar";
-//         const frm = document.getElementById("frmFactura");
-//         const http = new XMLHttpRequest();
-//         http.open("POST", url, true);
-//         http.send(new FormData(frm));
-//         http.onreadystatechange = function () {
-//             if (this.readyState == 4 && this.status == 200) {
-//                 const res = JSON.parse(this.responseText);
-//                 alertas(res.msg, res.icono);
-//                 frm.reset();
-//                 myModal.hide();
-//                 tblFacturas.ajax.reload();
-//             }
-//         }
+    //         const frm = document.getElementById("frmFactura");
+    //         const http = new XMLHttpRequest();
+    //         http.open("POST", url, true);
+    //         http.send(new FormData(frm));
+    //         http.onreadystatechange = function () {
+    //             if (this.readyState == 4 && this.status == 200) {
+    //                 const res = JSON.parse(this.responseText);
+    //                 alertas(res.msg, res.icono);
+    //                 frm.reset();
+    //                 myModal.hide();
+    //                 tblFacturas.ajax.reload();
+    //             }
+    //         }
 }
 
+function buscarNIT(e) {
+    e.preventDefault();
+    if (e.which == 13) {
+        const nit = document.getElementById("nit").value;
+        const url = base_url + "Facturas/buscarNIT/" + nit;
+        const http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.send();
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                console.log(res);
+                document.getElementById("razon_social").value = res.razon_social;
+                if (res) {
+                    document.getElementById("razon_social").value = res.razon_social;
+                    return;
+                } else {
+                    document.getElementById("razon_social").value = "";
+                    document.getElementById("razon_social").removeAttribute('disabled');
+                    document.getElementById("razon_social").focus();
+                    return;
+                }
+
+            }
+        }
+    }
+}
+
+function registrarNIT(e) {
+    e.preventDefault();
+    // e.value = e.value.toUpperCase();
+    if (e.which == 13) {
+        const nit = document.getElementById("nit");
+        const razon_social = document.getElementById("razon_social");
+
+        if (nit.value == "" || razon_social.value == "") {
+            alertas('Campos para factura obligatorios', 'warning');
+        } else {
+            const url = base_url + "Facturas/registrarNIT";
+            const frm = document.getElementById("nuevoRegistro");
+            const http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    alertas(res.msg, res.icono);
+                    // frm.reset();
+                    // myModal.hide();
+                    // tblFacturas.ajax.reload();
+                }
+            }
+        }
+    }
+}
 
 function alertas(mensaje, icono) {
     Swal.fire({
@@ -2165,14 +2220,14 @@ function zeroFill(number, width) {
     }
     return number + "";
 }
-var actualizar_fecha = function() {
+var actualizar_fecha = function () {
     let currentDate = new Date(),
         hours = currentDate.getHours(),
-        minutes = currentDate.getMinutes(), 
+        minutes = currentDate.getMinutes(),
         seconds = currentDate.getSeconds(),
-        weekDay = currentDate.getDay(), 
-        day = currentDate.getDate(), 
-        month = currentDate.getMonth(), 
+        weekDay = currentDate.getDay(),
+        day = currentDate.getDate(),
+        month = currentDate.getMonth(),
         year = currentDate.getFullYear();
     const weekDays = [
         'Domingo',
@@ -2202,19 +2257,19 @@ var actualizar_fecha = function() {
     document.getElementById('month').textContent = months[month];
     document.getElementById('year').textContent = year;
     document.getElementById('hours').textContent = hours;
- 
+
     if (minutes < 10) {
         minutes = "0" + minutes
     }
- 
+
     if (seconds < 10) {
         seconds = "0" + seconds
     }
- 
+
     document.getElementById('minutes').textContent = minutes;
     document.getElementById('seconds').textContent = seconds;
 };
- 
+
 actualizar_fecha();
- 
+
 setInterval(actualizar_fecha, 1000);
