@@ -37,6 +37,7 @@ class EspaciosModel extends Query
         } else {
             $res = "existe";
         }
+        
         return $res;
     }
     public function editarEspacio(int $id)

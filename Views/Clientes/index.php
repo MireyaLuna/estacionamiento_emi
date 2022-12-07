@@ -54,6 +54,25 @@
                         <input id="telefono" class="form-control" type="text" name="telefono">
                         <label for="telefono">Telefono</label>
                     </div>
+                    <hr>
+                    <div class="row" id="datosUsuario">
+                        <div class="form-floating mb-3">
+                            <select id="genero" class="form-control" name="genero">
+                                <?php foreach ($data['generos'] as $row) { ?>
+                                    <option value="<?php echo $row['codigo'] ?>"><?php echo $row['nombre'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="genero">Genero</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select id="cargo" class="form-control" name="cargo">
+                                <?php foreach ($data['cargos'] as $row) { ?>
+                                    <option value="<?php echo $row['codigo'] ?>"><?php echo $row['nombre'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="cargo">Rol</label>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="d-grid gap-2 col-6 mx-auto">

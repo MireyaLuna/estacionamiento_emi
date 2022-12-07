@@ -11,6 +11,8 @@ class Clientes extends Controller
     }
     public function index()
     {
+        $data['generos'] = $this->model->getGeneros();
+        $data['cargos'] = $this->model->getCargos();
         $data['usuarios'] = $this->model->getUsuarios();
         $this->views->getViews($this, "index", $data);
     }
@@ -37,33 +39,50 @@ class Clientes extends Controller
     public function registrar()
     {
         date_default_timezone_set("America/La_Paz");
+        $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $ci = $_POST['ci'];
         $telefono = $_POST['telefono'];
-        $id = $_POST['id'];
+        $genero = $_POST['genero'];
+        $cargo = $_POST['cargo'];
+        $id_estacionamiento = $_SESSION['id_estacionamiento'];
+        $hash = hash("SHA256", $ci);
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
 
-        if (empty($nombre) || empty($ci) || empty($telefono)) {
-            $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
+        if (empty($nombre) || empty($ci) || empty($telefono) || empty($genero)|| empty($cargo) || empty($id_estacionamiento) ) {
+            $msg = array('msg' => 'Todos los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
-                $data = $this->model->registrarCliente($nombre, $ci, $telefono, $fecha_hoy);
-                if ($data == "ok") {
-                    $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
-                } else if ($data == "existe") {
-                    $msg = array('msg' => 'El cliente ya existe', 'icono' => 'warning');
+                $data_usuario = $this->model->registrarUsuario($ci, $nombre, $hash, $genero, $cargo, $id_estacionamiento, $fecha_hoy);
+                if ($data_usuario == "ok") {
+                    $id_usuario = $this->model->getIdUsuario();
+                    // $usuario = intval($id_usuario);
+                    $data = $this->model->registrarCliente($nombre, $ci, $telefono, $fecha_hoy, $id_usuario['id_usuario']);
+                    if ($data == "ok") {
+                        $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
+                    } else if ($data == "existe") {
+                        $msg = array('msg' => 'El cliente ya existe', 'icono' => 'warning');
+                    } else {
+                        $msg = array('msg' => 'Error al registrar cliente', 'icono' => 'error');
+                    }
+                } else if ($data_usuario == "existe") {
+                    $msg = array('msg' => 'El usuario para el cliente ya existe', 'icono' => 'warning');
                 } else {
-                    $msg = array('msg' => 'Error al registrar cliente', 'icono' => 'error');
-                }
+                    $msg = array('msg' => 'Error al registrar el usuario para el cliente', 'icono' => 'error');
+                }                
             } else {
-                $data = $this->model->modificarCliente($nombre, $ci, $telefono, $fecha_hoy, $id);
+                $id_usuario = $this->model->getUsuarioCliente($id);
+                $data = $this->model->modificarUsuario($ci, $nombre, $fecha_hoy, $id_usuario['id_usuario']);
                 if ($data == "modificado") {
-                    $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
-                } else if ($data == "existe") {
-                    $msg = array('msg' => 'El cliente ya existe', 'icono' => 'warning');
+                    $data = $this->model->modificarCliente($nombre, $ci, $telefono, $fecha_hoy, $id);
+                    if ($data == "modificado") {
+                        $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
+                    } else {
+                        $msg = array('msg' => 'Error al modificar cliente', 'icono' => 'error');
+                    }
                 } else {
-                    $msg = array('msg' => 'Error al modificar cliente', 'icono' => 'error');
+                    $msg = array('msg' => 'Error al modificar usuario del cliente', 'icono' => 'error');
                 }
             }
         }

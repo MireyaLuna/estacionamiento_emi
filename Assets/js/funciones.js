@@ -953,18 +953,16 @@ function btnEditarUsuario(id) {
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const res = JSON.parse(this.responseText);
-            // if (res=='') {
-            //     alertas("No tiene permiso de realizar esta accion", "warning");
-            // } else {
+            // console.log(res);
             document.getElementById("id").value = res.id;
             document.getElementById("usuario").value = res.usuario;
             document.getElementById("nombre").value = res.nombre;
             document.getElementById("genero").value = res.genero;
             document.getElementById("cargo").value = res.cargo;
+            document.getElementById("estacionamiento").value = res.id_estacionamiento;
             document.getElementById("claves").classList.add('d-none');
             myModal.show();
             tblUsuarios.ajax.reload();
-            // }
         }
     }
 
@@ -1172,8 +1170,10 @@ function registrarCliente(e) {
     const nombre = document.getElementById("nombre");
     const ci = document.getElementById("ci");
     const telefono = document.getElementById("telefono");
+    const genero = document.getElementById("genero");
+    const cargo = document.getElementById("cargo");
 
-    if (nombre.value == "" || ci.value == "" || telefono.value == "") {
+    if (nombre.value == "" || ci.value == "" || telefono.value == ""|| genero.value == ""|| cargo.value == "" ){
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Clientes/registrar";
@@ -1207,8 +1207,9 @@ function btnEditarCliente(id) {
             document.getElementById("nombre").value = res.nombre;
             document.getElementById("ci").value = res.ci;
             document.getElementById("telefono").value = res.telefono;
+            document.getElementById("datosUsuario").classList.add('d-none');
             myModal.show();
-            console.log(res)
+            // console.log(res)
             tblClientes.ajax.reload();
         }
     }
@@ -2164,16 +2165,15 @@ function zeroFill(number, width) {
     }
     return number + "";
 }
-var udateTime = function() {
+var actualizar_fecha = function() {
     let currentDate = new Date(),
         hours = currentDate.getHours(),
         minutes = currentDate.getMinutes(), 
         seconds = currentDate.getSeconds(),
         weekDay = currentDate.getDay(), 
-        day = currentDate.getDay(), 
+        day = currentDate.getDate(), 
         month = currentDate.getMonth(), 
         year = currentDate.getFullYear();
- 
     const weekDays = [
         'Domingo',
         'Lunes',
@@ -2183,10 +2183,8 @@ var udateTime = function() {
         'Viernes',
         'Sabado'
     ];
- 
     document.getElementById('weekDay').textContent = weekDays[weekDay];
     document.getElementById('day').textContent = day;
- 
     const months = [
         'Enero',
         'Febrero',
@@ -2201,10 +2199,8 @@ var udateTime = function() {
         'Noviembre',
         'Diciembre'
     ];
- 
     document.getElementById('month').textContent = months[month];
     document.getElementById('year').textContent = year;
- 
     document.getElementById('hours').textContent = hours;
  
     if (minutes < 10) {
@@ -2219,6 +2215,6 @@ var udateTime = function() {
     document.getElementById('seconds').textContent = seconds;
 };
  
-udateTime();
+actualizar_fecha();
  
-setInterval(udateTime, 1000);
+setInterval(actualizar_fecha, 1000);
