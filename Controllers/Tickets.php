@@ -65,32 +65,24 @@ class Tickets extends Controller
         if (empty($vehiculo) || empty($espacio) || empty($ingreso) || empty($codigo)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
-            if ($id == "") {
-                $data = $this->model->registrarTicket($codigo, $vehiculo, $ingreso, $espacio, $fecha_hoy);
-                if ($data == "ok") {
-                    $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
-                } else if ($data == "existe") {
-                    $msg = array('msg' => 'Ya se encuentra registrado', 'icono' => 'warning');
-                } else {
-                    $msg = array('msg' => 'Error al registrar', 'icono' => 'error');
-                }
+            // if ($id == "") {
+            $data = $this->model->registrarTicket($codigo, $vehiculo, $ingreso, $espacio, $fecha_hoy);
+            if ($data == "ok") {
+                $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
+            } else if ($data == "existe") {
+                $msg = array('msg' => 'Ya se encuentra registrado', 'icono' => 'warning');
             } else {
-                // $data = $this->model->modificarEspacio($numero, $estacionamiento, $fecha_hoy, $id);
-                // if ($data == "modificado") {
-                //     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
-                // } else if ($data == "existe") {
-                //     $msg = array('msg' => 'El espacio ya existe', 'icono' => 'warning');
-                // } else {
-                //     $msg = array('msg' => 'Error al modificar espacio', 'icono' => 'error');
-                // }
+                $msg = array('msg' => 'Error al registrar', 'icono' => 'error');
             }
+            // } else {
+            //                 }
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
     public function generarPDF($id_ticket)
     {
-        
+
         $ticket = $this->model->getTicket($id_ticket);
         // $descuento = $this->model->getDescuento($id_venta);
         // $productos = $this->model->getProVenta($id_venta);
@@ -160,7 +152,7 @@ class Tickets extends Controller
         // $pdf->Cell(20, 2, '-------------------------------------', 0, 0, 'L');
         // $pdf->SetXY(20, 67);
         $pdf->Cell(36, 4, 'Conserve este ticket', 0, 0, 'L', true);
-      
+
         // $pdf->Image('http://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=SoyUnDios&.png', 15, 60, 50, 50);
         // //TITULOS DE CLIENTES
         // $pdf->SetFillColor(0, 0, 0);
@@ -215,7 +207,6 @@ class Tickets extends Controller
 
         $pdf->Output();
     }
-
     public function listar_tickets()
     {
         // <button class = "btn btn-success" onclick="btnGenerarFactura(' . $data[$i]['id'] . ')"><i class="fas fa-file-invoice"></i></button>
@@ -223,7 +214,7 @@ class Tickets extends Controller
         // print_r($data);
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
-                $data[$i]['estado'] = '<span class="badge bg-success">En playa</span>';
+                $data[$i]['estado'] = '<span class="badge bg-warning">En playa</span>';
                 $data[$i]['acciones'] = '<div>
                 <button class = "btn btn-warning" onclick="btnAnularTicket(' . $data[$i]['id'] . ')"><i class = "fas fa-ban"></i></button>
            <a class="btn btn-success" href="' . base_url . "Facturas/generaFactura/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-invoice"></i></a></div>
@@ -233,7 +224,7 @@ class Tickets extends Controller
                 $data[$i]['estado'] = '<span class="badge bg-success">Finalizado</span>';
                 $data[$i]['acciones'] = '<div>
             <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a></div>';
-            } else { 
+            } else {
                 $data[$i]['estado'] = '<span class="badge bg-danger">Anulado</span>';
                 $data[$i]['acciones'] = '<div>
             <a class="btn btn-danger" href="' . base_url . "Tickets/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a>
@@ -251,27 +242,26 @@ class Tickets extends Controller
     }
     public function anular($id_ticket)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'anular_venta');
-        // if (!empty($verificar) || $id_usuario == 1) {
-            // $data = $this->model->getAnularVenta($id_venta);
-            $anular = $this->model->getAnular($id_ticket);
-            // foreach ($data as $row) {
-            //     $stock_actual = $this->model->getProductos($row['id_producto']);
-            //     $stock = $stock_actual['cantidad'] + $row['cantidad'];
-            //     $this->model->actualizarStock($stock, $row['id_producto']);
-            // }
-            if ($anular == 'ok') {
-                $msg = array('msg' => 'Ticket anulado', 'icono' => 'success');
-            } else {
-                $msg = array('msg' => 'Error al anular', 'icono' => 'error');
-            }
-            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-            die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
+        $ticket = $this->model->getTicket($id_ticket);
+        $desocupar = $this->model->accionEspacio(1, $ticket['id_espacio']);
+        $anular = $this->model->getAnular($id_ticket);
+        if ($anular == 'ok') {
+            $msg = array('msg' => 'Ticket anulado', 'icono' => 'success');
+        } else {
+            $msg = array('msg' => 'Error al anular', 'icono' => 'error');
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function ticketFacturado(int $id)
+    {
+        $data = $this->model->accionTicket(2, $id);
+        if ($data == 1) {
+            $msg = "ok";
+        } else {
+            $msg = "";
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

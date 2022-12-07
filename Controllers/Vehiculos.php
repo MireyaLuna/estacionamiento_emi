@@ -40,6 +40,7 @@ class Vehiculos extends Controller
     {
         date_default_timezone_set("America/La_Paz");
         $placa = $_POST['placa'];
+        $placa = strtoupper($placa);
         $color = $_POST['color'];
         $marca = $_POST['marca'];
         $cliente = $_POST['id_cliente'];

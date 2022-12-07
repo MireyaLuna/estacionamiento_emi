@@ -68,6 +68,15 @@ class TicketsModel extends Query
         $data = $this->save($sql, $datos);
         return $data;
     }
+    public function accionTicket(int $estado, int $id)
+    {
+        $this->id = $id;
+        $this->estado = $estado;
+        $sql = "UPDATE ticket SET estado = ? WHERE id = ?";
+        $datos = array($this->estado, $this->id);
+        $data = $this->save($sql, $datos);
+        return $data;
+    }
     // public function getAnular(int $estado, int $id)
     // {
     //     $this->id = $id;

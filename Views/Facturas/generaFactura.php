@@ -7,16 +7,8 @@
         FACTURACION
     </div>
     <div class="card-body">
-        <form method="post" id="nuevoRegistro">
+        <form method="post" id="frmFactura">
             <div class="row">
-                <!-- <div class="col-md-6">
-                    <div class="form-floating mb-3">
-                        <input type="hidden" id="id" name="id">
-                        <input type="text" name="placa" id="placa" class="form-control" onkeyup="buscarPlaca(event)">
-                        <label for="placa">Buscar por placa</label>
-                    </div>
-                </div>
-                <hr> -->
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
                         <input type="text" name="placa_vehiculo" id="placa_vehiculo" class="form-control" style=" border-style: none; background-color: white;text-align: center; font-weight: bold; font-family: monospace; font-size: 30px;  color: blue;" value="<?php echo $data['placa']; ?>" disabled>
@@ -26,8 +18,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3">
-                        <!-- <input type="hidden" id="tipo" name="tipo">
-                        <input type="hidden" id="id_vehiculo" name="id_vehiculo"> -->
+                        <input type="hidden" id="id_ticket" name="id_ticket" value="<?php echo $data['id']; ?>">
+                        <input type="hidden" id="id" name="id">
                         <input type="text" name="tipo_vehiculo" id="tipo_vehiculo" class="form-control" style=" border-style: none; background-color: white;text-align: center; font-weight: bold; font-family: monospace; font-size: 30px;  color: blue;" value="<?php echo $data['tipo_vehiculo']; ?>" disabled>
                         <label for="tipo_vehiculo" style="font-weight: bold; font-size: 25px; color: black;">TIPO:
                         </label>
@@ -63,9 +55,9 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" name="hora_salida" id="hora_salida" class="form-control" style=" border-style: none; background-color: white;text-align: center; font-weight: bold; font-family: monospace; font-size: 25px;" value="<?php date_default_timezone_set("America/La_Paz");
-                                                                                                                                                                                                                                                    $fecha = new DateTime();
-                                                                                                                                                                                                                                                    $fecha_hoy = $fecha->format('H:i:s');
-                                                                                                                                                                                                                                                    echo $fecha_hoy ?>" disabled>
+                                                                                                                                                                                                                                                $fecha = new DateTime();
+                                                                                                                                                                                                                                                $fecha_hoy = $fecha->format('H:i:s');
+                                                                                                                                                                                                                                                echo $fecha_hoy ?>" disabled>
                         <label for="hora_salida" style="font-weight: bold; font-size: 20px; color: black;">Hora de
                             salida</label>
                     </div>
@@ -87,11 +79,7 @@
                                                                                                                                                                                                                                                     $salida = new DateTime();
                                                                                                                                                                                                                                                     $ingreso = new DateTime($i);
                                                                                                                                                                                                                                                     $tiempo_total = $ingreso->diff($salida);
-                                                                                                                                                                                                                                                    if ($tiempo_total->format('%m') > 30) {
-                                                                                                                                                                                                                                                        $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h') + 1;
-                                                                                                                                                                                                                                                    } else {
-                                                                                                                                                                                                                                                        $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h');
-                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                    $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h') + 1;
                                                                                                                                                                                                                                                     echo $horas;
                                                                                                                                                                                                                                                     ?>" disabled>
                         <label for="tiempo_total" style="font-weight: bold; font-size: 20px; color: black;">Tiempo total (horas): </label>
@@ -120,11 +108,7 @@
                                                                                                                                                                                                                                                                 $salida = new DateTime();
                                                                                                                                                                                                                                                                 $ingreso = new DateTime($i);
                                                                                                                                                                                                                                                                 $tiempo_total = $ingreso->diff($salida);
-                                                                                                                                                                                                                                                                if ($tiempo_total->format('%m') > 30) {
-                                                                                                                                                                                                                                                                    $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h') + 1;
-                                                                                                                                                                                                                                                                } else {
-                                                                                                                                                                                                                                                                    $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h');
-                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h') + 1;                                                                                                                                                                                                                                                            
                                                                                                                                                                                                                                                                 //PRECIO POR HORA
                                                                                                                                                                                                                                                                 echo $horas * 7;
                                                                                                                                                                                                                                                                 ?>" disabled>
@@ -136,7 +120,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-floating mb-3">
-                        <button class="btn btn-success mt-2 btn-block" style="float: right;" type="button" onclick="generarTicket()">Generar factura</button>
+                        <button class="btn btn-success mt-2 btn-block" style="float: right;" type="button" onclick="generarFactura()">Generar factura</button>
                     </div>
                 </div>
             </div>

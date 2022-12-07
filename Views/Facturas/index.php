@@ -13,16 +13,10 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
-                        <th>NUMERO TICKET</th>
+                        <th>TICKET</th>
                         <th>NIT</th>
                         <th>MONTO PAGADO</th>
-                        <!-- <th>CANTIDAD</th> -->
                         <th>FECHA EMISION</th>
-                        <th>FECHA LIMITE EMISION</th>
-                        <th>FECHA CREACION</th>
-                        <!-- <th>USUARIO CREACION</th> -->
-                        <th>FECHA MODIFICACION</th>
-                        <!-- <th>USUARIO MODIFICACION</th> -->
                         <th>ESTADO</th>
                         <th>ACCION</th>
                     </tr>

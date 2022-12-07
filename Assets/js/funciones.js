@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, tbl_detalles, codigo, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, tbl_detalles, codigo, factura_id, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -654,22 +654,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, {
             'data': 'nit',
         }, {
-            'data': 'monto_pagado',
+            'data': 'monto_total',
         }, {
-            //     'data': 'monto_recibido',
-            // }, {
             'data': 'fecha_emision',
         }, {
-            'data': 'fecha_limite_emision',
-        }, {
-            'data': 'fecha_creacion',
-        }, {
-            // 'data': 'usuario_creacion',
-            // }, {
-            'data': 'fecha_modificacion',
-        }, {
-            // 'data': 'usuario_modificador',
-            // }, {
             'data': 'estado',
         }, {
             'data': 'acciones',
@@ -2129,22 +2117,72 @@ function btnAnularTicket(id) {
     })
 }
 
-function btnGenerarFactura(id) {
-    const url = base_url + "Facturas/generaFactura/" + id;
-    // const url = base_url + "Facturas/registrar";
-    //         const frm = document.getElementById("frmFactura");
-    //         const http = new XMLHttpRequest();
-    //         http.open("POST", url, true);
-    //         http.send(new FormData(frm));
-    //         http.onreadystatechange = function () {
-    //             if (this.readyState == 4 && this.status == 200) {
-    //                 const res = JSON.parse(this.responseText);
-    //                 alertas(res.msg, res.icono);
-    //                 frm.reset();
-    //                 myModal.hide();
-    //                 tblFacturas.ajax.reload();
-    //             }
-    //         }
+function generarFactura() {
+    // var factura_id;
+    const url = base_url + "Facturas/obtenerIDfactura";
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const r = JSON.parse(this.responseText);
+            console.log(r);
+            codigo = r.factura + 1;
+        }
+        // console.log(" aid >>"+codigo);
+    }
+    // console.log(" id_factura >>"+codigo);
+
+    const nit = document.getElementById("nit");
+    const monto_total = document.getElementById("monto_total");
+    const id_ticket = document.getElementById("id_ticket");
+    const hora_salida = document.getElementById("hora_salida");
+    const fecha_salida = document.getElementById("fecha_salida");
+
+    if (nit.value == "" || monto_total.value == "" || id_ticket.value == "") {
+        alertas('Todo los campos son obligatorios', 'warning');
+    } else {
+        const url = base_url + "Facturas/registrar/" + monto_total.value+"/"+ fecha_salida.value + "/" + hora_salida.value;
+        const frm = document.getElementById("frmFactura");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                console.log(res);
+                alertas(res.msg, res.icono);
+                const u = base_url + "Tickets/ticketFacturado/" + id_ticket.value;
+                const h = new XMLHttpRequest();
+                h.open("GET", u, true);
+                h.send();
+                h.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // console.log(this.responseText);
+                        const rspt = JSON.parse(this.responseText);
+                        // console.log(codigo);
+                        if (rspt == '') {
+                            alertas('No tiene permiso', 'warning');
+                        } else {
+                            // frm.reset();
+                            if (codigo == 0) {
+                                codigo = 1;
+                            }
+                            const ruta = base_url + 'Facturas/generarPDF/' + codigo;
+                            window.open(ruta);
+                            location.reload();
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 300);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
 }
 
 function buscarNIT(e) {

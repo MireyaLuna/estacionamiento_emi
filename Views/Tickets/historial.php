@@ -36,6 +36,7 @@
         </form>
     </div> -->
 </div>
+<div class="card">
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered table-hover" id="tbl_tickets"  >
@@ -55,5 +56,6 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 <?php include "Views/Templates/footer.php"; ?>
