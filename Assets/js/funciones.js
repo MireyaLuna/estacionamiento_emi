@@ -2215,7 +2215,6 @@ function buscarNIT(e) {
 
 function registrarNIT(e) {
     e.preventDefault();
-    // e.value = e.value.toUpperCase();
     if (e.which == 13) {
         const nit = document.getElementById("nit");
         const razon_social = document.getElementById("razon_social");
@@ -2224,7 +2223,7 @@ function registrarNIT(e) {
             alertas('Campos para factura obligatorios', 'warning');
         } else {
             const url = base_url + "Facturas/registrarNIT";
-            const frm = document.getElementById("nuevoRegistro");
+            const frm = document.getElementById("frmFactura");
             const http = new XMLHttpRequest();
             http.open("POST", url, true);
             http.send(new FormData(frm));
