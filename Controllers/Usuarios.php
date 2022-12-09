@@ -11,7 +11,6 @@ class Usuarios extends Controller
     }
     public function index()
     {
-        // print_r($this->model->getUsuarios());
         $data['generos'] = $this->model->getGeneros();
         $data['cargos'] = $this->model->getCargos();
         $data['estacionamientos'] = $this->model->getEstacionamientos();
@@ -23,10 +22,14 @@ class Usuarios extends Controller
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Activo</span>';
-                $data[$i]['acciones'] = '<div> 
-            <button type="button" class = "btn btn-primary" onclick="btnEditarUsuario(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
-            <button type="button" class = "btn btn-danger" onclick="btnEliminarUsuario(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
-            </div>';
+                if ($data[$i]['id'] == 1) {
+                    $data[$i]['acciones'] = '<div><span class="badge bg-primary">Administrador</span></div>';
+                } else {
+                    $data[$i]['acciones'] = '<div> 
+                                            <button type="button" class = "btn btn-primary" onclick="btnEditarUsuario(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
+                                            <button type="button" class = "btn btn-danger" onclick="btnEliminarUsuario(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
+                                            </div>';
+                }
             } else {
                 $data[$i]['estado'] = '<span class="badge bg-danger">Inactivo</span>';
                 $data[$i]['acciones'] = '<div>
