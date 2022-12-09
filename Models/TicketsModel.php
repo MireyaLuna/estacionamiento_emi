@@ -20,7 +20,7 @@ class TicketsModel extends Query
     }
     public function getTicket(int $id_ticket)
     {
-        $sql = "SELECT t.*, v.placa, p.nombre AS tipo_vehiculo, e.nro_espacio, s.nombre AS estacionamiento FROM ticket t INNER JOIN vehiculo v INNER JOIN espacio e INNER JOIN estacionamiento s INNER JOIN parametro p WHERE t.id_vehiculo = v.id AND t.id_espacio = e.id AND e.id_estacionamiento = s.id AND p.codigo = v.tipo AND t.id = '$id_ticket'";
+        $sql = "SELECT t.*, v.placa, p.nombre AS tipo_vehiculo, e.id AS espacio, e.nro_espacio, s.nombre AS estacionamiento FROM ticket t INNER JOIN vehiculo v INNER JOIN espacio e INNER JOIN estacionamiento s INNER JOIN parametro p WHERE t.id_vehiculo = v.id AND t.id_espacio = e.id AND e.id_estacionamiento = s.id AND p.codigo = v.tipo AND t.id = '$id_ticket'";
         $data = $this->select($sql);
         return $data;
     }
@@ -32,8 +32,14 @@ class TicketsModel extends Query
     }
     public function getPlacaVehiculo($placa)
     {
-        $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM vehiculo v INNER JOIN parametro p WHERE v.placa = '$placa' AND p.codigo = v.tipo";
-        $data = $this->select($sql);
+        $verificar = "SELECT v.*, p.nombre AS tipo_vehiculo FROM vehiculo v INNER JOIN parametro p INNER JOIN ticket t WHERE v.placa = '$placa' AND p.codigo = v.tipo AND t.id_vehiculo = v.id AND t.estado = 1";
+        $existe = $this->select($verificar);
+        if (empty($existe)) {
+            $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM vehiculo v INNER JOIN parametro p WHERE v.placa = '$placa' AND p.codigo = v.tipo";
+            $data = $this->select($sql);
+        }else{
+            $data = "existe";
+        }
         return $data;
     }
     public function getCantidad()
@@ -70,6 +76,10 @@ class TicketsModel extends Query
     }
     public function accionTicket(int $estado, int $id)
     {
+        $datos_ticket = $this->getTicket($id);
+        $id_espacio = $datos_ticket['espacio'];
+        $this->accionEspacio(1, $id_espacio);
+
         $this->id = $id;
         $this->estado = $estado;
         $sql = "UPDATE ticket SET estado = ? WHERE id = ?";
@@ -97,13 +107,11 @@ class TicketsModel extends Query
         $sql = "UPDATE ticket SET estado = ? WHERE id = ?";
         $datos = array(3, $id_ticket);
         $data = $this->save($sql, $datos);
-        if($data == 1){
+        if ($data == 1) {
             $res = "ok";
-        }else{
+        } else {
             $res = "error";
         }
         return $res;
-        
     }
-
 }

@@ -8,7 +8,7 @@ class EspaciosModel extends Query
     }
     public function getEspacios()
     {
-        $sql = "SELECT e.*, s.nombre AS estacionamiento FROM espacio e INNER JOIN estacionamiento s WHERE e.id_estacionamiento = s.id";
+        $sql = "SELECT e.*, s.nombre AS estacionamiento FROM espacio e INNER JOIN estacionamiento s WHERE e.id_estacionamiento = s.id ORDER BY e.id";
         $data = $this->selectAll($sql);
         return $data;
     }

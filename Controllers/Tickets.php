@@ -1,8 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 
-use Luecano\NumeroALetras\NumeroALetras;
-
 class Tickets extends Controller
 {
     public function __construct()
@@ -82,12 +80,7 @@ class Tickets extends Controller
     }
     public function generarPDF($id_ticket)
     {
-
         $ticket = $this->model->getTicket($id_ticket);
-        // $descuento = $this->model->getDescuento($id_venta);
-        // $productos = $this->model->getProVenta($id_venta);
-        // print_r($ticket);
-        // exit();
 
         require('Libraries/fpdf/html2pdf.php');
 
@@ -149,61 +142,8 @@ class Tickets extends Controller
         $pdf->SetFillColor(0, 0, 0);
         $pdf->SetTextColor(255, 255, 255);
         $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(20, 2, '-------------------------------------', 0, 0, 'L');
-        // $pdf->SetXY(20, 67);
         $pdf->Cell(36, 4, 'Conserve este ticket', 0, 0, 'L', true);
 
-        // $pdf->Image('http://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=SoyUnDios&.png', 15, 60, 50, 50);
-        // //TITULOS DE CLIENTES
-        // $pdf->SetFillColor(0, 0, 0);
-        // $pdf->SetTextColor(255, 255, 255);
-        // $pdf->SetFont('Arial', 'B', 7);
-        // $pdf->Cell(20, 5, utf8_decode('C.I.'), 0, 0, 'C', true);
-        // $pdf->Cell(50, 5, 'Nombre', 0, 1, 'C', true);
-
-        // $pdf->SetTextColor(0, 0, 0);
-        // $clientes = $this->model->clientesVenta($id_venta);
-        // $pdf->SetFont('Arial', '', 7);
-        // $pdf->Cell(20, 5, $clientes['carnet'], 0, 0, 'L');
-        // $pdf->Cell(50, 5, utf8_decode($clientes['nombre']), 0, 1, 'L');
-
-        // $pdf->Ln();
-
-        // //TITULOS DE PRODUCTOS
-        // $pdf->SetFillColor(0, 0, 0);
-        // $pdf->SetTextColor(255, 255, 255);
-        // $pdf->Cell(10, 5, 'Cant', 0, 0, 'L', true);
-        // $pdf->Cell(35, 5, utf8_decode('Descripción'), 0, 0, 'L', true);
-        // $pdf->Cell(10, 5, ' Precio', 0, 0, 'L', true);
-        // $pdf->Cell(15, 5, 'Subtotal', 0, 1, 'L', true);
-
-        // $pdf->SetTextColor(0, 0, 0);
-
-        // $total = 0.00;
-        // foreach ($productos as $row) {
-        //     $total = $total + $row['subtotal'];
-        //     $pdf->Cell(10, 5, $row['cantidad'], 0, 0, 'L');
-        //     $pdf->Cell(35, 5, utf8_decode($row['descripcion']), 0, 0, 'L');
-        //     $pdf->Cell(10, 5, $row['precio'], 0, 0, 'R');
-        //     $pdf->Cell(10, 5, number_format($row['cantidad'] * $row['precio'], 2, '.', ','), 0, 1, 'L');
-        // }
-        // $pdf->Ln();
-        // $pdf->SetFont('Arial', 'B', 7);
-        // $pdf->Cell(70, 5, 'Descuento total', 0, 1, 'R');
-        // $pdf->SetFont('Arial', '', 7);
-        // $pdf->Cell(70, 5, number_format($descuento['total'], 2, '.', ','), 0, 1, 'R');
-        // $pdf->SetFont('Arial', 'B', 7);
-        // $pdf->Cell(70, 5, 'TOTAL A PAGAR', 0, 1, 'R');
-        // $pdf->SetFont('Arial', '', 7);
-        // $pdf->Cell(70, 5, number_format($total, 2, '.', ','), 0, 1, 'R');
-
-        // $formatter = new NumeroALetras();
-        // $letras = $formatter->toMoney($total, 2, '', '');
-        // $pdf->SetFont('Arial', 'B', 5);
-        // $letrastotal = "Son: " . $letras . " BOLIVIANOS";
-        // $pdf->MultiCell(70, 5, utf8_decode($letrastotal), 0, 'R');
-
-        // $pdf->WriteHTML($empresa['mensaje']);
 
         $pdf->Output();
     }

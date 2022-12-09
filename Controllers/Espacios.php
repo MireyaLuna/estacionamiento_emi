@@ -20,12 +20,13 @@ class Espacios extends Controller
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
                 $data[$i]['estado'] = '<span class="badge bg-success">Libre</span>';
-                //     $data[$i]['acciones'] = '<div> 
-                // <button type="button" class = "btn btn-primary" onclick="btnEditarEspacio(' . $data[$i]['id'] . ');"><i class="fa-regular fa-pen-to-square"></i></button>
-                // <button type="button" class = "btn btn-danger" onclick="btnEliminarEspacio(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
-                // </div>';
+                $data[$i]['acciones'] = '<div> 
+                <button type="button" class = "btn btn-danger" onclick="btnEliminarEspacio(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
+                </div>';
             } else if ($data[$i]['estado'] == 2) {
                 $data[$i]['estado'] = '<span class="badge bg-danger">Ocupado</span>';
+                $data[$i]['acciones'] = '<div> </div>';
+
             } else {
                 $data[$i]['estado'] = '<span class="badge bg-warning">Inactivo</span>';
                 $data[$i]['acciones'] = '<div>
@@ -131,6 +132,25 @@ class Espacios extends Controller
         // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
         // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionEspacio(2, $id);
+        if ($data == 1) {
+            $msg = "ok";
+        } else {
+            $msg = "";
+        }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+        // } else {
+        //     $msg = '';
+        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        //     die();
+        // }
+    }
+    public function desocupar(int $id)
+    {
+        // $id_usuario = $_SESSION['id_usuario'];
+        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
+        // if (!empty($verificar) || $id_usuario == 1) {
+        $data = $this->model->accionEspacio(1, $id);
         if ($data == 1) {
             $msg = "ok";
         } else {

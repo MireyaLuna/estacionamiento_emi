@@ -468,8 +468,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // 'data': 'usuario_modificador',
             // }, {
             'data': 'estado',
-            // }, {
-            //     'data': 'acciones',
+        }, {
+            'data': 'acciones',
         }],
         language: {
             "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
@@ -2007,16 +2007,23 @@ function buscarPlaca(e) {
         http.send();
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                // console.log(this.responseText);
                 const res = JSON.parse(this.responseText);
-                if (res) {
+                if (res == "existe") {
+                    alertas("El vehiculo ya esta dentro del parqueo", "warning");
+                    // console.log(res);
+                    return;
+                }
+                if (!res) {
+                    // console.log(res);
+                    alertas("Vehiculo no encontrado", "warning");
+                    return;
+                } else {
                     // console.log(res);
                     document.getElementById("placa_vehiculo").value = res.placa;
                     document.getElementById("tipo_vehiculo").value = res.tipo_vehiculo;
                     document.getElementById("tipo").value = res.tipo;
                     document.getElementById("id_vehiculo").value = res.id;
-                } else {
-                    alertas("Vehiculo no encontrado", "warning");
+                    return;
                 }
 
             }
@@ -2117,8 +2124,17 @@ function btnAnularTicket(id) {
     })
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function facturar() {
+    const ruta = base_url + 'Facturas/generarPDF/' + codigo;
+    window.open(ruta);
+    await sleep(1000);
+}
+
 function generarFactura() {
-    // var factura_id;
     const url = base_url + "Facturas/obtenerIDfactura";
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
@@ -2127,11 +2143,9 @@ function generarFactura() {
         if (this.readyState == 4 && this.status == 200) {
             const r = JSON.parse(this.responseText);
             console.log(r);
-            codigo = r.factura + 1;
+            codigo = r.factura + 0;
         }
-        // console.log(" aid >>"+codigo);
     }
-    // console.log(" id_factura >>"+codigo);
 
     const nit = document.getElementById("nit");
     const monto_total = document.getElementById("monto_total");
@@ -2142,7 +2156,7 @@ function generarFactura() {
     if (nit.value == "" || monto_total.value == "" || id_ticket.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
-        const url = base_url + "Facturas/registrar/" + monto_total.value+"/"+ fecha_salida.value + "/" + hora_salida.value;
+        const url = base_url + "Facturas/registrar/" + monto_total.value + "/" + fecha_salida.value + "/" + hora_salida.value;
         const frm = document.getElementById("frmFactura");
         const http = new XMLHttpRequest();
         http.open("POST", url, true);
@@ -2158,18 +2172,15 @@ function generarFactura() {
                 h.send();
                 h.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        // console.log(this.responseText);
                         const rspt = JSON.parse(this.responseText);
-                        // console.log(codigo);
                         if (rspt == '') {
                             alertas('No tiene permiso', 'warning');
                         } else {
-                            // frm.reset();
                             if (codigo == 0) {
                                 codigo = 1;
                             }
-                            const ruta = base_url + 'Facturas/generarPDF/' + codigo;
-                            window.open(ruta);
+                            tbl_tickets.ajax.reload();
+                            facturar();
                             location.reload();
                             setTimeout(() => {
                                 window.location.reload();
@@ -2180,10 +2191,8 @@ function generarFactura() {
             }
         }
     }
-
-
-
 }
+
 
 function buscarNIT(e) {
     e.preventDefault();

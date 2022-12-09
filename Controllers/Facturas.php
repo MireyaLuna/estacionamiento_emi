@@ -1,4 +1,8 @@
 <?php
+require 'vendor/autoload.php';
+
+use Luecano\NumeroALetras\NumeroALetras;
+
 class Facturas extends Controller
 {
     public function __construct()
@@ -163,128 +167,118 @@ class Facturas extends Controller
     }
     public function generarPDF(int $id_factura)
     {
-        print_r($id_factura);
-        // $ticket = $this->model->getTicket($id_ticket);
-        // // $descuento = $this->model->getDescuento($id_venta);
-        // // $productos = $this->model->getProVenta($id_venta);
-        // // print_r($ticket);
-        // // exit();
+        $factura = $this->model->getFactura($id_factura);
+        $i = $factura['hora_ingreso'];
+        $s = $factura['hora_salida'];
+        $ingreso = new DateTime($i);
+        $salida = new DateTime($s);
+        $tiempo_total = $ingreso->diff($salida);
+        $horas = ($tiempo_total->format('%d') * 24) + $tiempo_total->format('%h') + 1;
+        $monto_total = $horas*7;
 
-        // require('Libraries/fpdf/html2pdf.php');
+        require('Libraries/fpdf/html2pdf.php');
+        $pdf = new PDF_HTML('P', 'mm', array(80, 140));
+        $pdf->AddPage();
+        $pdf->SetMargins(5, 0, 0);
+        $pdf->SetTitle('Factura');
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Image(base_url . 'Assets/img/emilogo.png', 25, 5, 30, 18);
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->SetXY(5, 25);
+        $pdf->Cell(70, 3, 'ESTACIONAMIENTO: '.$factura['estacionamiento'], 0, 1, 'C');
+        $pdf->Cell(70, 3,$factura['ubicacion'], 0, 1, 'C');
+        $pdf->Line(5, 31, 75, 31);
+        $pdf->Line(5, 34, 75, 34);
+        $codigo = str_pad($factura['id'], 5, "0", STR_PAD_LEFT);
+        $pdf->Cell(70, 3, 'FACTURA Nro: '.$codigo, 0, 1, 'C');
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(35, 4, 'NIT: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 4, $factura['nit'], 0, 1, 'L');
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(35, 4, 'Nombre/Razon social: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 4, $factura['razon_social'], 0, 1, 'L');
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(35, 4, 'Fecha de emision: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 4, $factura['fecha_emision'], 0, 1, 'L');
 
-        // // $pdf = new FPDF('P','mm', 'a4');
-        // $pdf = new PDF_HTML('P', 'mm', array(80, 90));
-        // // $pdf = new FPDF('P', 'mm', array(200, 80));
-        // $pdf->AddPage();
-        // $pdf->SetMargins(5, 0, 0);
-        // $pdf->SetTitle('Ticket de ingreso');
-        // $pdf->SetFont('Arial', 'B', 14);
-        // // $pdf->Cell(65, 10, utf8_decode($empresa['nombre']), 0, 1, 'L');
-        // $pdf->Image(base_url . 'Assets/img/emilogo.png', 25, 5, 30, 18);
-        // $pdf->SetFont('Arial', 'B', 8);
-        // $pdf->SetXY(10, 25);
-        // $pdf->Cell(22, 6, 'Estacionamiento: ', 0, 0, 'C');
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(22, 6, $ticket['estacionamiento'], 0, 1, 'L');
-        // $pdf->SetFont('Arial', 'B', 8);
-        // $pdf->SetXY(10, 30);
-        // $pdf->Cell(22, 6, 'Numero de ticket: ', 0, 0, 'C');
-        // $pdf->SetFont('Arial', 'B', 12);
-        // $pdf->Cell(20, 6, $ticket['codigo'], 0, 1, 'L');
-        // // $pdf->Ln();
-        // $pdf->Line(5, 24, 75, 24);
-        // $pdf->Line(5, 36, 75, 36);
-        // $pdf->Line(5, 47, 75, 47);
-        // $pdf->Line(5, 64, 75, 64);
+        $pdf->Line(5, 46, 75, 46);
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(70, 4, 'DATOS DE CLIENTE Y VEHICULO ', 0, 1, 'C');
+        $pdf->Cell(15, 3, 'Cliente: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['nombre'], 0, 1, 'L');
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(15, 3, 'C.I.: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['ci'], 0, 1, 'L');
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(15, 3, 'Tipo: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['tipo_vehiculo'], 0, 1, 'L');
 
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(20, 6, 'Placa: ', 0, 0, 'L');
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(20, 6, $ticket['placa'], 0, 1, 'L');
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(15, 3, 'Placa: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['placa'], 0, 1, 'L');
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(15, 3, 'Entrada: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['hora_ingreso'], 0, 1, 'L');
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(15, 3, 'Salida: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['hora_salida'], 0, 1, 'L');
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(15, 3, 'Espacio: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(35, 3, $factura['nro_espacio'], 0, 1, 'L');
 
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(20, 5, 'Tipo: ', 0, 0, 'L');
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(20, 5, $ticket['tipo_vehiculo'], 0, 1, 'L');
+        $pdf->SetFillColor(0, 0, 0);
+        $pdf->SetTextColor(255, 255, 255);
+        $pdf->Cell(9, 4, 'CANT.', 0, 0, 'C', true);
+        $pdf->Cell(38, 4, utf8_decode('DESCRIPCIÓN'), 0, 0, 'C', true);
+        $pdf->Cell(10, 4, 'P/U', 0, 0, 'C', true);
+        $pdf->Cell(13, 4, 'SUBTOTAL', 0, 1, 'C', true);
+        $pdf->SetTextColor(0, 0, 0);
 
-        // $pdf->SetFont('Arial', 'B', 7);
-        // $pdf->Cell(20, 6, 'Fecha ingreso: ', 0, 0, 'L');
-        // $pdf->SetFont('Arial', '', 7);
-        // $f = strtotime($ticket['hora_ingreso']);
-        // $fecha = getDate($f);
-        // $fecha_ingreso = " " . $fecha['mday'] . "/" . $fecha['mon'] . "/" . $fecha['year'];
-        // $hora_ingreso = " " . $fecha['hours'] . ":" . $fecha['minutes'] . ":" . $fecha['seconds'];
-        // $pdf->Cell(20, 6, $fecha_ingreso, 0, 1, 'L');
+        $pdf->Cell(9, 5, $horas, 0, 0, 'C');
+        $pdf->Cell(38, 5, 'Parqueo vehiculo', 0, 0, 'L');
+        $pdf->Cell(10, 5, '7', 0, 0, 'C');
+        $pdf->Cell(13, 5, $monto_total, 0, 1, 'C');
 
-        // $pdf->SetFont('Arial', 'B', 7);
-        // $pdf->Cell(20, 6, 'Hora ingreso: ', 0, 0, 'L');
-        // $pdf->SetFont('Arial', '', 7);
-        // $pdf->Cell(20, 6, $hora_ingreso, 0, 1, 'L');
+        $pdf->Line(5, 80, 75, 80);
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(57, 5, 'Monto a pagar Bs.: ', 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(13, 5, $monto_total, 0, 1, 'C');
+        
+        $pdf->SetFont('Times', 'B', 7);
+        $pdf->Cell(57, 5, utf8_decode('Importe base crédito fiscal Bs.: '), 0, 0, 'R');
+        $pdf->SetFont('Times', '', 7);
+        $pdf->Cell(13, 5, $monto_total, 0, 1, 'C');
+        
+        $formatter = new NumeroALetras();
+        $letras = $formatter->toMoney($monto_total, 2, '', '');
+        $pdf->Line(5, 96, 75, 96);
+        $pdf->Cell(70, 6, 'Son: '.$letras. '00/100 BOLIVIANOS', 0, 1, 'C');
+        $pdf->MultiCell(70, 4, utf8_decode('"Esta factura contribuye al desarrollo del país, el uso ilícito será sancionado penalmente de acuerdo a la ley."'),0,'C');
+        
+        $pdf->Line(5, 104, 75, 104);
+        $pdf->SetFont('Times', '', 6);
+        $pdf->Cell(70, 6, 'Usuario: '.$_SESSION['usuario'], 0, 1, 'L');
 
-        // $pdf->SetFont('Arial', 'B', 7);
-        // $pdf->Cell(20, 5, 'Espacio: ', 0, 0, 'L');
-        // $pdf->SetFont('Arial', 'B', 10);
-        // $pdf->Cell(20, 5, $ticket['nro_espacio'], 0, 1, 'L');
+        $pdf->Output();
 
-        // $pdf->SetXY(20, 65);
-        // $pdf->SetFillColor(0, 0, 0);
-        // $pdf->SetTextColor(255, 255, 255);
-        // $pdf->SetFont('Arial', 'B', 10);
-        // // $pdf->Cell(20, 2, '-------------------------------------', 0, 0, 'L');
-        // // $pdf->SetXY(20, 67);
-        // $pdf->Cell(36, 4, 'Conserve este ticket', 0, 0, 'L', true);
-
-        // // $pdf->Image('http://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=SoyUnDios&.png', 15, 60, 50, 50);
-        // // //TITULOS DE CLIENTES
-        // // $pdf->SetFillColor(0, 0, 0);
-        // // $pdf->SetTextColor(255, 255, 255);
-        // // $pdf->SetFont('Arial', 'B', 7);
-        // // $pdf->Cell(20, 5, utf8_decode('C.I.'), 0, 0, 'C', true);
-        // // $pdf->Cell(50, 5, 'Nombre', 0, 1, 'C', true);
-
-        // // $pdf->SetTextColor(0, 0, 0);
-        // // $clientes = $this->model->clientesVenta($id_venta);
-        // // $pdf->SetFont('Arial', '', 7);
-        // // $pdf->Cell(20, 5, $clientes['carnet'], 0, 0, 'L');
-        // // $pdf->Cell(50, 5, utf8_decode($clientes['nombre']), 0, 1, 'L');
-
-        // // $pdf->Ln();
-
-        // // //TITULOS DE PRODUCTOS
-        // // $pdf->SetFillColor(0, 0, 0);
-        // // $pdf->SetTextColor(255, 255, 255);
-        // // $pdf->Cell(10, 5, 'Cant', 0, 0, 'L', true);
-        // // $pdf->Cell(35, 5, utf8_decode('Descripción'), 0, 0, 'L', true);
-        // // $pdf->Cell(10, 5, ' Precio', 0, 0, 'L', true);
-        // // $pdf->Cell(15, 5, 'Subtotal', 0, 1, 'L', true);
-
-        // // $pdf->SetTextColor(0, 0, 0);
-
-        // // $total = 0.00;
-        // // foreach ($productos as $row) {
-        // //     $total = $total + $row['subtotal'];
-        // //     $pdf->Cell(10, 5, $row['cantidad'], 0, 0, 'L');
-        // //     $pdf->Cell(35, 5, utf8_decode($row['descripcion']), 0, 0, 'L');
-        // //     $pdf->Cell(10, 5, $row['precio'], 0, 0, 'R');
-        // //     $pdf->Cell(10, 5, number_format($row['cantidad'] * $row['precio'], 2, '.', ','), 0, 1, 'L');
-        // // }
-        // // $pdf->Ln();
-        // // $pdf->SetFont('Arial', 'B', 7);
-        // // $pdf->Cell(70, 5, 'Descuento total', 0, 1, 'R');
-        // // $pdf->SetFont('Arial', '', 7);
-        // // $pdf->Cell(70, 5, number_format($descuento['total'], 2, '.', ','), 0, 1, 'R');
-        // // $pdf->SetFont('Arial', 'B', 7);
-        // // $pdf->Cell(70, 5, 'TOTAL A PAGAR', 0, 1, 'R');
-        // // $pdf->SetFont('Arial', '', 7);
-        // // $pdf->Cell(70, 5, number_format($total, 2, '.', ','), 0, 1, 'R');
-
-        // // $formatter = new NumeroALetras();
-        // // $letras = $formatter->toMoney($total, 2, '', '');
-        // // $pdf->SetFont('Arial', 'B', 5);
-        // // $letrastotal = "Son: " . $letras . " BOLIVIANOS";
-        // // $pdf->MultiCell(70, 5, utf8_decode($letrastotal), 0, 'R');
-
-        // // $pdf->WriteHTML($empresa['mensaje']);
+     
     }
     public function obtenerIDfactura()
     {
