@@ -13,7 +13,7 @@
     <link href="<?php echo base_url; ?>Assets/css/animate.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-info">
+<body class="bg-azul">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="alert alert-danger text-center d-none" id="alerta" role="alert"></div>
                                         <div class="d-grid gap-2">
-                                            <button type="button" class="btn btn-success" onclick="frmLogin(event)">INGRESAR</button>
+                                            <button type="button" class="btn btn-primary" onclick="frmLogin(event)">INGRESAR</button>
                                         </div>
                                     </form>
                                 </div>

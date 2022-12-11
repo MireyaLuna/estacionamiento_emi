@@ -1,7 +1,4 @@
 <?php include "Views/Templates/header.php"; ?>
-<!-- <ol class="breadcrumb">
-    <li class="breadcrumb-item active mt-2" aria-current="page">Usuarios</li>
-</ol> -->
 <div class="card">
     <div class="card-header card-header-primary">
         LISTA DE USUARIOS
@@ -9,7 +6,7 @@
     <div class="card-body">
         <div><button type="button" class="btn btn-primary mb-2" onclick="frmUsuario();"><i class="fas fa-plus"></i></button></div>
         <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="tblUsuarios" style="width:auto">
+        <table class="table table-bordered table-hover" id="tblUsuarios">
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
@@ -18,10 +15,10 @@
             <th>GENERO</th>
             <th>CARGO</th>
             <th>ESTACIONAMIENTO</th>
-            <th>FECHA CREACION</th>
-            <!-- <th>USUARIO CREACION</th> -->
+            <!-- <th>FECHA CREACION</th>
+            <th>USUARIO CREACION</th>
             <th>FECHA MODIFICACION</th>
-            <!-- <th>USUARIO MODIFICACION</th> -->
+            <th>USUARIO MODIFICACION</th> -->
             <th>ESTADO</th>
             <th>ACCIONES</th>
         </tr>

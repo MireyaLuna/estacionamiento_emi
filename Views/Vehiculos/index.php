@@ -15,8 +15,8 @@
                         <th>MARCA</th>
                         <th>CLIENTE</th>
                         <th>TIPO</th>
-                        <th>FECHA CREACION</th>
-                        <th>FECHA MODIFICACION</th>
+                        <!-- <th>FECHA CREACION</th>
+                        <th>FECHA MODIFICACION</th> -->
                         <th>ESTADO</th>
                         <th>ACCION</th>
                     </tr>

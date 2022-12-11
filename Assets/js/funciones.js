@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'estacionamiento',
             }, {
-                'data': 'fecha_creacion',
-            }, {
-                // 'data': 'usuario_creacion',
-                // }, {
-                'data': 'fecha_modificacion',
-            }, {
-                // 'data': 'usuario_modificador',
-                // }, {
+            //     'data': 'fecha_creacion',
+            // }, {
+            //     'data': 'usuario_creacion',
+            // }, {
+            //     'data': 'fecha_modificacion',
+            // }, {
+            //     'data': 'usuario_modificador',
+            // }, {
                 'data': 'estado',
             }, {
                 'data': 'acciones',
@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'tipo',
             }, {
-                'data': 'fecha_creacion',
-            }, {
+            //     'data': 'fecha_creacion',
+            // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-                'data': 'fecha_modificacion',
-            }, {
+            //     'data': 'fecha_modificacion',
+            // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -204,12 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'usuario',
             }, {
-                'data': 'fecha_creacion',
-            }, {
+            //     'data': 'fecha_creacion',
+            // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-                'data': 'fecha_modificacion',
-            }, {
+            //     'data': 'fecha_modificacion',
+            // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -292,12 +292,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'estacionamiento',
             }, {
-                'data': 'fecha_creacion',
-            }, {
+            //     'data': 'fecha_creacion',
+            // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-                'data': 'fecha_modificacion',
-            }, {
+            //     'data': 'fecha_modificacion',
+            // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -378,12 +378,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'ubicacion',
             }, {
-                'data': 'fecha_creacion',
-            }, {
+            //     'data': 'fecha_creacion',
+            // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-                'data': 'fecha_modificacion',
-            }, {
+            //     'data': 'fecha_modificacion',
+            // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -470,12 +470,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // }, {
                 //     'data': 'hora_salida',
                 // }, {
-                'data': 'fecha_creacion',
-            }, {
+            //     'data': 'fecha_creacion',
+            // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-                'data': 'fecha_modificacion',
-            }, {
+            //     'data': 'fecha_modificacion',
+            // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -2361,13 +2361,13 @@ function alertas(mensaje, icono) {
     })
 }
 
-function zeroFill(number, width) {
-    width -= number.toString().length;
-    if (width > 0) {
-        return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
-    }
-    return number + "";
-}
+// function zeroFill(number, width) {
+//     width -= number.toString().length;
+//     if (width > 0) {
+//         return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+//     }
+//     return number + "";
+// }
 var actualizar_fecha = function () {
     let currentDate = new Date(),
         hours = currentDate.getHours(),

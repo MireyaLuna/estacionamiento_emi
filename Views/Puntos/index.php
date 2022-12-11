@@ -15,9 +15,9 @@
                     <th>NOMBRE</th>
                     <th>DESCRIPCION</th>
                     <th>ESTACIONAMIENTO</th>
-                    <th>FECHA CREACION</th>
+                    <!-- <th>FECHA CREACION</th> -->
                     <!-- <th>USUARIO CREACION</th> -->
-                    <th>FECHA MODIFICACION</th>
+                    <!-- <th>FECHA MODIFICACION</th> -->
                     <!-- <th>USUARIO MODIFICACION</th> -->
                     <th>ESTADO</th>
                     <th>ACCION</th>

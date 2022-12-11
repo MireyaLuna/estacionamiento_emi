@@ -60,6 +60,9 @@ th{
 .bg-morado{
     background-color: #512062 !important;
 }
+.bg-azul{
+    background-color: #071887 !important;
+}
 input[type="checkbox"]{
     position: relative;
     width: 60px;

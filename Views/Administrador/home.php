@@ -33,7 +33,7 @@ if ($_SESSION['cargo'] == '1ADM') { ?>
             <div class="card bg-danger text-white mb-4 animate__animated animate__backInRight">
                 <div class="card-body">
                     <i class="fas fa-times-circle fa-2x"></i>
-                    Deshabilitados
+                    Inactivos
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="<?php echo base_url; ?>Espacios">Ver más</a>

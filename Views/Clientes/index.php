@@ -18,9 +18,9 @@
                         <th>TELEFONO</th>
                         <!-- <th>ADMINISTRADOR</th>-->
                         <th>USUARIO</th>
-                        <th>FECHA CREACION</th>
+                        <!-- <th>FECHA CREACION</th> -->
                         <!-- <th>USUARIO CREACION</th> -->
-                        <th>FECHA MODIFICACION</th>
+                        <!-- <th>FECHA MODIFICACION</th> -->
                         <!-- <th>USUARIO MODIFICACION</th> -->
                         <th>ESTADO</th>
                         <th>ACCION</th>
