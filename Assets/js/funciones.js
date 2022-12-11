@@ -919,6 +919,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+    $('#desde').change(function () {
+        tbl_tickets.draw();
+    })
+    $('#hasta').change(function () {
+        tbl_tickets.draw();
+    })
+    $('#desdeF').change(function () {
+        tblFacturas.draw();
+    })
+    $('#hastaF').change(function () {
+        tblFacturas.draw();
+    })
 })
 
 function frmLogin(e) {
@@ -1614,9 +1626,6 @@ function registrarEspacio(e) {
     e.preventDefault();
     const estacionamiento = document.getElementById("estacionamiento");
     const numero = document.getElementById("numero");
-    // const vehiculo = document.getElementById("vehiculo");
-    // const ingreso = document.getElementById("ingreso");
-    // const salida = document.getElementById("salida");
 
     if (numero.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
@@ -1653,10 +1662,6 @@ function btnEditarEspacio(id) {
             document.getElementById("id").value = res.id;
             document.getElementById("estacionamiento").value = res.id_estacionamiento;
             document.getElementById("numero").value = res.nro_espacio;
-            // document.getElementById("vehiculo").value = res.id_vehiculo;
-            // document.getElementById("ingreso").value = res.hora_ingreso;
-            // document.getElementById("salida").removeAttribute('disabled');
-            // document.getElementById("salida").value = res.hora_salida;
             myModal.show();
             console.log(res);
             tblEspacios.ajax.reload();
@@ -2416,4 +2421,56 @@ var actualizar_fecha = function () {
 if (document.getElementById('weekDay')) {
     actualizar_fecha();
     setInterval(actualizar_fecha, 1000);
+}
+if (document.getElementById('desde') && document.getElementById('hasta')) {
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            let desde = $('#desde').val();
+            let hasta = $('#hasta').val();
+            let data_fecha = data[4].split(' ');
+            let fecha = data_fecha[0].trim();
+            // console.log(data);
+            if (desde == '' || hasta == '') {
+                return true;
+            }
+            if (fecha >= desde && fecha <= hasta) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    );
+}
+if (document.getElementById('desdeF') && document.getElementById('hastaF')) {
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            let desde = $('#desdeF').val();
+            let hasta = $('#hastaF').val();
+            let data_fecha = data[4].split(' ');
+            let fecha = data_fecha[0].trim();
+            // console.log(data);
+            if (desde == '' || hasta == '') {
+                return true;
+            }
+            if (fecha >= desde && fecha <= hasta) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    );
+}
+
+function mostrarTodo() {
+    document.getElementById('desde').value = '';
+    document.getElementById('hasta').value = '';
+    tbl_tickets.draw();
+}
+
+function mostrarTodoF() {
+    document.getElementById('desdeF').value = '';
+    document.getElementById('hastaF').value = '';
+    tblFacturas.draw();
 }

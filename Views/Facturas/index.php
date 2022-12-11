@@ -1,11 +1,35 @@
 <?php include "Views/Templates/header.php"; ?>
-<!-- <ol class="breadcrumb">
-    <li class="breadcrumb-item active mt-2" aria-current="page">Usuarios</li>
-</ol> -->
 <div class="card">
     <div class="card-header card-header-primary">
-        FACTURAS
+        <strong>LISTA DE FACTURAS</strong>
     </div>
+    <div class="card-body">
+        <form method="POST" target="_blank">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input id="desdeF" class="form-control" type="date" value="<?php date_default_timezone_set("America/La_Paz");
+                                                                                    echo date('Y-m-d') ?>" name="desde">
+                        <label for="desdeF">Desde</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input id="hastaF" class="form-control" type="date" value="<?php date_default_timezone_set("America/La_Paz");
+                                                                                    echo date('Y-m-d') ?>" name="hasta">
+                        <label for="hastaF">Hasta</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-block" type="button" onclick="mostrarTodoF()"><i class="fa-solid fa-eye"></i> Ver todos los registros de facturas</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card">
     <div class="card-body">
         <div><button type="button" class="btn btn-primary mb-2" onclick="frmFactura();"><i class="fas fa-plus"></i></button></div>
         <div class="table-responsive">
