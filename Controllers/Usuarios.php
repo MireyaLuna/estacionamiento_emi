@@ -23,13 +23,13 @@ class Usuarios extends Controller
     }
     public function mis_vehiculos()
     {
-        $data['datos'] = $this->model->getVehiculosUsuario($_SESSION['id_usuario']);
-        $this->views->getViews($this, "mis_vehiculos", $data);
+        // $data['datos'] = $this->model->getVehiculosUsuario($_SESSION['id_usuario']);
+        $this->views->getViews($this, "mis_vehiculos");
     }
     public function mis_tickets()
     {
-        $data['tickets'] = $this->model->getTicketsUsuario($_SESSION['id_usuario']);
-        $this->views->getViews($this, "mis_tickets", $data);
+        // $data['tickets'] = $this->model->getTicketsUsuario($_SESSION['id_usuario']);
+        $this->views->getViews($this, "mis_tickets");
     }
     public function listar()
     {
@@ -98,8 +98,6 @@ class Usuarios extends Controller
                 $msg = "Usuario o contraseña incorrecta";
             }
         }
-        // print_r($_POST);
-        // print_r($data);
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
