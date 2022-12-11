@@ -7,23 +7,23 @@
         <div><button type="button" class="btn btn-primary mb-2" onclick="frmVehiculo();"><i class="fas fa-plus"></i></button></div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover" id="tblVehiculos">
-    <thead class="thead-dark">
-        <tr>
-            <th>ID</th>
-            <th>PLACA</th>
-            <th>COLOR</th>
-            <th>MARCA</th>
-            <th>CLIENTE</th>
-            <th>TIPO</th>
-            <th>FECHA CREACION</th>
-            <th>FECHA MODIFICACION</th>
-            <th>ESTADO</th>
-            <th>ACCION</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>PLACA</th>
+                        <th>COLOR</th>
+                        <th>MARCA</th>
+                        <th>CLIENTE</th>
+                        <th>TIPO</th>
+                        <th>FECHA CREACION</th>
+                        <th>FECHA MODIFICACION</th>
+                        <th>ESTADO</th>
+                        <th>ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

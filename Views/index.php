@@ -13,7 +13,7 @@
     <link href="<?php echo base_url; ?>Assets/css/animate.min.css" rel="stylesheet" />
 </head>
 
-<body class="bg-primary">
+<body class="bg-info">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -22,7 +22,7 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header text-center">
-                                    <h3 class="font-weight-light my-4">Iniciar sesión</h3>
+                                    <h3 class="font-weight-light my-4" style="color:dimgrey">Inicio de sesión</h3>
                                     <img src="<?php echo base_url;?>Assets/img/emilogo.png" class="img-fluid rounded" alt="logo">
                                 </div>
                                 <div class="card-body">

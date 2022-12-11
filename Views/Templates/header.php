@@ -120,7 +120,7 @@
                         <?php
                         if ($_SESSION['cargo'] == '1ADM') { ?>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRegistros" aria-expanded="false" aria-controls="collapseRegistros">
-                                <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 Registros
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -140,6 +140,21 @@
                                     </a>
                                 </nav>
                             </div>
+                        <?php } ?>
+                        <?php
+                        if ($_SESSION['cargo'] != '1ADM') { ?>
+                            <a class="nav-link" href="<?php echo base_url; ?>Usuarios/mis_datos">
+                                <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
+                                Mis datos
+                            </a>
+                            <a class="nav-link" href="<?php echo base_url; ?>Usuarios/mis_vehiculos">
+                                <div class="sb-nav-link-icon"><i class="fas fa-car-side"></i></div>
+                                Mis vehiculos
+                            </a>
+                            <a class="nav-link" href="<?php echo base_url; ?>Usuarios/mis_tickets">
+                                <div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>
+                                Mis tickets
+                            </a>
                         <?php } ?>
                     </div>
                 </div>

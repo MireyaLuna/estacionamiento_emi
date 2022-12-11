@@ -23,6 +23,13 @@ th{
     color: white;
     font-weight: bold;
 }
+.card-header-login{
+	background: snow;
+	box-shadow:  6px 6px 12px #4d4c4c,
+             -6px -6px 12px #ffffff;
+    color: white;
+    font-weight: bold;
+}
 .card-header-details{
 	background: linear-gradient(-90deg, #ffffff, #511717); 
 	box-shadow:  6px 6px 12px #4d4c4c,

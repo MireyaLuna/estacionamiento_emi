@@ -12,6 +12,24 @@ class UsuariosModel extends Query
         $data = $this->select($sql);
         return $data;
     }
+    public function getDatosUsuario(int $id_usuario)
+    {
+        $sql = "SELECT c.*, u.usuario FROM usuario u INNER JOIN cliente c WHERE u.id = $id_usuario AND c.id_usuario = u.id";
+        $data = $this->select($sql);
+        return $data;
+    }
+    public function getVehiculosUsuario(int $id_usuario)
+    {
+        $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN parametro p WHERE u.id = $id_usuario AND u.usuario = c.ci AND c.id = v.id_cliente AND p.codigo = v.tipo";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
+    public function getTicketsUsuario(int $id_usuario)
+    {
+        $sql = "SELECT t.*, v.placa, e.nro_espacio AS espacio_ocupado FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN ticket t INNER JOIN espacio e WHERE u.id = $id_usuario AND u.usuario = c.ci AND c.id = v.id_cliente AND t.id_vehiculo = v.id AND t.id_espacio = e.id;";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
     public function getGeneros()
     {
         $sql = "SELECT * FROM parametro WHERE grupo = 'Genero'";

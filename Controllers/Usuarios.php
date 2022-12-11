@@ -16,6 +16,21 @@ class Usuarios extends Controller
         $data['estacionamientos'] = $this->model->getEstacionamientos();
         $this->views->getViews($this, "index", $data);
     }
+    public function mis_datos()
+    {
+        $data['datos'] = $this->model->getDatosUsuario($_SESSION['id_usuario']);
+        $this->views->getViews($this, "mis_datos", $data);
+    }
+    public function mis_vehiculos()
+    {
+        $data['datos'] = $this->model->getVehiculosUsuario($_SESSION['id_usuario']);
+        $this->views->getViews($this, "mis_vehiculos", $data);
+    }
+    public function mis_tickets()
+    {
+        $data['tickets'] = $this->model->getTicketsUsuario($_SESSION['id_usuario']);
+        $this->views->getViews($this, "mis_tickets", $data);
+    }
     public function listar()
     {
         $data = $this->model->getUsuarios();
@@ -37,6 +52,27 @@ class Usuarios extends Controller
                 </div>';
             }
         }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function listar_MisTickets()
+    {
+        $data = $this->model->getTicketsUsuario($_SESSION['id_usuario']);
+        for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]['estado'] == 1) {
+                $data[$i]['estado'] = '<span class="badge bg-warning">En playa</span>';
+            } else  if ($data[$i]['estado'] == 2) {
+                $data[$i]['estado'] = '<span class="badge bg-success">Finalizado</span>';
+            } else {
+                $data[$i]['estado'] = '<span class="badge bg-danger">Anulado</span>';
+            }
+        }
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function listar_misVehiculos()
+    {
+        $data = $this->model->getVehiculosUsuario($_SESSION['id_usuario']);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }

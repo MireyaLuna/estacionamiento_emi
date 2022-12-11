@@ -1,4 +1,4 @@
-let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tblEspacios, tblAdministrador, tblPagos, tblFacturas, tbl_detalles, codigo, factura_id, myModal;
+let tblUsuarios, tblVehiculos, tblClientes, tbl_tickets, tblPuntos, tblEstacionamientos, tbl_MisTickets, tblEspacios, tblMisVehiculos, tblAdministrador, tblPagos, tblFacturas, tbl_detalles, codigo, factura_id, myModal;
 document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById('my_modal')) {
         myModal = new bootstrap.Modal(document.getElementById('my_modal'));
@@ -813,6 +813,106 @@ document.addEventListener("DOMContentLoaded", function () {
                 'data': 'hora_ingreso',
             }, {
                 'data': 'hora_ingreso',
+            }],
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+            },
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [{
+                    //Botón para Excel
+                    extend: 'excelHtml5',
+                    footer: true,
+                    title: 'Archivo',
+                    filename: 'Export_File',
+
+                    //Aquí es donde generas el botón personalizado
+                    text: '<span class="badge bg-success"><i class="fas fa-file-excel"></i></span>'
+                },
+                //Botón para PDF
+                {
+                    extend: 'pdfHtml5',
+                    download: 'open',
+                    footer: true,
+                    title: 'Reporte de usuarios',
+                    filename: 'Reporte de usuarios',
+                    text: '<span class="badge  bg-danger"><i class="fas fa-file-pdf"></i></span>',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                //Botón para copiar
+                {
+                    extend: 'copyHtml5',
+                    footer: true,
+                    title: 'Reporte',
+                    filename: 'Reporte',
+                    text: '<span class="badge  bg-primary"><i class="fas fa-copy"></i></span>',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                //Botón para print
+                {
+                    extend: 'print',
+                    footer: true,
+                    filename: 'Export_File_print',
+                    text: '<span class="badge bg-dark"><i class="fas fa-print"></i></span>'
+                },
+                //Botón para cvs
+                {
+                    extend: 'csvHtml5',
+                    footer: true,
+                    filename: 'Export_File_csv',
+                    text: '<span class="badge  bg-success"><i class="fas fa-file-csv"></i></span>'
+                },
+                {
+                    extend: 'colvis',
+                    text: '<span class="badge  bg-info"><i class="fas fa-columns"></i></span>',
+                    postfixButtons: ['colvisRestore']
+                }
+            ]
+        });
+    }
+    if (document.getElementById('tblMisVehiculos')) {
+        tblMisVehiculos = $('#tblMisVehiculos').DataTable({
+            ajax: {
+                url: base_url + "Usuarios/listar_misVehiculos",
+                dataSrc: ''
+            },
+            columns: [{
+                'data': 'tipo_vehiculo',
+            }, {
+                'data': 'placa',
+            }, {
+                'data': 'color',
+            }, {
+                'data': 'marca',
+            }],
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+            }
+        });
+    }
+    if (document.getElementById('tbl_MisTickets')) {
+        tbl_MisTickets = $('#tbl_MisTickets').DataTable({
+            ajax: {
+                url: base_url + "Usuarios/listar_MisTickets",
+                dataSrc: ''
+            },
+            columns: [{
+                'data': 'codigo',
+            }, {
+                'data': 'placa',
+            }, {
+                'data': 'espacio_ocupado',
+            }, {
+                'data': 'hora_ingreso',
+            }, {
+                'data': 'hora_salida',
+            }, {
+                'data': 'estado',
             }],
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
