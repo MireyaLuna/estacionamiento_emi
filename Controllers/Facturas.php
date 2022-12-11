@@ -25,11 +25,10 @@ class Facturas extends Controller
     }
     public function listar()
     {
-        // <button type="button" class = "btn btn-danger" onclick="btnEliminarFactura(' . $data[$i]['id'] . ');"><i class="fas fa-trash"></i></button>
         $data = $this->model->getFacturas();
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i]['estado'] == 1) {
-                $data[$i]['estado'] = '<span class="badge bg-success">Completado</span>';
+                $data[$i]['estado'] = '<span class="badge bg-success">Facturado</span>';
                 
                 $data[$i]['acciones'] = '<div> 
                 <a class="btn btn-danger" href="' . base_url . "Facturas/generarPDF/" . $data[$i]['id'] . '" target="_blank"><i class="fas fa-file-pdf"></i></a></div>';

@@ -84,11 +84,10 @@ class Tickets extends Controller
 
         require('Libraries/fpdf/html2pdf.php');
 
-        // $pdf = new FPDF('P','mm', 'a4');
         $pdf = new PDF_HTML('P', 'mm', array(80, 90));
-        // $pdf = new FPDF('P', 'mm', array(200, 80));
         $pdf->AddPage();
         $pdf->SetMargins(5, 0, 0);
+        
         $pdf->SetTitle('Ticket de ingreso');
         $pdf->SetFont('Arial', 'B', 14);
         // $pdf->Cell(65, 10, utf8_decode($empresa['nombre']), 0, 1, 'L');
