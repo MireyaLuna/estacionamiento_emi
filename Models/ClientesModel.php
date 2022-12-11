@@ -30,7 +30,7 @@ class ClientesModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $id_estacionamiento, string $fecha)
+    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $id_estacionamiento, string $fecha, int $usuario_interaccion)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
@@ -39,11 +39,13 @@ class ClientesModel extends Query
         $this->cargo = $cargo;
         $this->id_estacionamiento = $id_estacionamiento;
         $this->fecha = $fecha;
+        $this->usuario_interaccion = $usuario_interaccion;
+
         $verificar = "SELECT * FROM usuario WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, id_estacionamiento, fecha_creacion) VALUES (?,?,?,?,?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha);
+            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, id_estacionamiento, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?,?,?)";
+            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha, $this->usuario_interaccion);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
                 $res = "ok";
@@ -67,23 +69,20 @@ class ClientesModel extends Query
         $data = $this->select($sql);
         return $data;
     }
-    public function registrarCliente(string $nombre, string $ci, string $telefono, string $fecha, int $id_usuario)
+    public function registrarCliente(string $nombre, string $ci, string $telefono, string $fecha, int $id_usuario, int $usuario_interaccion)
     {
         $this->nombre = $nombre;
         $this->ci = $ci;
         $this->telefono = $telefono;
         $this->fecha = $fecha;
         $this->id_usuario = $id_usuario;
-
-        // $registrar_usuario = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, id_estacionamiento, fecha_creacion) VALUES (?,?,?,?,?,?,?)";
-        // $datos = array($this->ci, $this->nombre, $this->clave, $this->);
-        // $data = $this->save($sql, $datos);
+        $this->usuario_interaccion = $usuario_interaccion;
 
         $verificar = "SELECT * FROM cliente WHERE ci = '$this->ci'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO cliente(nombre, ci, telefono, fecha_creacion, id_usuario) VALUES (?,?,?,?,?)";
-            $datos = array($this->nombre, $this->ci, $this->telefono, $this->fecha, $this->id_usuario);
+            $sql = "INSERT INTO cliente(nombre, ci, telefono, fecha_creacion, id_usuario, usuario_creacion) VALUES (?,?,?,?,?,?)";
+            $datos = array($this->nombre, $this->ci, $this->telefono, $this->fecha, $this->id_usuario, $this->usuario_interaccion);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
                 $res = "ok";
@@ -102,18 +101,20 @@ class ClientesModel extends Query
         $data = $this->select($sql);
         return $data;
     }
-    public function modificarCliente(string $nombre, string $ci, string $telefono, string $fecha, int $id)
+    public function modificarCliente(string $nombre, string $ci, string $telefono, string $fecha, int $usuario_interaccion, int $id)
     {
         $this->nombre = $nombre;
         $this->ci = $ci;
         $this->telefono = $telefono;
         $this->fecha = $fecha;
         $this->id = $id;
+        $this->usuario_interaccion = $usuario_interaccion;
+
         // $verificar = "SELECT * FROM cliente WHERE ci = '$this->ci'";
         // $existe = $this->select($verificar);
         // if (empty($existe)) {
-            $sql = "UPDATE cliente SET nombre = ?, ci = ?, telefono = ? , fecha_modificacion = ? WHERE id = ?";
-            $datos = array($this->nombre, $this->ci, $this->telefono, $this->fecha, $this->id);
+            $sql = "UPDATE cliente SET nombre = ?, ci = ?, telefono = ? , fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+            $datos = array($this->nombre, $this->ci, $this->telefono, $this->fecha, $this->usuario_interaccion, $this->id);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
                 $res = "modificado";
@@ -125,15 +126,16 @@ class ClientesModel extends Query
         // }
         return $res;
     }
-    public function modificarUsuario(string $usuario, string $nombre, string $fecha, int $id)
+    public function modificarUsuario(string $usuario, string $nombre, string $fecha, int $usuario_interaccion, int $id)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->fecha = $fecha;
         $this->id = $id;
+        $this->usuario_interaccion = $usuario_interaccion;
 
-        $sql = "UPDATE usuario SET usuario = ?, nombre = ?, fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->usuario, $this->nombre, $this->fecha, $this->id);
+        $sql = "UPDATE usuario SET usuario = ?, nombre = ?, fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->usuario, $this->nombre, $this->fecha, $this->usuario_interaccion, $this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";

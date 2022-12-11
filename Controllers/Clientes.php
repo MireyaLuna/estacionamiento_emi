@@ -54,11 +54,11 @@ class Clientes extends Controller
             $msg = array('msg' => 'Todos los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
-                $data_usuario = $this->model->registrarUsuario($ci, $nombre, $hash, $genero, $cargo, $id_estacionamiento, $fecha_hoy);
+                $data_usuario = $this->model->registrarUsuario($ci, $nombre, $hash, $genero, $cargo, $id_estacionamiento, $fecha_hoy, $_SESSION['id_usuario']);
                 if ($data_usuario == "ok") {
                     $id_usuario = $this->model->getIdUsuario();
                     // $usuario = intval($id_usuario);
-                    $data = $this->model->registrarCliente($nombre, $ci, $telefono, $fecha_hoy, $id_usuario['id_usuario']);
+                    $data = $this->model->registrarCliente($nombre, $ci, $telefono, $fecha_hoy, $id_usuario['id_usuario'], $_SESSION['id_usuario']);
                     if ($data == "ok") {
                         $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                     } else if ($data == "existe") {
@@ -73,9 +73,9 @@ class Clientes extends Controller
                 }                
             } else {
                 $id_usuario = $this->model->getUsuarioCliente($id);
-                $data = $this->model->modificarUsuario($ci, $nombre, $fecha_hoy, $id_usuario['id_usuario']);
+                $data = $this->model->modificarUsuario($ci, $nombre, $fecha_hoy, $_SESSION['id_usuario'], $id_usuario['id_usuario']);
                 if ($data == "modificado") {
-                    $data = $this->model->modificarCliente($nombre, $ci, $telefono, $fecha_hoy, $id);
+                    $data = $this->model->modificarCliente($nombre, $ci, $telefono, $fecha_hoy, $_SESSION['id_usuario'], $id);
                     if ($data == "modificado") {
                         $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                     } else {
@@ -91,23 +91,12 @@ class Clientes extends Controller
     }
     public function editar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'editar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->editarCliente($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function eliminar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'eliminar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionCliente(0, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Cliente dado de baja', 'icono' => 'success');
@@ -116,17 +105,9 @@ class Clientes extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function reingresar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionCliente(1, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Cliente reingresado exitosamente', 'icono' => 'success');
@@ -135,10 +116,5 @@ class Clientes extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
 }
