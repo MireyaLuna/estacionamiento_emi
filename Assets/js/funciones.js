@@ -2445,15 +2445,15 @@ if (document.getElementById('desde') && document.getElementById('hasta')) {
 if (document.getElementById('desdeF') && document.getElementById('hastaF')) {
     $.fn.dataTable.ext.search.push(
         function (settings, data, dataIndex) {
-            let desde = $('#desdeF').val();
-            let hasta = $('#hastaF').val();
-            let data_fecha = data[4].split(' ');
-            let fecha = data_fecha[0].trim();
+            let desdeF = $('#desdeF').val();
+            let hastaF = $('#hastaF').val();
+            let data_fechaF = data[4].split(' ');
+            let fechaF = data_fechaF[0].trim();
             // console.log(data);
-            if (desde == '' || hasta == '') {
+            if (desdeF == '' || hastaF == '') {
                 return true;
             }
-            if (fecha >= desde && fecha <= hasta) {
+            if (fechaF >= desdeF && fechaF <= hastaF) {
                 return true;
             } else {
                 return false;

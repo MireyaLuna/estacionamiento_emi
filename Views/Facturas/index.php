@@ -31,7 +31,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <div><button type="button" class="btn btn-primary mb-2" onclick="frmFactura();"><i class="fas fa-plus"></i></button></div>
+        <!-- <div><button type="button" class="btn btn-primary mb-2" onclick="frmFactura();"><i class="fas fa-plus"></i></button></div> -->
         <div class="table-responsive">
             <table class="table table-bordered table-hover" id="tblFacturas">
                 <thead class="thead-dark">
