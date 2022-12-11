@@ -55,6 +55,7 @@ class Usuarios extends Controller
                 $_SESSION['nombre'] = $data['nombre'];
                 $_SESSION['id_estacionamiento'] = $data['id_estacionamiento'];
                 $_SESSION['estacionamiento'] = $data['estacionamiento'];
+                // $_SESSION['cargo'] = $data['cargo'];
                 $_SESSION['activo'] = true;
                 $msg = "ok";
             } else {
