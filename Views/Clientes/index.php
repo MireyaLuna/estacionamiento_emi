@@ -55,7 +55,7 @@
                         <label for="telefono">Telefono</label>
                     </div>
                     <hr>
-                    <div class="row" id="datosUsuario">
+                    <div id="datosUsuario">
                         <div class="form-floating mb-3">
                             <select id="genero" class="form-control" name="genero">
                                 <?php foreach ($data['generos'] as $row) { ?>

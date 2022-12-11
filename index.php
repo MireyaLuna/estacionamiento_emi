@@ -37,7 +37,9 @@
             // header('Location: '.base_url.'Errors');
         }
     }else{
-        echo "No existe el controlador";
+        if ($controller != 'Assets') {
+            echo "No existe el controlador";
+        }
         // header('Location: '.base_url.'Errors');
     }
 ?>

@@ -843,6 +843,7 @@ function frmLogin(e) {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
                 const res = JSON.parse(this.responseText);
+                console.log(res);
                 if (res == "ok") {
                     window.location = base_url + "Administrador/home";
                 } else {
