@@ -81,9 +81,11 @@ class Tickets extends Controller
     public function generarPDF($id_ticket)
     {
         $ticket = $this->model->getTicket($id_ticket);
+
         sleep(2);
 
         require('Libraries/fpdf/html2pdf.php');
+        // print_r($ticket);
 
         $pdf = new PDF_HTML('P', 'mm', array(80, 90));
         $pdf->AddPage();

@@ -1031,6 +1031,7 @@ function registrarUsuario(e) {
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
+                console.log(res);
                 alertas(res.msg, res.icono);
                 frm.reset();
                 myModal.hide();
