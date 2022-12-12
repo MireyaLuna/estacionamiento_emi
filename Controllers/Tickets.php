@@ -80,31 +80,36 @@ class Tickets extends Controller
     }
     public function generarPDF($id_ticket)
     {
+        
         $ticket = $this->model->getTicket($id_ticket);
-
+        $estacionamiento = $ticket['estacionamiento'];
+        $codigo =  $ticket['codigo'];
+        $placa = $ticket['placa'];
+        $tipo = $ticket['tipo_vehiculo'];
+        $ingreso = $ticket['hora_ingreso'];
+        $espacio = $ticket['nro_espacio'];
         sleep(2);
-
-        require('Libraries/fpdf/html2pdf.php');
         // print_r($ticket);
-
+        
+        require('Libraries/fpdf/html2pdf.php');
+        
         $pdf = new PDF_HTML('P', 'mm', array(80, 90));
         $pdf->AddPage();
         $pdf->SetMargins(5, 0, 0);
         
         $pdf->SetTitle('Ticket de ingreso');
         $pdf->SetFont('Arial', 'B', 14);
-        // $pdf->Cell(65, 10, utf8_decode($empresa['nombre']), 0, 1, 'L');
         $pdf->Image(base_url . 'Assets/img/emilogo.png', 25, 5, 30, 18);
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->SetXY(10, 25);
         $pdf->Cell(22, 6, 'Estacionamiento: ', 0, 0, 'C');
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(22, 6, $ticket['estacionamiento'], 0, 1, 'L');
+        $pdf->Cell(22, 6, $estacionamiento, 0, 1, 'L');
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->SetXY(10, 30);
         $pdf->Cell(22, 6, 'Numero de ticket: ', 0, 0, 'C');
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(20, 6, $ticket['codigo'], 0, 1, 'L');
+        $pdf->Cell(20, 6, $codigo, 0, 1, 'L');
         // $pdf->Ln();
         $pdf->Line(5, 24, 75, 24);
         $pdf->Line(5, 36, 75, 36);
@@ -114,17 +119,17 @@ class Tickets extends Controller
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(20, 6, 'Placa: ', 0, 0, 'L');
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(20, 6, $ticket['placa'], 0, 1, 'L');
+        $pdf->Cell(20, 6, $placa, 0, 1, 'L');
 
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(20, 5, 'Tipo: ', 0, 0, 'L');
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(20, 5, $ticket['tipo_vehiculo'], 0, 1, 'L');
+        $pdf->Cell(20, 5, $tipo, 0, 1, 'L');
 
         $pdf->SetFont('Arial', 'B', 7);
         $pdf->Cell(20, 6, 'Fecha ingreso: ', 0, 0, 'L');
         $pdf->SetFont('Arial', '', 7);
-        $f = strtotime($ticket['hora_ingreso']);
+        $f = strtotime($ingreso);
         $fecha = getDate($f);
         $fecha_ingreso = " " . $fecha['mday'] . "/" . $fecha['mon'] . "/" . $fecha['year'];
         $hora_ingreso = " " . $fecha['hours'] . ":" . $fecha['minutes'] . ":" . $fecha['seconds'];
@@ -138,7 +143,7 @@ class Tickets extends Controller
         $pdf->SetFont('Arial', 'B', 7);
         $pdf->Cell(20, 5, 'Espacio: ', 0, 0, 'L');
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(20, 5, $ticket['nro_espacio'], 0, 1, 'L');
+        $pdf->Cell(20, 5, $espacio, 0, 1, 'L');
 
         $pdf->SetXY(20, 65);
         $pdf->SetFillColor(0, 0, 0);
