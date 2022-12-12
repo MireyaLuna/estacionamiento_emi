@@ -21,16 +21,17 @@ class FacturasModel extends Query
         $data = $this->select($sql);
         return $data;
     }
-    public function registrarFactura(string $nit, string $fecha_emision, string $monto_total, string $id_ticket, string $fecha)
+    public function registrarFactura(string $nit, string $fecha_emision, string $monto_total, string $id_ticket, string $fecha )
     {
         $this->nit = $nit;
         $this->fecha_emision = $fecha_emision;
         $this->monto_total = $monto_total;
         $this->id_ticket = $id_ticket;
         $this->fecha = $fecha;
+        $this->id_usuario = $_SESSION['id_usuario'];
 
-        $sql = "INSERT INTO factura(nit, fecha_emision, monto_total, id_ticket, fecha_creacion) VALUES (?,?,?,?,?)";
-        $datos = array($this->nit, $this->fecha_emision, $this->monto_total, $this->id_ticket, $this->fecha);
+        $sql = "INSERT INTO factura(nit, fecha_emision, monto_total, id_ticket, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?)";
+        $datos = array($this->nit, $this->fecha_emision, $this->monto_total, $this->id_ticket, $this->fecha, $this->id_usuario);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "ok";
@@ -55,9 +56,11 @@ class FacturasModel extends Query
         $this->fecha_emision = $fecha_emision;
         $this->fecha_limite = $fecha_limite;
         $this->fecha = $fecha;
+        $this->id_usuario = $_SESSION['id_usuario'];
+
         $this->id = $id;
-        $sql = "UPDATE factura SET id_registro = ?, nit = ?, monto_pagado = ?, monto_recibido = ?, fecha_emision = ?, fecha_limite_emision =?, fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->registro, $this->nit, $this->monto_pagado, $this->monto_recibido, $this->fecha_emision, $this->fecha_limite, $this->fecha, $this->id);
+        $sql = "UPDATE factura SET id_registro = ?, nit = ?, monto_pagado = ?, monto_recibido = ?, fecha_emision = ?, fecha_limite_emision =?, fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->registro, $this->nit, $this->monto_pagado, $this->monto_recibido, $this->fecha_emision, $this->fecha_limite, $this->fecha, $this->id_usuario, $this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";

@@ -26,11 +26,13 @@ class VehiculosModel extends Query{
         $this->cliente = $cliente;
         $this->tipo = $tipo;
         $this->fecha = $fecha;
+        $this->id_usuario = $_SESSION['id_usuario'];
+
         $verificar = "SELECT * FROM vehiculo WHERE placa = '$this->placa'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO vehiculo(placa, color, marca, id_cliente, tipo, fecha_creacion) VALUES (?,?,?,?,?,?)";
-            $datos = array($this->placa, $this->color, $this->marca, $this->cliente, $this->tipo, $this->fecha);
+            $sql = "INSERT INTO vehiculo(placa, color, marca, id_cliente, tipo, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?,?)";
+            $datos = array($this->placa, $this->color, $this->marca, $this->cliente, $this->tipo, $this->fecha, $this->id_usuario);
             $data = $this->save($sql, $datos);
             if($data == 1){
                 $res = "ok";
@@ -54,10 +56,12 @@ class VehiculosModel extends Query{
         $this->id_cliente = $cliente;
         $this->tipo = $tipo;
         $this->fecha = $fecha;
+        $this->id_usuario = $_SESSION['id_usuario'];
+
         $this->id = $id;
         
-        $sql = "UPDATE vehiculo SET placa = ?, color = ?, marca = ?, id_cliente = ?, tipo = ? , fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->placa, $this->color, $this->marca, $this->id_cliente, $this->tipo, $this->fecha, $this->id);
+        $sql = "UPDATE vehiculo SET placa = ?, color = ?, marca = ?, id_cliente = ?, tipo = ? , fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->placa, $this->color, $this->marca, $this->id_cliente, $this->tipo, $this->fecha, $this->id_usuario, $this->id);
         $data = $this->save($sql, $datos);
         if($data == 1){
             $res = "modificado";

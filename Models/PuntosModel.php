@@ -19,8 +19,10 @@ class PuntosModel extends Query{
         $this->descripcion = $descripcion;
         $this->estacionamiento = $estacionamiento;
         $this->fecha = $fecha;
-        $sql = "INSERT INTO punto_atencion(nombre, descripcion, id_estacionamiento, fecha_creacion) VALUES (?,?,?,?)";
-        $datos = array($this->nombre, $this->descripcion, $this->estacionamiento, $this->fecha);
+        $this->id_usuario = $_SESSION['id_usuario'];
+
+        $sql = "INSERT INTO punto_atencion(nombre, descripcion, id_estacionamiento, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?)";
+        $datos = array($this->nombre, $this->descripcion, $this->estacionamiento, $this->fecha,  $this->id_usuario);
         $data = $this->save($sql, $datos);
         if($data == 1){
             $res = "ok";
@@ -39,10 +41,12 @@ class PuntosModel extends Query{
         $this->descripcion = $descripcion;
         $this->estacionamiento = $estacionamiento;
         $this->fecha = $fecha;
+        $this->id_usuario = $_SESSION['id_usuario'];
+
         $this->id = $id;
 
-        $sql = "UPDATE punto_atencion SET nombre = ?, descripcion = ?, id_estacionamiento = ? , fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->nombre, $this->descripcion, $this->estacionamiento, $this->fecha, $this->id);
+        $sql = "UPDATE punto_atencion SET nombre = ?, descripcion = ?, id_estacionamiento = ? , fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->nombre, $this->descripcion, $this->estacionamiento, $this->fecha, $this->id_usuario, $this->id);
         $data = $this->save($sql, $datos);
         if($data == 1){
             $res = "modificado";

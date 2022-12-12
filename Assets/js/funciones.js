@@ -2282,7 +2282,7 @@ function generarFactura() {
                             if (codigo == 0) {
                                 codigo = 1;
                             }
-                            tbl_tickets.ajax.reload();
+                            // tbl_tickets.ajax.reload();
                             facturar();
                             location.reload();
                             setTimeout(() => {

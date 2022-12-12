@@ -52,7 +52,7 @@ class Espacios extends Controller
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
-                $data = $this->model->registrarEspacio($numero, $estacionamiento, $fecha_hoy);
+                $data = $this->model->registrarEspacio($numero, $estacionamiento, $fecha_hoy, $_SESSION['id_usuario']);
                 if ($data == "ok") {
                     $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                 } else if ($data == "existe") {
@@ -61,7 +61,7 @@ class Espacios extends Controller
                     $msg = array('msg' => 'Error al registrar', 'icono' => 'error');
                 }
             } else {
-                $data = $this->model->modificarEspacio($numero, $estacionamiento, $fecha_hoy, $id);
+                $data = $this->model->modificarEspacio($numero, $estacionamiento, $fecha_hoy, $_SESSION['id_usuario'], $id);
                 if ($data == "modificado") {
                     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                 } else if ($data == "existe") {

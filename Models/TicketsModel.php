@@ -55,8 +55,10 @@ class TicketsModel extends Query
         $this->ingreso = $ingreso;
         $this->espacio = $espacio;
         $this->fecha = $fecha;
-        $sql = "INSERT INTO ticket(codigo, id_vehiculo, hora_ingreso, id_espacio, fecha_creacion) VALUES (?,?,?,?,?)";
-        $datos = array($this->codigo, $this->vehiculo, $this->ingreso, $this->espacio, $this->fecha);
+        $this->id_usuario = $_SESSION['id_usuario'];
+
+        $sql = "INSERT INTO ticket(codigo, id_vehiculo, hora_ingreso, id_espacio, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?)";
+        $datos = array($this->codigo, $this->vehiculo, $this->ingreso, $this->espacio, $this->fecha, $this->id_usuario);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "ok";
@@ -87,21 +89,6 @@ class TicketsModel extends Query
         $data = $this->save($sql, $datos);
         return $data;
     }
-    // public function getAnular(int $estado, int $id)
-    // {
-    //     $this->id = $id;
-    //     $this->estado = $estado;
-    //     $sql = "UPDATE ticket SET estado = ? WHERE id = ?";
-    //     $datos = array($this->estado, $this->id);
-    //     $data = $this->save($sql, $datos);
-    //     return $data;
-    // }
-    // public function getAnularVenta(int $id_venta)
-    // {
-    //     $sql = "SELECT c.*, d.* FROM ventas c INNER JOIN detalle_ventas d ON c.id = d.id_venta WHERE c.id = $id_venta";
-    //     $data = $this->selectAll($sql);
-    //     return $data;
-    // }
     public function getAnular(int $id_ticket)
     {
         $sql = "UPDATE ticket SET estado = ? WHERE id = ?";

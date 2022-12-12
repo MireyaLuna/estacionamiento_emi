@@ -18,16 +18,17 @@ class EspaciosModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarEspacio(string $numero, string $estacionamiento, string $fecha)
+    public function registrarEspacio(string $numero, string $estacionamiento, string $fecha, int $id_usuario)
     {
         $this->numero = $numero;
         $this->estacionamiento = $estacionamiento;
         $this->fecha = $fecha;
+        $this->id_usuario = $id_usuario;
         $verificar = "SELECT * FROM espacio WHERE id_estacionamiento = '$this->estacionamiento' AND nro_espacio = '$this->numero'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO espacio(nro_espacio, id_estacionamiento, fecha_creacion) VALUES (?,?,?)";
-            $datos = array($this->numero, $this->estacionamiento, $this->fecha);
+            $sql = "INSERT INTO espacio(nro_espacio, id_estacionamiento, fecha_creacion, usuario_creacion) VALUES (?,?,?,?)";
+            $datos = array($this->numero, $this->estacionamiento, $this->fecha, $this->id_usuario);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
                 $res = "ok";
@@ -46,14 +47,15 @@ class EspaciosModel extends Query
         $data = $this->select($sql);
         return $data;
     }
-    public function modificarEspacio(string $numero, string $estacionamiento, string $fecha, int $id)
+    public function modificarEspacio(string $numero, string $estacionamiento, string $fecha, int $id_usuario, int $id)
     {
         $this->numero = $numero;
         $this->estacionamiento = $estacionamiento;
         $this->fecha = $fecha;
+        $this->id_usuario = $id_usuario;
         $this->id = $id;
-        $sql = "UPDATE espacio SET nro_espacio = ?, id_estacionamiento = ?, fecha_modificacion = ? WHERE id = ?";
-        $datos = array($this->numero, $this->estacionamiento, $this->fecha, $this->id);
+        $sql = "UPDATE espacio SET nro_espacio = ?, id_estacionamiento = ?, fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->numero, $this->estacionamiento, $this->fecha, $this->id_usuario,$this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";
@@ -66,8 +68,10 @@ class EspaciosModel extends Query
     {
         $this->id = $id;
         $this->estado = $estado;
-        $sql = "UPDATE espacio SET estado = ? WHERE id = ?";
-        $datos = array($this->estado, $this->id);
+        $this->id_usuario = $_SESSION['id_usuario'];
+
+        $sql = "UPDATE espacio SET estado = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->estado, $this->id_usuario, $this->id);
         $data = $this->save($sql, $datos);
         return $data;
     }
