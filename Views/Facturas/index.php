@@ -1,4 +1,6 @@
 <?php include "Views/Templates/header.php"; ?>
+<?php
+if ($_SESSION['cargo'] == '1ADM') { ?>
 <div class="card">
     <div class="card-header card-header-primary">
         <strong>LISTA DE FACTURAS</strong>
@@ -108,4 +110,13 @@
         </div>
     </div>
 </div>
+<?php } else { ?>
+    <div class="content">
+        <a href="<?php echo base_url; ?>Administrador/home" class="pagina">
+            <div class="text-center">
+                <p>No tienes permiso de visitar esta pagina.</p>
+            </div>
+        </a>
+    </div>
+<?php } ?>
 <?php include "Views/Templates/footer.php"; ?>

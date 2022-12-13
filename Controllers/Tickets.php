@@ -74,7 +74,6 @@ class Tickets extends Controller
     }
     public function generarPDF($id_ticket)
     {
-        
         $ticket = $this->model->getTicket($id_ticket);
         $estacionamiento = $ticket['estacionamiento'];
         $codigo =  $ticket['codigo'];
