@@ -41,7 +41,7 @@ class Espacios extends Controller
     {
         date_default_timezone_set("America/La_Paz");
         $numero = $_POST['numero'];
-        $estacionamiento = $_POST['estacionamiento'];
+        $estacionamiento = 1;
         // $vehiculo = $_POST['vehiculo'];
         // $ingreso = $_POST['ingreso'];
         $id = $_POST['id'];

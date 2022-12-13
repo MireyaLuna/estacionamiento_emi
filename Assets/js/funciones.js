@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'cargo',
             }, {
-                'data': 'estacionamiento',
-            }, {
+            //     'data': 'estacionamiento',
+            // }, {
             //     'data': 'fecha_creacion',
             // }, {
             //     'data': 'usuario_creacion',
@@ -290,8 +290,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'descripcion',
             }, {
-                'data': 'estacionamiento',
-            }, {
+            //     'data': 'estacionamiento',
+            // }, {
             //     'data': 'fecha_creacion',
             // }, {
                 // 'data': 'usuario_creacion',
@@ -460,8 +460,8 @@ document.addEventListener("DOMContentLoaded", function () {
             columns: [{
                 'data': 'id',
             }, {
-                'data': 'estacionamiento',
-            }, {
+            //     'data': 'estacionamiento',
+            // }, {
                 'data': 'nro_espacio',
             }, {
                 //     'data': 'id_vehiculo',
@@ -919,18 +919,20 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-    $('#desde').change(function () {
-        tbl_tickets.draw();
-    })
-    $('#hasta').change(function () {
-        tbl_tickets.draw();
-    })
-    $('#desdeF').change(function () {
-        tblFacturas.draw();
-    })
-    $('#hastaF').change(function () {
-        tblFacturas.draw();
-    })
+    if (document.getElementById('desde') || document.getElementById('hasta') || document.getElementById('desdeF') || document.getElementById('hastaF')) {   
+        $('#desde').change(function () {
+            tbl_tickets.draw();
+        })
+        $('#hasta').change(function () {
+            tbl_tickets.draw();
+        })
+        $('#desdeF').change(function () {
+            tblFacturas.draw();
+        })
+        $('#hastaF').change(function () {
+            tblFacturas.draw();
+        })
+    }
 })
 
 function frmLogin(e) {
@@ -953,9 +955,9 @@ function frmLogin(e) {
         http.send(new FormData(frm));
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
+                // console.log(this.responseText);
                 const res = JSON.parse(this.responseText);
-                console.log(res);
+                // console.log(res);
                 if (res == "ok") {
                     window.location = base_url + "Administrador/home";
                 } else {
@@ -1017,8 +1019,8 @@ function registrarUsuario(e) {
     const confirmar = document.getElementById("confirmar");
     const genero = document.getElementById("genero");
     const cargo = document.getElementById("cargo");
-    const id_estacionamiento = document.getElementById("estacionamiento");
-    if (usuario.value == "" || nombre.value == "" || genero.value == "" || cargo.value == "" || id_estacionamiento.value == "") {
+    // const id_estacionamiento = document.getElementById("estacionamiento");
+    if (usuario.value == "" || nombre.value == "" || genero.value == "" || cargo.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else if (clave.value != confirmar.value) {
         alertas('Las contraseñas no coinciden', 'warning');
@@ -1057,7 +1059,7 @@ function btnEditarUsuario(id) {
             document.getElementById("nombre").value = res.nombre;
             document.getElementById("genero").value = res.genero;
             document.getElementById("cargo").value = res.cargo;
-            document.getElementById("estacionamiento").value = res.id_estacionamiento;
+            // document.getElementById("estacionamiento").value = res.id_estacionamiento;
             document.getElementById("claves").classList.add('d-none');
             myModal.show();
             tblUsuarios.ajax.reload();
@@ -1522,17 +1524,21 @@ function registrarEstacionamiento(e) {
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
-                console.log(res);
+                // console.log(res);
                 alertas(res.msg, res.icono);
                 frm.reset();
                 myModal.hide();
-                tblEstacionamientos.ajax.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+                // tblEstacionamientos.ajax.reload();
             }
         }
     }
 }
 
-function btnEditarEstacionamiento(id) {
+function btnEditarEstacionamiento() {
+    const id = 1;
     document.getElementById("tituloModal").textContent = "Actualizar estacionamiento";
     document.getElementById("btnAccion").textContent = "Modificar";
     const url = base_url + "Estacionamientos/editar/" + id;
@@ -1542,12 +1548,11 @@ function btnEditarEstacionamiento(id) {
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const res = JSON.parse(this.responseText);
+            // console.log(res);
             document.getElementById("id").value = res.id;
             document.getElementById("nombre").value = res.nombre;
             document.getElementById("ubicacion").value = res.ubicacion;
             myModal.show();
-            console.log(res)
-            tblEstacionamientos.ajax.reload();
         }
     }
 }
@@ -1639,6 +1644,7 @@ function registrarEspacio(e) {
         http.send(new FormData(frm));
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
                 const res = JSON.parse(this.responseText);
                 console.log(res);
                 alertas(res.msg, res.icono);
@@ -2257,7 +2263,7 @@ function generarFactura() {
     const hora_salida = document.getElementById("hora_salida");
     const fecha_salida = document.getElementById("fecha_salida");
 
-    if (nit.value == "" || monto_total.value == "" || id_ticket.value == "") {
+    if (monto_total.value == "" || id_ticket.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
     } else {
         const url = base_url + "Facturas/registrar/" + monto_total.value + "/" + fecha_salida.value + "/" + hora_salida.value;

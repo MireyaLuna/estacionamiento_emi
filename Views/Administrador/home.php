@@ -1,6 +1,6 @@
 <?php include "Views/Templates/header.php"; ?>
 <div class="mt-4 text-center">
-    <h4>Bienvenido al estacionamiento <?php echo $_SESSION['estacionamiento'] ?></h4>
+    <h1>Bienvenido <?php //echo $_SESSION['estacionamiento'] ?></h1>
 </div>
 <?php
 if ($_SESSION['cargo'] == '1ADM') { ?>

@@ -39,7 +39,7 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $_SESSION['nombre'] ?><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $_SESSION['usuario'] ?><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <!-- <li><a class="dropdown-item" href="#!">Perfil</a></li> -->
                     <li>
@@ -89,7 +89,7 @@
                                 if ($_SESSION['id_usuario'] == 1) { ?>
                                     <a class="nav-link" href="<?php echo base_url; ?>Estacionamientos">
                                         <div class="sb-nav-link-icon"><i class="fas fa-warehouse"></i></div>
-                                        Estacionamientos
+                                        Datos del estacionamiento
                                     </a>
                                 <?php } ?>
                                 <?php
@@ -159,8 +159,11 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Estas en:</div>
-                    <p>Estacionamiento <?php echo $_SESSION['estacionamiento'] ?></p>
+                    <div class="small">Iniciaste sesion como: </div>
+                    <p> <?php 
+                    // echo $_SESSION['estacionamiento'] 
+                    echo $_SESSION['nombre'];
+                    ?></p>
                 </div>
             </nav>
         </div>

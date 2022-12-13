@@ -11,7 +11,8 @@ class Estacionamientos extends Controller
     }
     public function index()
     {
-        $this->views->getViews($this, "index");
+        $data = $this->model->getEstacionamiento(1);
+        $this->views->getViews($this, "index", $data);
     }
     public function listar()
     {
@@ -73,7 +74,7 @@ class Estacionamientos extends Controller
         // $id_usuario = $_SESSION['id_usuario'];
         // $verificar = $this->model->verificarPermiso($id_usuario, 'editar_usuario');
         // if (!empty($verificar) || $id_usuario == 1) {
-        $data = $this->model->editarEstacionamiento($id);
+        $data = $this->model->getEstacionamiento($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
         // } else {

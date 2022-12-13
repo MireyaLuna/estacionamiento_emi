@@ -13,7 +13,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
-                        <th>ESTACIONAMIENTO</th>
+                        <!-- <th>ESTACIONAMIENTO</th> -->
                         <th>NUMERO ESPACIO</th>
                         <!-- <th>FECHA CREACION</th> -->
                         <!-- <th>USUARIO CREACION</th> -->
@@ -40,16 +40,16 @@
                 <form method="post" id="frmEspacio">
                     <div class="form-floating mb-3">
                         <input type="hidden" id="id" name="id">
-                        <select id="estacionamiento" class="form-control" name="estacionamiento">
+                        <select id="estacionamiento" class="form-control" name="estacionamiento" disabled>
                             <?php foreach ($data['estacionamientos'] as $row) { ?>
                                 <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
                             <?php } ?>
                         </select>
-                        <label for="estacionamiento">Estacionamientos</label>
+                        <label for="estacionamiento">Sucursal</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input id="numero" class="form-control" type="text" name="numero">
-                        <label for="numero">Numero</label>
+                        <label for="numero">Numero o codigo de espacio</label>
                     </div>
                     <div class="row">
                         <div class="d-grid gap-2 col-6 mx-auto">

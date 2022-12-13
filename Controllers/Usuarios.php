@@ -86,12 +86,14 @@ class Usuarios extends Controller
             $hash = hash("SHA256", $clave);
             $data = $this->model->getUsuario($usuario, $hash);
             if ($data) {
+                // print_r($data);
                 $_SESSION['id_usuario'] = $data['id'];
                 $_SESSION['usuario'] = $data['usuario'];
                 $_SESSION['nombre'] = $data['nombre'];
-                $_SESSION['id_estacionamiento'] = $data['id_estacionamiento'];
-                $_SESSION['estacionamiento'] = $data['estacionamiento'];
-                $_SESSION['cargo'] = $data['cargo_usuario'];
+                // $_SESSION['id_estacionamiento'] = $data['id_estacionamiento'];
+                // $_SESSION['estacionamiento'] = $data['estacionamiento'];
+                $_SESSION['cargo'] = $data['cargo'];
+                $_SESSION['cargo_usuario'] = $data['cargo_usuario'];
                 $_SESSION['activo'] = true;
                 $msg = "ok";
             } else {
@@ -110,21 +112,21 @@ class Usuarios extends Controller
         $confirmar = $_POST['confirmar'];
         $genero = $_POST['genero'];
         $cargo = $_POST['cargo'];
-        $id_estacionamiento = $_POST['estacionamiento'];
+        // $id_estacionamiento = $_POST['estacionamiento'];
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         $hash = hash("SHA256", $clave);
         $usuario_interaccion = $_SESSION['id_usuario'];
 
-        if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo) || empty($id_estacionamiento)) {
+        if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             if ($id == "") {
                 if ($clave != $confirmar) {
                     $msg = array('msg' => 'No coinciden las constraseñas', 'icono' => 'warning');
                 } else {
-                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $genero, $cargo, $id_estacionamiento, $fecha_hoy, $usuario_interaccion);
+                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $genero, $cargo, $fecha_hoy, $usuario_interaccion);
                     if ($data == "ok") {
                         $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
                     } else if ($data == "existe") {
@@ -134,7 +136,7 @@ class Usuarios extends Controller
                     }
                 }
             } else {
-                $data = $this->model->modificarUsuario($usuario, $nombre, $genero, $cargo, $id_estacionamiento, $fecha_hoy, $usuario_interaccion, $id);
+                $data = $this->model->modificarUsuario($usuario, $nombre, $genero, $cargo, $fecha_hoy, $usuario_interaccion, $id);
                 if ($data == "modificado") {
                     $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
                 } else {

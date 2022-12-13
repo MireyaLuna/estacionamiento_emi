@@ -13,7 +13,7 @@ class Tickets extends Controller
     }
     public function index()
     {
-        $data['espacios'] = $this->model->getEspacios($_SESSION['id_estacionamiento']);
+        $data['espacios'] = $this->model->getEspacios(1);
         $this->views->getViews($this, "index", $data);
     }
     public function historial()

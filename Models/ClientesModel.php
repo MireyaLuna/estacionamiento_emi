@@ -30,22 +30,22 @@ class ClientesModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $id_estacionamiento, string $fecha, int $usuario_interaccion)
+    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $fecha, int $usuario_interaccion)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->clave = $clave;
         $this->genero = $genero;
         $this->cargo = $cargo;
-        $this->id_estacionamiento = $id_estacionamiento;
+        // $this->id_estacionamiento = $id_estacionamiento;
         $this->fecha = $fecha;
         $this->usuario_interaccion = $usuario_interaccion;
 
         $verificar = "SELECT * FROM usuario WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, id_estacionamiento, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha, $this->usuario_interaccion);
+            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?,?)";
+            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->fecha, $this->usuario_interaccion);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
                 $res = "ok";

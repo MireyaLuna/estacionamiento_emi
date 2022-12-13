@@ -4,33 +4,49 @@
 </ol> -->
 <div class="card">
     <div class="card-header card-header-primary">
-        ESTACIONAMIENTOS
+        DATOS DEL ESTACIONAMIENTO
     </div>
-    <div class="card-body">
+    <?php
+    if (empty($data)) {?>
         <div><button type="button" class="btn btn-primary mb-2" onclick="frmEstacionamiento();"><i class="fas fa-plus"></i></button></div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="tblEstacionamientos">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>NOMBRE</th>
-                        <th>UBICACION</th>
-                        <!-- <th>CANTIDAD</th> -->
-                        <!-- <th>ADMINISTRADOR</th>
-            <th>USUARIO</th> -->
-                        <!-- <th>FECHA CREACION</th> -->
-                        <!-- <th>USUARIO CREACION</th> -->
-                        <!-- <th>FECHA MODIFICACION</th> -->
-                        <!-- <th>USUARIO MODIFICACION</th> -->
-                        <th>ESTADO</th>
-                        <th>ACCION</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <?php
+    }else{?>
+        <div class="card-body">
+            <!-- <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="tblEstacionamientos">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>UBICACION</th>
+                            <th>ESTADO</th>
+                            <th>ACCION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                 </tbody>
             </table>
+        </div> -->
+        <div class="row">
+            <div style="text-align: end;"><button title="Editar datos del estacionamiento" type="button" class="btn btn-primary mb-2" onclick="btnEditarEstacionamiento();"><i class="fa-regular fa-pen-to-square"></i></button></div>
+            <div class="col-md-12">
+                <div class="form-floating mb-3">
+                    <input type="text" name="estacionamiento" id="estacionamiento" class="form-control" style=" border-style: none; background-color: white;text-align: center; font-weight: bold; font-family: monospace; font-size: 30px;" value="<?php echo $data['nombre'] ?>" disabled>
+                    <label for="estacionamiento" style="font-weight: bold; font-size: 25px; color: black;">Estacionamiento:
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-floating mb-3">
+                    <input type="text" name="est_ubicacion" id="est_ubicacion" class="form-control" style=" border-style: none; background-color: white;text-align: center; font-weight: bold; font-family: monospace; font-size: 30px;" value="<?php echo $data['ubicacion'] ?>" disabled>
+                    <label for="est_ubicacion" style="font-weight: bold; font-size: 25px; color: black;">Ubicacion:
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
+    <?php }
+    ?>
 </div>
 <div class="modal fade" id="my_modal" tabindex="-1" aria-labelledby="my_modalLabel" aria-hidden="true">
     <div class="modal-dialog">

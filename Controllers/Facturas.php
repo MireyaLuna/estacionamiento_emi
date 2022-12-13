@@ -54,6 +54,9 @@ class Facturas extends Controller
         $id = $_POST['id'];
         $id_ticket = $_POST['id_ticket'];
         $nit = $_POST['nit'];
+        if($nit==''){
+            $nit = 0;
+        }
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         $fecha_emision = $fecha->format('Y-m-d');

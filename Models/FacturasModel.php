@@ -17,7 +17,7 @@ class FacturasModel extends Query
         $usuario = $_SESSION['id_usuario'];
         $sql = "SELECT f.id, e.nombre AS estacionamiento, e.ubicacion, f.nit, df.razon_social, f.fecha_emision, c.nombre, c.ci, p.nombre AS tipo_vehiculo, v.placa, t.hora_ingreso, t.hora_salida, s.nro_espacio 
         FROM factura f INNER JOIN estacionamiento e INNER JOIN datos_factura df INNER JOIN ticket t INNER JOIN espacio s INNER JOIN cliente c INNER JOIN vehiculo v INNER JOIN usuario u INNER JOIN parametro p 
-        WHERE t.id = f.id_ticket AND t.id_espacio = s.id AND t.id_vehiculo = v.id AND f.nit = df.nit AND v.id_cliente = c.id AND p.codigo = v.tipo AND f.id = $id AND u.id = $usuario AND u.id_estacionamiento = e.id";
+        WHERE t.id = f.id_ticket AND t.id_espacio = s.id AND t.id_vehiculo = v.id AND f.nit = df.nit AND v.id_cliente = c.id AND p.codigo = v.tipo AND f.id = $id AND u.id = $usuario";
         $data = $this->select($sql);
         return $data;
     }

@@ -20,19 +20,19 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card animate__animated animate__zoomIn shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header text-center">
-                                    <h3 class="font-weight-light my-4" style="color:dimgrey">Inicio de sesión</h3>
                                     <img src="<?php echo base_url;?>Assets/img/emilogo.png" class="img-fluid rounded" alt="logo">
+                                    <h3 class="font-weight-light my-4" style="color:dimgrey">Inicio de sesión</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form id="frmLogin">
+                                    <form method="POST" id="frmLogin">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="usuario" name="usuario" type="texto" placeholder="Ingrese email" />
+                                            <input class="form-control" id="usuario" name="usuario" type="text" />
                                             <label for="usuario">Ingrese usuario</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" />
+                                            <input class="form-control" id="clave" name="clave" type="password" />
                                             <label for="clave">Ingrese contraseña</label>
                                         </div>
                                         <div class="alert alert-danger text-center d-none" id="alerta" role="alert"></div>
@@ -54,7 +54,7 @@
     <script>
         const base_url = '<?php echo base_url;?>';
     </script>
-    <!-- <script src="<?php echo base_url; ?>Assets/js/login.js"></script> -->
+    <!-- <script src="<?php //echo base_url; ?>Assets/js/login.js"></script> -->
 </body>
 
 </html>

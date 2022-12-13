@@ -7,8 +7,10 @@ class UsuariosModel extends Query
         parent::__construct();
     }
     public function getUsuario(string $usuario, string $clave)
-    { 
-        $sql = "SELECT u.*, e.nombre AS estacionamiento, p.codigo AS cargo_usuario FROM usuario u INNER JOIN estacionamiento e INNER JOIN parametro p WHERE u.usuario = '$usuario' AND u.clave = '$clave' AND u.id_estacionamiento = e.id AND p.codigo = u.cargo";
+    {
+        // $sql = "SELECT u.*, e.nombre AS estacionamiento, p.codigo AS cargo_usuario FROM usuario u INNER JOIN estacionamiento e INNER JOIN parametro p WHERE u.usuario = '$usuario' AND u.clave = '$clave' AND u.id_estacionamiento = e.id AND p.codigo = u.cargo";
+        $sql = "SELECT u.*, p.codigo AS cargo_usuario FROM usuario u INNER JOIN parametro p 
+        WHERE u.usuario = '$usuario' AND u.clave = '$clave' AND p.codigo = u.cargo";
         $data = $this->select($sql);
         return $data;
     }
@@ -50,25 +52,25 @@ class UsuariosModel extends Query
     }
     public function getUsuarios()
     {
-        $sql = "SELECT u.*, p.nombre AS genero, p2.nombre AS cargo, e.nombre AS estacionamiento FROM usuario u INNER JOIN parametro p INNER JOIN parametro p2 INNER JOIN estacionamiento e WHERE u.genero = p.codigo AND u.cargo = p2.codigo AND e.id = u.id_estacionamiento";
+        // $sql = "SELECT u.*, p.nombre AS genero, p2.nombre AS cargo, e.nombre AS estacionamiento FROM usuario u INNER JOIN parametro p INNER JOIN parametro p2 INNER JOIN estacionamiento e WHERE u.genero = p.codigo AND u.cargo = p2.codigo AND e.id = u.id_estacionamiento";
+        $sql = "SELECT u.*, p.nombre AS genero, p2.nombre AS cargo FROM usuario u INNER JOIN parametro p INNER JOIN parametro p2 WHERE u.genero = p.codigo AND u.cargo = p2.codigo";
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $id_estacionamiento, string $fecha, int $usuario_interaccion)
+    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $genero, string $cargo, string $fecha, int $usuario_interaccion)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->clave = $clave;
         $this->genero = $genero;
         $this->cargo = $cargo;
-        $this->id_estacionamiento = $id_estacionamiento;
         $this->fecha = $fecha;
         $this->usuario_interaccion = $usuario_interaccion;
         $verificar = "SELECT * FROM usuario WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, id_estacionamiento, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha, $this->usuario_interaccion);
+            $sql = "INSERT INTO usuario(usuario, nombre, clave, genero, cargo, fecha_creacion, usuario_creacion) VALUES (?,?,?,?,?,?,?)";
+            $datos = array($this->usuario, $this->nombre, $this->clave, $this->genero, $this->cargo, $this->fecha, $this->usuario_interaccion);
             $data = $this->save($sql, $datos);
             if ($data == 1) {
                 $res = "ok";
@@ -82,23 +84,23 @@ class UsuariosModel extends Query
     }
     public function editarUsuario(int $id)
     {
-        $sql = "SELECT u.*, e.nombre AS estacionamiento FROM usuario u INNER JOIN estacionamiento e WHERE e.id = u.id_estacionamiento AND u.id = $id";
+        // $sql = "SELECT u.*, e.nombre AS estacionamiento FROM usuario u INNER JOIN estacionamiento e WHERE e.id = u.id_estacionamiento AND u.id = $id";
+        $sql = "SELECT * FROM usuario WHERE id = $id";
         $data = $this->select($sql);
         return $data;
     }
-    public function modificarUsuario(string $usuario, string $nombre, string $genero, string $cargo, string $id_estacionamiento, string $fecha, int $usuario_interaccion, int $id)
+    public function modificarUsuario(string $usuario, string $nombre, string $genero, string $cargo, string $fecha, int $usuario_interaccion, int $id)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->genero = $genero;
         $this->cargo = $cargo;
-        $this->id_estacionamiento = $id_estacionamiento;
         $this->fecha = $fecha;
         $this->id = $id;
         $this->usuario_interaccion = $_SESSION['id_usuario'];
 
-        $sql = "UPDATE usuario SET usuario = ?, nombre = ?, genero = ?, cargo = ?, id_estacionamiento = ?, fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
-        $datos = array($this->usuario, $this->nombre, $this->genero, $this->cargo, $this->id_estacionamiento, $this->fecha, $this-> usuario_interaccion, $this->id);
+        $sql = "UPDATE usuario SET usuario = ?, nombre = ?, genero = ?, cargo = ?, fecha_modificacion = ?, usuario_modificacion = ? WHERE id = ?";
+        $datos = array($this->usuario, $this->nombre, $this->genero, $this->cargo, $this->fecha, $this->usuario_interaccion, $this->id);
         $data = $this->save($sql, $datos);
         if ($data == 1) {
             $res = "modificado";

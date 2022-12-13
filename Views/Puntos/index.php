@@ -14,7 +14,7 @@
                     <th>ID</th>
                     <th>NOMBRE</th>
                     <th>DESCRIPCION</th>
-                    <th>ESTACIONAMIENTO</th>
+                    <!-- <th>ESTACIONAMIENTO</th> -->
                     <!-- <th>FECHA CREACION</th> -->
                     <!-- <th>USUARIO CREACION</th> -->
                     <!-- <th>FECHA MODIFICACION</th> -->
@@ -38,6 +38,14 @@
             <div class="modal-body">
                 <form method="post" id="frmPuntos">
                     <div class="form-floating mb-3">
+                        <select id="estacionamiento" class="form-control" name="estacionamiento" disabled>
+                            <?php foreach ($data['estacionamientos'] as $row) { ?>
+                                <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <label for="estacionamiento">Sucursal</label>
+                    </div>
+                    <div class="form-floating mb-3">
                         <input type="hidden" id="id" name="id">
                         <input id="nombre" class="form-control" type="text" name="nombre">
                         <label for="nombre">Nombre</label>
@@ -46,14 +54,7 @@
                         <input id="descripcion" class="form-control" type="text" name="descripcion">
                         <label for="descripcion">Descripcion</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <select id="estacionamiento" class="form-control" name="estacionamiento">
-                            <?php foreach ($data['estacionamientos'] as $row) { ?>
-                                <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></option>
-                            <?php } ?>
-                        </select>
-                        <label for="estacionamiento">Estacionamientos</label>
-                    </div>
+
                     <div class="row">
                         <div class="d-grid gap-2 col-6 mx-auto">
                             <button type="button" class="btn btn-success" onclick="registrarPunto(event);" id="btnAccion">Registrar</button>

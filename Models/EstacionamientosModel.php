@@ -27,7 +27,7 @@ class EstacionamientosModel extends Query{
         
         return $res;
     }
-    public function editarEstacionamiento(int $id){
+    public function getEstacionamiento(int $id){
         $sql = "SELECT * FROM estacionamiento WHERE id = $id";
         $data = $this->select($sql);
         return $data;

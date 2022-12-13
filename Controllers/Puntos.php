@@ -39,7 +39,7 @@ class Puntos extends Controller
         date_default_timezone_set("America/La_Paz");
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
-        $estacionamiento = $_POST['estacionamiento'];
+        $estacionamiento = 1;
         $id = $_POST['id'];
         $fecha = new DateTime();
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
