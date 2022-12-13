@@ -149,23 +149,12 @@ class Usuarios extends Controller
     }
     public function editar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'editar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->editarUsuario($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function eliminar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'eliminar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionUser(0, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Usuario dado de baja', 'icono' => 'success');
@@ -174,17 +163,9 @@ class Usuarios extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function reingresar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionUser(1, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Usuario reingresado exitosamente', 'icono' => 'success');
@@ -193,11 +174,6 @@ class Usuarios extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function cambiarPass()
     {

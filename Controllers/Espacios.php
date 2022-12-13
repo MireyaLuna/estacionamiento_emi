@@ -76,23 +76,12 @@ class Espacios extends Controller
     }
     public function editar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'editar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->editarEspacio($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function eliminar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'eliminar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionEspacio(3, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Espacio dado de baja', 'icono' => 'success');
@@ -101,17 +90,9 @@ class Espacios extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function reingresar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionEspacio(1, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Espacio reingresado exitosamente', 'icono' => 'success');
@@ -120,17 +101,9 @@ class Espacios extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function ocupar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionEspacio(2, $id);
         if ($data == 1) {
             $msg = "ok";
@@ -139,17 +112,9 @@ class Espacios extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function desocupar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionEspacio(1, $id);
         if ($data == 1) {
             $msg = "ok";
@@ -158,10 +123,5 @@ class Espacios extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
 }

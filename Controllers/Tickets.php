@@ -18,14 +18,8 @@ class Tickets extends Controller
     }
     public function historial()
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'ver_historial_ventas');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->getVehiculos();
         $this->views->getViews($this, "historial", $data);
-        // } else {
-        //     header('Location: ' . base_url . 'Errors/permisos');
-        // }
     }
     public function buscarPlaca($placa)
     {

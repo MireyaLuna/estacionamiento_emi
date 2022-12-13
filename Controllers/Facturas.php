@@ -90,23 +90,12 @@ class Facturas extends Controller
     }
     public function editar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'editar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->editarFactura($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function eliminar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'eliminar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionFactura(0, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Factura dada de baja', 'icono' => 'success');
@@ -115,17 +104,9 @@ class Facturas extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function reingresar(int $id)
     {
-        // $id_usuario = $_SESSION['id_usuario'];
-        // $verificar = $this->model->verificarPermiso($id_usuario, 'reingresar_usuario');
-        // if (!empty($verificar) || $id_usuario == 1) {
         $data = $this->model->accionFactura(1, $id);
         if ($data == 1) {
             $msg = array('msg' => 'Factura reingresada exitosamente', 'icono' => 'success');
@@ -134,11 +115,6 @@ class Facturas extends Controller
         }
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
-        // } else {
-        //     $msg = '';
-        //     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-        //     die();
-        // }
     }
     public function buscarNIT(int $nit)
     {
