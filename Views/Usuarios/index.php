@@ -1,6 +1,6 @@
 <?php include "Views/Templates/header.php"; ?>
 <?php
-if ($_SESSION['cargo'] == '1ADM') { ?>
+if ($_SESSION['id_usuario'] == 1) { ?>
     <div class="card">
         <div class="card-header card-header-primary">
             LISTA DE USUARIOS
