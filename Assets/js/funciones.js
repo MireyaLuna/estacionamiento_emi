@@ -2303,6 +2303,7 @@ function generarFactura() {
                             if (codigo == 0) {
                                 codigo = 1;
                             }
+                            frm.reset();
                             // tbl_tickets.ajax.reload();
                             facturar();
                             location.reload();
