@@ -951,21 +951,23 @@ function frmLogin(e) {
         const url = base_url + "Usuarios/validar";
         const frm = document.getElementById("frmLogin");
         const http = new XMLHttpRequest();
-        http.open("POST", url, true);
-        http.send(new FormData(frm));
-        http.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                // console.log(this.responseText);
-                const res = JSON.parse(this.responseText);
-                // console.log(res);
-                if (res == "ok") {
-                    window.location = base_url + "Administrador/home";
-                } else {
-                    document.getElementById("alerta").classList.remove("d-none");
-                    document.getElementById("alerta").textContent = res;
+        setTimeout(() => {
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+        }, 100);
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    console.log(res);
+                    if (res == "ok") {
+                        window.location = base_url + "Administrador/home";
+                    } else {
+                        document.getElementById("alerta").classList.remove("d-none");
+                        document.getElementById("alerta").textContent = res;
+                    }
                 }
             }
-        }
     }
 }
 
@@ -1022,8 +1024,8 @@ function registrarUsuario(e) {
     // const id_estacionamiento = document.getElementById("estacionamiento");
     if (usuario.value == "" || nombre.value == "" || genero.value == "" || cargo.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
-    // } else if (clave.value != confirmar.value) {
-    //     alertas('Las contraseñas no coinciden', 'warning');
+        // } else if (clave.value != confirmar.value) {
+        //     alertas('Las contraseñas no coinciden', 'warning');
     } else {
         const url = base_url + "Usuarios/registrar";
         const frm = document.getElementById("frmUsuario");
