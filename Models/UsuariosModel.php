@@ -22,7 +22,8 @@ class UsuariosModel extends Query
     }
     public function getVehiculosUsuario(int $id_usuario)
     {
-        $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN parametro p WHERE u.id = $id_usuario AND u.usuario = c.ci AND c.id = v.id_cliente AND p.codigo = v.tipo";
+        // $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN parametro p WHERE u.id = $id_usuario AND u.usuario = c.ci AND c.id = v.id_cliente AND p.codigo = v.tipo";
+        $sql = "SELECT v.*, p.nombre AS tipo_vehiculo FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN parametro p WHERE u.id = $id_usuario AND c.id = v.id_cliente AND p.codigo = v.tipo AND c.id_usuario = u.id";
         $data = $this->selectAll($sql);
         return $data;
     }
