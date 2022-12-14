@@ -2140,6 +2140,20 @@ function buscarPlaca(e) {
         }
     }
 }
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function facturar() {
+    const ruta = base_url + 'Facturas/generarPDF/' + codigo;
+    window.open(ruta);
+    await sleep(1000);
+}
+async function tickete() {
+    const ruta = base_url + 'Tickets/generarPDF/' + codigo;
+    window.open(ruta);
+    await sleep(1000);
+}
 
 function generarTicket() {
     var codigo;
@@ -2189,8 +2203,7 @@ function generarTicket() {
                             if (codigo == 0) {
                                 codigo = 1;
                             }
-                            const ruta = base_url + 'Tickets/generarPDF/' + codigo;
-                            window.open(ruta);
+                            tickete();
                             location.reload();
                             setTimeout(() => {
                                 window.location.reload();
@@ -2234,15 +2247,7 @@ function btnAnularTicket(id) {
     })
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-async function facturar() {
-    const ruta = base_url + 'Facturas/generarPDF/' + codigo;
-    window.open(ruta);
-    await sleep(1000);
-}
 
 function generarFactura() {
     const url = base_url + "Facturas/obtenerIDfactura";
