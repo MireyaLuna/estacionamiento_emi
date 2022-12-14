@@ -145,6 +145,7 @@ class Facturas extends Controller
     }
     public function generarPDF(int $id_factura)
     {
+        ob_start();
         $factura = $this->model->getFactura($id_factura);
         $i = $factura['hora_ingreso'];
         $s = $factura['hora_salida'];
@@ -255,7 +256,7 @@ class Facturas extends Controller
         $pdf->Cell(70, 6, 'Usuario: '.$_SESSION['usuario'], 0, 1, 'L');
 
         $pdf->Output();
-
+        ob_end_flush(); 
      
     }
     public function obtenerIDfactura()

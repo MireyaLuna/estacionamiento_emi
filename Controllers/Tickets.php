@@ -74,6 +74,7 @@ class Tickets extends Controller
     }
     public function generarPDF($id_ticket)
     {
+        ob_start();
         $ticket = $this->model->getTicket($id_ticket);
         $estacionamiento = $ticket['estacionamiento'];
         $codigo =  $ticket['codigo'];
@@ -144,8 +145,8 @@ class Tickets extends Controller
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(36, 4, 'Conserve este ticket', 0, 0, 'L', true);
 
-
         $pdf->Output();
+        ob_end_flush(); 
     }
     public function listar_tickets()
     {
