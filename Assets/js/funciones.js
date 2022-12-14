@@ -2297,13 +2297,14 @@ function generarFactura() {
                 h.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         const rspt = JSON.parse(this.responseText);
+                        console.log(rspt);
+                        // frm.reset();
                         if (rspt == '') {
                             alertas('No tiene permiso', 'warning');
                         } else {
                             if (codigo == 0) {
                                 codigo = 1;
                             }
-                            frm.reset();
                             // tbl_tickets.ajax.reload();
                             facturar();
                             location.reload();

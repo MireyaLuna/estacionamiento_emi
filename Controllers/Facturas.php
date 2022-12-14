@@ -61,7 +61,7 @@ class Facturas extends Controller
         $fecha_hoy = $fecha->format('Y-m-d H:i:s a');
         $fecha_emision = $fecha->format('Y-m-d');
 
-        if (empty($id_ticket) || empty($nit) || empty($monto_total)) {
+        if (empty($id_ticket) || empty($monto_total)) {
             $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
         } else {
             // if ($id == "") {

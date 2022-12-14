@@ -119,32 +119,34 @@ class Usuarios extends Controller
         $hash = hash("SHA256", $clave);
         $usuario_interaccion = $_SESSION['id_usuario'];
 
-        if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo)) {
-            $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
-        } else {
-            if ($id == "") {
-                if ($clave != $confirmar) {
-                    $msg = array('msg' => 'No coinciden las constraseñas', 'icono' => 'warning');
-                } else {
-                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $genero, $cargo, $fecha_hoy, $usuario_interaccion);
-                    if ($data == "ok") {
-                        $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
-                    } else if ($data == "existe") {
-                        $msg = array('msg' => 'El usuario ya existe', 'icono' => 'warning');
-                    } else {
-                        $msg = array('msg' => 'Error al registrar usuario', 'icono' => 'error');
-                    }
-                }
-            } else {
-                $data = $this->model->modificarUsuario($usuario, $nombre, $genero, $cargo, $fecha_hoy, $usuario_interaccion, $id);
-                if ($data == "modificado") {
-                    $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
-                } else {
-                    $msg = array('msg' => 'Error al modificar usuario', 'icono' => 'error');
-                }
-            }
-        }
-        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        print_r($_POST);
+
+        // if (empty($usuario) || empty($nombre) || empty($genero) || empty($cargo)) {
+        //     $msg = array('msg' => 'Todo los campos son obligatorios', 'icono' => 'warning');
+        // } else {
+        //     if ($id == "") {
+        //         if ($clave != $confirmar) {
+        //             $msg = array('msg' => 'No coinciden las constraseñas', 'icono' => 'warning');
+        //         } else {
+        //             $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $genero, $cargo, $fecha_hoy, $usuario_interaccion);
+        //             if ($data == "ok") {
+        //                 $msg = array('msg' => 'Registrado exitosamente', 'icono' => 'success');
+        //             } else if ($data == "existe") {
+        //                 $msg = array('msg' => 'El usuario ya existe', 'icono' => 'warning');
+        //             } else {
+        //                 $msg = array('msg' => 'Error al registrar usuario', 'icono' => 'error');
+        //             }
+        //         }
+        //     } else {
+        //         $data = $this->model->modificarUsuario($usuario, $nombre, $genero, $cargo, $fecha_hoy, $usuario_interaccion, $id);
+        //         if ($data == "modificado") {
+        //             $msg = array('msg' => 'Modificado exitosamente', 'icono' => 'success');
+        //         } else {
+        //             $msg = array('msg' => 'Error al modificar usuario', 'icono' => 'error');
+        //         }
+        //     }
+        // }
+        // echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
     public function editar(int $id)
