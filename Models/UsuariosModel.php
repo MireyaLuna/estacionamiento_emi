@@ -29,7 +29,8 @@ class UsuariosModel extends Query
     }
     public function getTicketsUsuario(int $id_usuario)
     {
-        $sql = "SELECT t.*, v.placa, e.nro_espacio AS espacio_ocupado FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN ticket t INNER JOIN espacio e WHERE u.id = $id_usuario AND u.usuario = c.ci AND c.id = v.id_cliente AND t.id_vehiculo = v.id AND t.id_espacio = e.id;";
+        // $sql = "SELECT t.*, v.placa, e.nro_espacio AS espacio_ocupado FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN ticket t INNER JOIN espacio e WHERE u.id = $id_usuario AND u.usuario = c.ci AND c.id = v.id_cliente AND t.id_vehiculo = v.id AND t.id_espacio = e.id";
+        $sql = "SELECT t.*, v.placa, e.nro_espacio AS espacio_ocupado FROM usuario u INNER JOIN vehiculo v INNER JOIN cliente c INNER JOIN ticket t INNER JOIN espacio e WHERE u.id = $id_usuario AND u.id = c.id_usuario AND c.id = v.id_cliente AND t.id_vehiculo = v.id AND t.id_espacio = e.id";
         $data = $this->selectAll($sql);
         return $data;
     }
