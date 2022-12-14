@@ -2156,7 +2156,7 @@ async function tickete() {
 }
 
 function generarTicket() {
-    var codigo;
+    codigo = 123;
     const url = base_url + "Tickets/obtenerCodigo";
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
@@ -2164,10 +2164,13 @@ function generarTicket() {
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const rs = JSON.parse(this.responseText);
+            // console.log(rs.cantidad);
             codigo = rs.cantidad + 1;
+            // console.log(codigo);
         }
     }
-    console.log(codigo);
+    setTimeout(()=>{
+        
     const placa_vehiculo = document.getElementById("placa_vehiculo");
     const tipo = document.getElementById("tipo");
     const espacio = document.getElementById("espacio");
@@ -2214,6 +2217,7 @@ function generarTicket() {
             }
         }
     }
+    },100);
 }
 
 function btnAnularTicket(id) {

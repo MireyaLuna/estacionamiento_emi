@@ -72,7 +72,7 @@ class Tickets extends Controller
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
-    public function generarPDF($id_ticket)
+    public function generarPDF(int $id_ticket)
     {
         ob_start();
         $ticket = $this->model->getTicket($id_ticket);
