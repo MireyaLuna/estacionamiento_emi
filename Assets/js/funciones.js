@@ -2265,7 +2265,7 @@ function generarFactura() {
         if (this.readyState == 4 && this.status == 200) {
             const r = JSON.parse(this.responseText);
             console.log(r);
-            codigo = r.factura + 0;
+            codigo = r.factura + 1;
         }
     }
     // setTimeout(() => {
