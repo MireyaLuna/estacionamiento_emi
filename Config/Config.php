@@ -3,7 +3,7 @@
     const host = "localhost";
     const user = "root";
     const pass = "";
-    const db = "estacionamiento_emi";
-    // const db = "parqueo_emi";
+    // const db = "estacionamiento_emi";
+    const db = "parqueo_emi";
     const charset = "charset=utf8";
 ?>
