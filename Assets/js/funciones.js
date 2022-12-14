@@ -2156,7 +2156,7 @@ async function tickete() {
 }
 
 function generarTicket() {
-    codigo = 123;
+    // codigo = 123;
     const url = base_url + "Tickets/obtenerCodigo";
     const http = new XMLHttpRequest();
     http.open("GET", url, true);
