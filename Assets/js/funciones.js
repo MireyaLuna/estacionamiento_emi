@@ -20,16 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'cargo',
             }, {
-            //     'data': 'estacionamiento',
-            // }, {
-            //     'data': 'fecha_creacion',
-            // }, {
-            //     'data': 'usuario_creacion',
-            // }, {
-            //     'data': 'fecha_modificacion',
-            // }, {
-            //     'data': 'usuario_modificador',
-            // }, {
+                //     'data': 'estacionamiento',
+                // }, {
+                //     'data': 'fecha_creacion',
+                // }, {
+                //     'data': 'usuario_creacion',
+                // }, {
+                //     'data': 'fecha_modificacion',
+                // }, {
+                //     'data': 'usuario_modificador',
+                // }, {
                 'data': 'estado',
             }, {
                 'data': 'acciones',
@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'tipo',
             }, {
-            //     'data': 'fecha_creacion',
-            // }, {
+                //     'data': 'fecha_creacion',
+                // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-            //     'data': 'fecha_modificacion',
-            // }, {
+                //     'data': 'fecha_modificacion',
+                // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -204,12 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'usuario',
             }, {
-            //     'data': 'fecha_creacion',
-            // }, {
+                //     'data': 'fecha_creacion',
+                // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-            //     'data': 'fecha_modificacion',
-            // }, {
+                //     'data': 'fecha_modificacion',
+                // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -290,14 +290,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'descripcion',
             }, {
-            //     'data': 'estacionamiento',
-            // }, {
-            //     'data': 'fecha_creacion',
-            // }, {
+                //     'data': 'estacionamiento',
+                // }, {
+                //     'data': 'fecha_creacion',
+                // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-            //     'data': 'fecha_modificacion',
-            // }, {
+                //     'data': 'fecha_modificacion',
+                // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -378,12 +378,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }, {
                 'data': 'ubicacion',
             }, {
-            //     'data': 'fecha_creacion',
-            // }, {
+                //     'data': 'fecha_creacion',
+                // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-            //     'data': 'fecha_modificacion',
-            // }, {
+                //     'data': 'fecha_modificacion',
+                // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -460,8 +460,8 @@ document.addEventListener("DOMContentLoaded", function () {
             columns: [{
                 'data': 'id',
             }, {
-            //     'data': 'estacionamiento',
-            // }, {
+                //     'data': 'estacionamiento',
+                // }, {
                 'data': 'nro_espacio',
             }, {
                 //     'data': 'id_vehiculo',
@@ -470,12 +470,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // }, {
                 //     'data': 'hora_salida',
                 // }, {
-            //     'data': 'fecha_creacion',
-            // }, {
+                //     'data': 'fecha_creacion',
+                // }, {
                 // 'data': 'usuario_creacion',
                 // }, {
-            //     'data': 'fecha_modificacion',
-            // }, {
+                //     'data': 'fecha_modificacion',
+                // }, {
                 // 'data': 'usuario_modificador',
                 // }, {
                 'data': 'estado',
@@ -919,7 +919,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-    if (document.getElementById('desde') || document.getElementById('hasta') || document.getElementById('desdeF') || document.getElementById('hastaF')) {   
+    if (document.getElementById('desde') || document.getElementById('hasta') || document.getElementById('desdeF') || document.getElementById('hastaF')) {
         $('#desde').change(function () {
             tbl_tickets.draw();
         })
@@ -1022,8 +1022,8 @@ function registrarUsuario(e) {
     // const id_estacionamiento = document.getElementById("estacionamiento");
     if (usuario.value == "" || nombre.value == "" || genero.value == "" || cargo.value == "") {
         alertas('Todo los campos son obligatorios', 'warning');
-    } else if (clave.value != confirmar.value) {
-        alertas('Las contraseñas no coinciden', 'warning');
+    // } else if (clave.value != confirmar.value) {
+    //     alertas('Las contraseñas no coinciden', 'warning');
     } else {
         const url = base_url + "Usuarios/registrar";
         const frm = document.getElementById("frmUsuario");
@@ -2140,6 +2140,7 @@ function buscarPlaca(e) {
         }
     }
 }
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -2169,55 +2170,55 @@ function generarTicket() {
             // console.log(codigo);
         }
     }
-    setTimeout(()=>{
-        
-    const placa_vehiculo = document.getElementById("placa_vehiculo");
-    const tipo = document.getElementById("tipo");
-    const espacio = document.getElementById("espacio");
-    const hora_ingreso = document.getElementById("hora_ingreso");
-    const fecha_ingreso = document.getElementById("fecha_ingreso");
+    setTimeout(() => {
 
-    if (placa_vehiculo.value == "" || hora_ingreso.value == "" || fecha_ingreso.value == "" || espacio.value == "") {
-        alertas('Todo los campos son obligatorios', 'warning');
-    } else {
-        const url = base_url + "Tickets/registrar/" + fecha_ingreso.value + "/" + hora_ingreso.value + "/" + tipo.value;
-        const frm = document.getElementById("nuevoRegistro");
-        const http = new XMLHttpRequest();
-        http.open("POST", url, true);
-        http.send(new FormData(frm));
-        http.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                const res = JSON.parse(this.responseText);
-                // console.log(res);
-                alertas(res.msg, res.icono);
-                const u = base_url + "Espacios/ocupar/" + espacio.value;
-                const h = new XMLHttpRequest();
-                h.open("GET", u, true);
-                h.send();
-                h.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        // console.log(this.responseText);
-                        const rspt = JSON.parse(this.responseText);
-                        console.log(codigo);
-                        if (rspt == '') {
-                            alertas('No tiene permiso', 'warning');
-                        } else {
-                            frm.reset();
-                            if (codigo == 0) {
-                                codigo = 1;
+        const placa_vehiculo = document.getElementById("placa_vehiculo");
+        const tipo = document.getElementById("tipo");
+        const espacio = document.getElementById("espacio");
+        const hora_ingreso = document.getElementById("hora_ingreso");
+        const fecha_ingreso = document.getElementById("fecha_ingreso");
+
+        if (placa_vehiculo.value == "" || hora_ingreso.value == "" || fecha_ingreso.value == "" || espacio.value == "") {
+            alertas('Todo los campos son obligatorios', 'warning');
+        } else {
+            const url = base_url + "Tickets/registrar/" + fecha_ingreso.value + "/" + hora_ingreso.value + "/" + tipo.value;
+            const frm = document.getElementById("nuevoRegistro");
+            const http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    // console.log(res);
+                    alertas(res.msg, res.icono);
+                    const u = base_url + "Espacios/ocupar/" + espacio.value;
+                    const h = new XMLHttpRequest();
+                    h.open("GET", u, true);
+                    h.send();
+                    h.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            // console.log(this.responseText);
+                            const rspt = JSON.parse(this.responseText);
+                            console.log(codigo);
+                            if (rspt == '') {
+                                alertas('No tiene permiso', 'warning');
+                            } else {
+                                frm.reset();
+                                if (codigo == 0) {
+                                    codigo = 1;
+                                }
+                                tickete();
+                                location.reload();
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 300);
                             }
-                            tickete();
-                            location.reload();
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 300);
                         }
                     }
                 }
             }
         }
-    }
-    },100);
+    }, 100);
 }
 
 function btnAnularTicket(id) {
@@ -2265,53 +2266,55 @@ function generarFactura() {
             codigo = r.factura + 0;
         }
     }
+    setTimeout(() => {
 
-    const nit = document.getElementById("nit");
-    const monto_total = document.getElementById("monto_total");
-    const id_ticket = document.getElementById("id_ticket");
-    const hora_salida = document.getElementById("hora_salida");
-    const fecha_salida = document.getElementById("fecha_salida");
+        const nit = document.getElementById("nit");
+        const razon = document.getElementById("razon_social");
+        const monto_total = document.getElementById("monto_total");
+        const id_ticket = document.getElementById("id_ticket");
+        const hora_salida = document.getElementById("hora_salida");
+        const fecha_salida = document.getElementById("fecha_salida");
 
-    if (monto_total.value == "" || id_ticket.value == "") {
-        alertas('Todo los campos son obligatorios', 'warning');
-    } else {
-        const url = base_url + "Facturas/registrar/" + monto_total.value + "/" + fecha_salida.value + "/" + hora_salida.value;
-        const frm = document.getElementById("frmFactura");
-        const http = new XMLHttpRequest();
-        http.open("POST", url, true);
-        http.send(new FormData(frm));
-        http.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                const res = JSON.parse(this.responseText);
-                console.log(res);
-                alertas(res.msg, res.icono);
-                const u = base_url + "Tickets/ticketFacturado/" + id_ticket.value;
-                const h = new XMLHttpRequest();
-                h.open("GET", u, true);
-                h.send();
-                h.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        const rspt = JSON.parse(this.responseText);
-                        if (rspt == '') {
-                            alertas('No tiene permiso', 'warning');
-                        } else {
-                            if (codigo == 0) {
-                                codigo = 1;
+        if (nit.value == "" || razon.value == "") {
+            alertas('Ingrese datos de facturacion (ENTER)', 'warning');
+        } else {
+            const url = base_url + "Facturas/registrar/" + monto_total.value + "/" + fecha_salida.value + "/" + hora_salida.value;
+            const frm = document.getElementById("frmFactura");
+            const http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.send(new FormData(frm));
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    console.log(res);
+                    alertas(res.msg, res.icono);
+                    const u = base_url + "Tickets/ticketFacturado/" + id_ticket.value;
+                    const h = new XMLHttpRequest();
+                    h.open("GET", u, true);
+                    h.send();
+                    h.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            const rspt = JSON.parse(this.responseText);
+                            if (rspt == '') {
+                                alertas('No tiene permiso', 'warning');
+                            } else {
+                                if (codigo == 0) {
+                                    codigo = 1;
+                                }
+                                // tbl_tickets.ajax.reload();
+                                facturar();
+                                location.reload();
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 300);
                             }
-                            // tbl_tickets.ajax.reload();
-                            facturar();
-                            location.reload();
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 300);
                         }
                     }
                 }
             }
         }
-    }
+    }, 100);
 }
-
 
 function buscarNIT(e) {
     e.preventDefault();
