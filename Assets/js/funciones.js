@@ -955,19 +955,19 @@ function frmLogin(e) {
             http.open("POST", url, true);
             http.send(new FormData(frm));
         }, 100);
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    // console.log(this.responseText);
-                    const res = JSON.parse(this.responseText);
-                    console.log(res);
-                    if (res == "ok") {
-                        window.location = base_url + "Administrador/home";
-                    } else {
-                        document.getElementById("alerta").classList.remove("d-none");
-                        document.getElementById("alerta").textContent = res;
-                    }
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // console.log(this.responseText);
+                const res = JSON.parse(this.responseText);
+                console.log(res);
+                if (res == "ok") {
+                    window.location = base_url + "Administrador/home";
+                } else {
+                    document.getElementById("alerta").classList.remove("d-none");
+                    document.getElementById("alerta").textContent = res;
                 }
             }
+        }
     }
 }
 
@@ -2268,54 +2268,54 @@ function generarFactura() {
             codigo = r.factura + 0;
         }
     }
-    setTimeout(() => {
+    // setTimeout(() => {
 
-        const nit = document.getElementById("nit");
-        const razon = document.getElementById("razon_social");
-        const monto_total = document.getElementById("monto_total");
-        const id_ticket = document.getElementById("id_ticket");
-        const hora_salida = document.getElementById("hora_salida");
-        const fecha_salida = document.getElementById("fecha_salida");
+    const nit = document.getElementById("nit");
+    const razon = document.getElementById("razon_social");
+    const monto_total = document.getElementById("monto_total");
+    const id_ticket = document.getElementById("id_ticket");
+    const hora_salida = document.getElementById("hora_salida");
+    const fecha_salida = document.getElementById("fecha_salida");
 
-        if (nit.value == "" || razon.value == "") {
-            alertas('Ingrese datos de facturacion (ENTER)', 'warning');
-        } else {
-            const url = base_url + "Facturas/registrar/" + monto_total.value + "/" + fecha_salida.value + "/" + hora_salida.value;
-            const frm = document.getElementById("frmFactura");
-            const http = new XMLHttpRequest();
-            http.open("POST", url, true);
-            http.send(new FormData(frm));
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    const res = JSON.parse(this.responseText);
-                    console.log(res);
-                    alertas(res.msg, res.icono);
-                    const u = base_url + "Tickets/ticketFacturado/" + id_ticket.value;
-                    const h = new XMLHttpRequest();
-                    h.open("GET", u, true);
-                    h.send();
-                    h.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            const rspt = JSON.parse(this.responseText);
-                            if (rspt == '') {
-                                alertas('No tiene permiso', 'warning');
-                            } else {
-                                if (codigo == 0) {
-                                    codigo = 1;
-                                }
-                                // tbl_tickets.ajax.reload();
-                                facturar();
-                                location.reload();
-                                setTimeout(() => {
-                                    window.location.reload();
-                                }, 300);
+    if (nit.value == "" || razon.value == "") {
+        alertas('Ingrese datos de facturacion (ENTER)', 'warning');
+    } else {
+        const url = base_url + "Facturas/registrar/" + monto_total.value + "/" + fecha_salida.value + "/" + hora_salida.value;
+        const frm = document.getElementById("frmFactura");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                console.log(res);
+                alertas(res.msg, res.icono);
+                const u = base_url + "Tickets/ticketFacturado/" + id_ticket.value;
+                const h = new XMLHttpRequest();
+                h.open("GET", u, true);
+                h.send();
+                h.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        const rspt = JSON.parse(this.responseText);
+                        if (rspt == '') {
+                            alertas('No tiene permiso', 'warning');
+                        } else {
+                            if (codigo == 0) {
+                                codigo = 1;
                             }
+                            // tbl_tickets.ajax.reload();
+                            facturar();
+                            location.reload();
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 300);
                         }
                     }
                 }
             }
         }
-    }, 100);
+    }
+    // }, 100);
 }
 
 function buscarNIT(e) {
